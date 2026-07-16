@@ -14,6 +14,69 @@ comparison. No LLM judge on the core task.
 
 See `SPEC.md` for the full design. This tree is a working v1 implementation.
 
+## Evaluate a model (the walkthrough)
+
+This is how to run the benchmark on a model the way it's meant to be run — as
+an **agentic** eval. You need an agent tool that can drive a model against a
+filesystem (opencode, Claude Code, Cursor, an SDK loop, …), plus `python3` and
+`g++`. No torch.
+
+**The golden rule: never run the agent in this repo.** It will find
+`reference/`, a prior `submissions/*`, the oracle, or the hidden set and grade
+*that* instead of solving — you'll measure nothing. Always start from an
+isolated workspace.
+
+**1 — make an isolated workspace** (whitelist copy: task + open-book docs +
+public fixtures + grader; no answers):
+```
+scripts/new_eval.sh my-model cpp        # -> eval/my-model/
+```
+
+**2 — run the model as an agent.** Open your agent tool **inside
+`eval/my-model/`**, pointed at the model under test, and give it one line:
+> Read `harness/TASK.md` and `START.md`, then do it.
+
+It writes a converter in `submission/`, self-grading on the public fixtures as
+it goes. It gets no reference and never sees the hidden set. (You're the driver
+of *when* it stops; a budget/patience call.)
+
+**3 — score it on the hidden set** (the authoritative number — *your* step, not
+the agent's):
+```
+python3 harness/orchestrate.py --submission eval/my-model/submission \
+  --model-id my-model --language cpp --condition open_book \
+  --public eval/my-model/fixtures/public --hidden fixtures/hidden \
+  --out results.json
+```
+
+**4 — (optional) measure the memorization gap.** Repeat 1–3 with `--delta`: the
+model gets `DELTA_SPEC.md` (a one-page format change) instead of stock, and is
+graded on `hidden_delta`. Use a **separate workspace name** but the **same
+`--model-id`** so the two runs pair up:
+```
+scripts/new_eval.sh my-model-delta cpp --delta   # separate workspace
+# ...run the agent inside eval/my-model-delta/, then (note: SAME --model-id):
+python3 harness/orchestrate.py --submission eval/my-model-delta/submission \
+  --model-id my-model --language cpp --condition delta \
+  --public eval/my-model-delta/fixtures/public --hidden fixtures/hidden_delta \
+  --out results.json
+```
+A model that *understands* pickle/zip adapts (gap ≈ 0); one that pattern-matched
+stock `.pth` collapses (large gap).
+
+**5 — rank + compare:**
+```
+python3 scripts/score.py results.json
+```
+Per-model correctness (T1–T5), T6 robustness, a safety gate (any executed
+hostile pickle → disqualified), and the stock−delta gap.
+
+**Reference output.** `harness/example_results.json` + `submissions/` hold a
+real two-model run done exactly this way (Claude Code and opencode+Kimi, both
+C++). Both were 100% correct on T1–T5 with a +0.0pp gap; the only separator was
+T6 robustness (kimi-cpp 7/7 vs claude-cpp 5/7 — two segfaults on adversarial
+input). `python3 scripts/score.py` reproduces that leaderboard.
+
 ## Layout
 
 ```
