@@ -1,5 +1,7 @@
 # NullTorch
 
+[![CI](https://github.com/verticalrectangle/nulltorch/actions/workflows/ci.yml/badge.svg)](https://github.com/verticalrectangle/nulltorch/actions/workflows/ci.yml)
+
 An LLM benchmark: **reimplement a layered real-world binary format from
 evidence, under a negative dependency constraint.** Flagship task — read
 PyTorch `.pth` checkpoints (zip → pickle → torch tensor/storage semantics)
