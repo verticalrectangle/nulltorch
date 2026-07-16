@@ -74,7 +74,7 @@ hostile pickle → disqualified), and the stock−delta gap.
 **Reference output.** `harness/example_results.json` + `submissions/` hold a
 real two-model run done exactly this way (two coding agents, both
 C++). Both were 100% correct on T1–T5 with a +0.0pp gap; the only separator was
-T6 robustness (kimi-cpp 7/7 vs fable-cpp 5/7 — two segfaults on adversarial
+T6 robustness (kimi-3 7/7 vs fable-cpp 5/7 — two segfaults on adversarial
 input). `python3 scripts/score.py` reproduces that leaderboard.
 
 ## Layout
@@ -162,16 +162,16 @@ where `<subs_root>/<fixture_id>/` holds `manifest.json` + `tensors/*.bin`.
 full repo an agent will just find `reference/` or `submissions/` and grade the
 committed answer instead of solving:
 ```
-scripts/new_eval.sh kimi-cpp cpp     # -> eval/kimi-cpp/ (no reference, no hidden set)
+scripts/new_eval.sh kimi-3 cpp     # -> eval/kimi-3/ (no reference, no hidden set)
 ```
-Open your agent tool (opencode, Claude Code, …) **inside `eval/kimi-cpp/`** and
+Open your agent tool (opencode, Claude Code, …) **inside `eval/kimi-3/`** and
 say *"Read `harness/TASK.md` and `START.md`, then do it."* It writes its
 converter in `submission/` and self-grades on the public fixtures. When it's
 done, score its artifact on the **hidden** set from the real repo:
 ```
-python3 harness/orchestrate.py --submission eval/kimi-cpp/submission \
-  --model-id kimi-cpp --language cpp --condition open_book \
-  --public eval/kimi-cpp/fixtures/public --hidden fixtures/hidden --out results.json
+python3 harness/orchestrate.py --submission eval/kimi-3/submission \
+  --model-id kimi-3 --language cpp --condition open_book \
+  --public eval/kimi-3/fixtures/public --hidden fixtures/hidden --out results.json
 ```
 `submissions/fable-cpp/` was produced this way (via a coding agent).
 

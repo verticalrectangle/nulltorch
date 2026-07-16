@@ -204,7 +204,7 @@
     }
    ],
    "language": "cpp",
-   "model_id": "kimi-cpp",
+   "model_id": "kimi-3",
    "spent": {
     "tokens": 0,
     "wall_seconds": 0
@@ -499,7 +499,7 @@
     }
    ],
    "language": "cpp",
-   "model_id": "kimi-cpp",
+   "model_id": "kimi-3",
    "spent": {
     "tokens": 0,
     "wall_seconds": 0
