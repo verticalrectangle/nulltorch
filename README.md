@@ -72,9 +72,9 @@ Per-model correctness (T1–T5), T6 robustness, a safety gate (any executed
 hostile pickle → disqualified), and the stock−delta gap.
 
 **Reference output.** `harness/example_results.json` + `submissions/` hold a
-real two-model run done exactly this way (Claude Code and opencode+Kimi, both
+real two-model run done exactly this way (two coding agents, both
 C++). Both were 100% correct on T1–T5 with a +0.0pp gap; the only separator was
-T6 robustness (kimi-cpp 7/7 vs claude-cpp 5/7 — two segfaults on adversarial
+T6 robustness (kimi-cpp 7/7 vs fable-cpp 5/7 — two segfaults on adversarial
 input). `python3 scripts/score.py` reproduces that leaderboard.
 
 ## Layout
@@ -141,13 +141,13 @@ bash scripts/ci.sh
 **2. Evaluate a converter** — build it and score it on the hidden set:
 ```
 python3 harness/orchestrate.py \
-  --submission submissions/claude-cpp \
+  --submission submissions/fable-cpp \
   --model-id my-model --language cpp --condition open_book \
   --public fixtures/public,fixtures/t4 --hidden fixtures/hidden \
   --out results.json
 ```
 A submission dir needs a `build.sh` that compiles `./convert` (see
-`submissions/claude-cpp/`), invoked as `./convert <file.pth> <out_dir>`. The
+`submissions/fable-cpp/`), invoked as `./convert <file.pth> <out_dir>`. The
 authoritative score is the **hidden**-set pass; the public pass is a dev signal.
 For the RVC track add `--rvc-cmd` via `harness/run.py` (see docs/RVC_TRACK.md).
 
@@ -173,7 +173,7 @@ python3 harness/orchestrate.py --submission eval/kimi-cpp/submission \
   --model-id kimi-cpp --language cpp --condition open_book \
   --public eval/kimi-cpp/fixtures/public --hidden fixtures/hidden --out results.json
 ```
-`submissions/claude-cpp/` was produced this way (via Claude as the agent).
+`submissions/fable-cpp/` was produced this way (via a coding agent).
 
 **5. Score / rank the results**:
 ```
@@ -206,7 +206,7 @@ oracle: `fixtures/gen/gen_rvc.py`.
 `harness/TASK.md` is the agent-facing task; `harness/orchestrate.py` builds a
 submission and grades it on public (dev) + hidden (eval) into a results cell.
 Proven by running it for real: a coding agent built a from-scratch **stdlib
-C++** `.pth` reader (`submissions/claude-cpp/`, 586 lines, one file — ZIP
+C++** `.pth` reader (`submissions/fable-cpp/`, 586 lines, one file — ZIP
 central-dir parse incl. zip64, a full RFC-1951 inflate, a protocol-0/1/2/4
 pickle VM, stride-aware materialization) and was scored on the **hidden** set
 it never saw:
@@ -220,7 +220,7 @@ it never saw:
   adversarial tier did. That gap *is* the benchmark working.
 
 Results cell in `harness/example_results.json` (now 2 real models:
-`reference-py`, `claude-cpp`).
+`reference-py`, `fable-cpp`).
 
 ## End-to-end loop (implemented)
 `reference/convert.py` (stdlib, validation-only) → `harness/run.py` grades it

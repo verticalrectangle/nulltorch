@@ -25,7 +25,7 @@
     }
    ],
    "language": "cpp",
-   "model_id": "claude-cpp",
+   "model_id": "fable-cpp",
    "spent": {
     "tokens": 0,
     "wall_seconds": 3
@@ -383,7 +383,7 @@
     }
    ],
    "language": "cpp",
-   "model_id": "claude-cpp",
+   "model_id": "fable-cpp",
    "spent": {
     "tokens": 0,
     "wall_seconds": 0
