@@ -10,3 +10,6 @@ submissions/*/convert
 # orchestrator scratch
 /scratch_dev.json
 /scratch/
+
+# eval workspaces (scratch; created by scripts/new_eval.sh)
+/eval/

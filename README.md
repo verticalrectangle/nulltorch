@@ -95,10 +95,22 @@ python3 grader/grade.py --set fixtures/public <subs_root>  # a whole set
 ```
 where `<subs_root>/<fixture_id>/` holds `manifest.json` + `tensors/*.bin`.
 
-**4. Run a model as an agent** — hand it `harness/TASK.md` + `docs/openbook/` +
-the public fixtures, let it write a stdlib converter while self-grading with
-`grade.py`, then score its artifact with orchestrate.py (mode 2). The
-`submissions/claude-cpp/` reader was produced exactly this way.
+**4. Run a model as an agent.** First make an **isolated workspace** — in the
+full repo an agent will just find `reference/` or `submissions/` and grade the
+committed answer instead of solving:
+```
+scripts/new_eval.sh kimi-cpp cpp     # -> eval/kimi-cpp/ (no reference, no hidden set)
+```
+Open your agent tool (opencode, Claude Code, …) **inside `eval/kimi-cpp/`** and
+say *"Read `harness/TASK.md` and `START.md`, then do it."* It writes its
+converter in `submission/` and self-grades on the public fixtures. When it's
+done, score its artifact on the **hidden** set from the real repo:
+```
+python3 harness/orchestrate.py --submission eval/kimi-cpp/submission \
+  --model-id kimi-cpp --language cpp --condition open_book \
+  --public eval/kimi-cpp/fixtures/public --hidden fixtures/hidden --out results.json
+```
+`submissions/claude-cpp/` was produced this way (via Claude as the agent).
 
 **Regenerate fixtures** (optional; the only step that needs torch):
 ```
