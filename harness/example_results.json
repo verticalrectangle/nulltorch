@@ -7,6 +7,151 @@
   {
    "budget": {
     "tokens": 0,
+    "wall_seconds": 0
+   },
+   "condition": "open_book",
+   "determinism_violations": 0,
+   "iterations": [
+    {
+     "t_seconds": 0,
+     "tier_passes": {
+      "T1": 6,
+      "T2": 12,
+      "T3": 18,
+      "T4": 0,
+      "T5": 0,
+      "T6": 7
+     }
+    }
+   ],
+   "language": "cpp",
+   "model_id": "kimi-cpp",
+   "spent": {
+    "tokens": 0,
+    "wall_seconds": 0
+   },
+   "t5_peak_rss_bytes": 41115648,
+   "t6_incidents": {
+    "crashes": 0,
+    "exec_attempts": 0,
+    "hangs": 0
+   },
+   "tiers": {
+    "T1": {
+     "categories": {
+      "t1_flat_f16": {
+       "pass": 3,
+       "total": 3
+      },
+      "t1_flat_f32": {
+       "pass": 3,
+       "total": 3
+      }
+     },
+     "pass": 6,
+     "total": 6
+    },
+    "T2": {
+     "categories": {
+      "t2_nested": {
+       "pass": 3,
+       "total": 3
+      },
+      "t2_ordered_meta": {
+       "pass": 3,
+       "total": 3
+      },
+      "t2_rvc_like": {
+       "pass": 3,
+       "total": 3
+      },
+      "t2_seq_of_tensors": {
+       "pass": 3,
+       "total": 3
+      }
+     },
+     "pass": 12,
+     "total": 12
+    },
+    "T3": {
+     "categories": {
+      "t3_mixed": {
+       "pass": 3,
+       "total": 3
+      },
+      "t3_offset_reshape": {
+       "pass": 3,
+       "total": 3
+      },
+      "t3_overlap_views": {
+       "pass": 3,
+       "total": 3
+      },
+      "t3_scalar_zero": {
+       "pass": 3,
+       "total": 3
+      },
+      "t3_tied": {
+       "pass": 3,
+       "total": 3
+      },
+      "t3_transposed": {
+       "pass": 3,
+       "total": 3
+      }
+     },
+     "pass": 18,
+     "total": 18
+    },
+    "T4": {
+     "categories": {},
+     "pass": 0,
+     "total": 0
+    },
+    "T5": {
+     "categories": {},
+     "pass": 0,
+     "total": 0
+    },
+    "T6": {
+     "categories": {
+      "t6_alloc_bomb": {
+       "pass": 1,
+       "total": 1
+      },
+      "t6_corrupt_central_dir": {
+       "pass": 1,
+       "total": 1
+      },
+      "t6_deep_nesting": {
+       "pass": 1,
+       "total": 1
+      },
+      "t6_exec_reduce": {
+       "pass": 1,
+       "total": 1
+      },
+      "t6_memo_cycle": {
+       "pass": 1,
+       "total": 1
+      },
+      "t6_truncated_pickle": {
+       "pass": 1,
+       "total": 1
+      },
+      "t6_truncated_zip": {
+       "pass": 1,
+       "total": 1
+      }
+     },
+     "pass": 7,
+     "total": 7
+    }
+   }
+  },
+  {
+   "budget": {
+    "tokens": 0,
     "wall_seconds": 3
    },
    "condition": "open_book",
@@ -30,7 +175,7 @@
     "tokens": 0,
     "wall_seconds": 3
    },
-   "t5_peak_rss_bytes": 514170880,
+   "t5_peak_rss_bytes": 514732032,
    "t6_incidents": {
     "crashes": 2,
     "exec_attempts": 0,

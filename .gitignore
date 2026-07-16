@@ -13,3 +13,6 @@ submissions/*/convert
 
 # eval workspaces (scratch; created by scripts/new_eval.sh)
 /eval/
+
+# opencode/agent session logs
+omp-session-*.html
