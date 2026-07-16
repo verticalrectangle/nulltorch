@@ -64,6 +64,49 @@ python3 grade.py --set ../fixtures/public <submissions_root>
 - Open-book (default) / closed-book / **delta** (memorization gap =
   stock − delta).
 
+## Running the benchmark
+
+Needs Python 3 (stdlib only) and, for the C++ example, `g++`. **No torch is
+needed to run or grade** — the fixtures are committed. `pip install jsonschema`
+is only for board-schema validation.
+
+**1. Verify the whole suite** (exactly what CI runs):
+```
+bash scripts/ci.sh
+```
+
+**2. Evaluate a converter** — build it and score it on the hidden set:
+```
+python3 harness/orchestrate.py \
+  --submission submissions/claude-cpp \
+  --model-id my-model --language cpp --condition open_book \
+  --public fixtures/public,fixtures/t4 --hidden fixtures/hidden \
+  --out results.json
+```
+A submission dir needs a `build.sh` that compiles `./convert` (see
+`submissions/claude-cpp/`), invoked as `./convert <file.pth> <out_dir>`. The
+authoritative score is the **hidden**-set pass; the public pass is a dev signal.
+For the RVC track add `--rvc-cmd` via `harness/run.py` (see docs/RVC_TRACK.md).
+
+**3. Grade output you already produced**:
+```
+python3 grader/grade.py <fixture_dir> <your_out_dir>       # one fixture
+python3 grader/grade.py --set fixtures/public <subs_root>  # a whole set
+```
+where `<subs_root>/<fixture_id>/` holds `manifest.json` + `tensors/*.bin`.
+
+**4. Run a model as an agent** — hand it `harness/TASK.md` + `docs/openbook/` +
+the public fixtures, let it write a stdlib converter while self-grading with
+`grade.py`, then score its artifact with orchestrate.py (mode 2). The
+`submissions/claude-cpp/` reader was produced exactly this way.
+
+**Regenerate fixtures** (optional; the only step that needs torch):
+```
+python3 fixtures/gen/generate.py      --out fixtures/public --seeds 1001,1002,1003
+python3 fixtures/gen/generate_hard.py --out-t4 fixtures/t4 --out-t6 fixtures/t6 --seeds 1001,1002
+python3 delta/transform_delta.py      fixtures/public fixtures/public_delta
+```
+
 ## RVC track — engine fidelity (implemented)
 Beyond general reading, NullTorch mirrors what `pop-maker-studio/src/pth_reader.cpp`
 actually does for RVC voice models: **config extraction** (18-arg
