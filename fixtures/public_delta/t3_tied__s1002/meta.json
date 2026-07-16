@@ -1,0 +1,12 @@
+{
+ "container": "zip_stored_delta",
+ "fixture_id": "t3_tied__s1002",
+ "n_tensors": 3,
+ "pickle_protocol": 2,
+ "recipe": "t3_tied",
+ "seed": 1002,
+ "sha256_pth": "318087ab60af2205d89c39c0d261b934b6dd764184c0a0c5b1ffb98c40acf988",
+ "tier": "T3",
+ "torch_version": "2.12.0+cpu",
+ "variant": "delta"
+}

@@ -1,0 +1,12 @@
+{
+ "container": "zip_stored_delta",
+ "fixture_id": "t1_flat_f32__s2001",
+ "n_tensors": 5,
+ "pickle_protocol": 2,
+ "recipe": "t1_flat_f32",
+ "seed": 2001,
+ "sha256_pth": "1414ca9a5b8307e81acb11b7093583348c225f8f2241f5592abced362fde2a3d",
+ "tier": "T1",
+ "torch_version": "2.12.0+cpu",
+ "variant": "delta"
+}

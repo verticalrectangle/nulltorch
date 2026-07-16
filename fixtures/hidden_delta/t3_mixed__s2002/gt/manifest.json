@@ -1,0 +1,70 @@
+{
+ "byteorder": "little",
+ "nulltorch_manifest": 1,
+ "tensors": {
+  "nested/deep/w": {
+   "dtype": "i64",
+   "nbytes": 128,
+   "shape": [
+    4,
+    4
+   ],
+   "storage_key": "2",
+   "storage_offset": 0,
+   "stride": [
+    4,
+    1
+   ]
+  },
+  "tied.a": {
+   "dtype": "f16",
+   "nbytes": 128,
+   "shape": [
+    64
+   ],
+   "storage_key": "0",
+   "storage_offset": 0,
+   "stride": [
+    1
+   ]
+  },
+  "tied.b": {
+   "dtype": "f16",
+   "nbytes": 128,
+   "shape": [
+    64
+   ],
+   "storage_key": "0",
+   "storage_offset": 0,
+   "stride": [
+    1
+   ]
+  },
+  "trans": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    8,
+    8
+   ],
+   "storage_key": "1",
+   "storage_offset": 0,
+   "stride": [
+    1,
+    8
+   ]
+  },
+  "view.mid": {
+   "dtype": "f16",
+   "nbytes": 64,
+   "shape": [
+    32
+   ],
+   "storage_key": "0",
+   "storage_offset": 16,
+   "stride": [
+    1
+   ]
+  }
+ }
+}

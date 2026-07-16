@@ -1,0 +1,22 @@
+{
+ "layer0.weight.bin": {
+  "sha256": "c570cc5a7b6657a32b0e218bbbf20010e8324323d98beb2488ec1017e7ccb145",
+  "size": 48
+ },
+ "layer1.weight.bin": {
+  "sha256": "a3996cfaea8265534618d10d61dbe095991b6fcd74d2f2ff22a4e9916b41fea2",
+  "size": 64
+ },
+ "layer2.weight.bin": {
+  "sha256": "f9b77ce5e56294dd278848f3d476295ee7fb3e49efe938fcea68fa28d6c2fdcd",
+  "size": 80
+ },
+ "layer3.weight.bin": {
+  "sha256": "f5109ce18d92682fdbf18d590cf7f4a51fd12ef9f7a6691b39e774400c64c121",
+  "size": 96
+ },
+ "layer4.weight.bin": {
+  "sha256": "7589b28d0a9d7f69dd44d09af81c59fe5166261dcce1735b46a88cf2275fbbaf",
+  "size": 112
+ }
+}

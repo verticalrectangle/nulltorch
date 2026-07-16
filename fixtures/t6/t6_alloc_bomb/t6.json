@@ -1,0 +1,10 @@
+{
+ "expectation": "refuse",
+ "must_not": [
+  "crash",
+  "hang",
+  "exec",
+  "spawn"
+ ],
+ "note": "declared length must be validated against bytes remaining"
+}

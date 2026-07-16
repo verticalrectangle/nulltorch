@@ -1,0 +1,22 @@
+{
+ "pair__0.bin": {
+  "sha256": "5bfbe8022442ffa486db43ba64cd3901df45c7df8ca0622c628a3a96d78261af",
+  "size": 20
+ },
+ "pair__1.bin": {
+  "sha256": "4e94860dd0fb66ad6a04e694e4c93b9cab8ed728bf8cc29ba23f7c351d961b51",
+  "size": 10
+ },
+ "stack__0.bin": {
+  "sha256": "4e9e27099cbdaf79a22ce0656d27a30c738855ef2800fffa11f19030dc623e68",
+  "size": 16
+ },
+ "stack__1.bin": {
+  "sha256": "09081106c694f1eb5d8547de3715db851eb2d246b832a19bb9da300b2b1756d3",
+  "size": 12
+ },
+ "stack__2.bin": {
+  "sha256": "b4afd24e9e49aad1f58c0dd2c072951d89df4a579ab9e82af9e1650a92e5c058",
+  "size": 16
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "empty.bin": {
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "size": 0
+ },
+ "one.bin": {
+  "sha256": "b9de23bebad8357ab1ab1b913fdfc91b2f024135d7dea760d79ff686c6abc2c5",
+  "size": 8
+ },
+ "scalar.bin": {
+  "sha256": "e21712a06022eecab9f5bd25414b4af9adeb316bb03947134cea060c78afd2d9",
+  "size": 4
+ },
+ "zero_row.bin": {
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "size": 0
+ }
+}

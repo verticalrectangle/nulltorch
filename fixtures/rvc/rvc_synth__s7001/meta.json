@@ -1,0 +1,9 @@
+{
+ "fixture_id": "rvc_synth__s7001",
+ "grading": "byte",
+ "gt_bytes_stored": true,
+ "n_config_fields": 19,
+ "n_tensors": 8,
+ "recipe": "rvc",
+ "tier": "RVC"
+}

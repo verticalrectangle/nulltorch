@@ -1,0 +1,14 @@
+{
+ "head2d.bin": {
+  "sha256": "4a836b87f75a8f83d37537758accdb328ea8d915962f66eab2b1442ab270ffd9",
+  "size": 96
+ },
+ "tail.bin": {
+  "sha256": "9be370886bc55c217d343953fd5345b70b3f6d254fec78619626f763feb16f5d",
+  "size": 80
+ },
+ "win.bin": {
+  "sha256": "7c29dc8af482629e09a60f297640cef11d25c2e38609c0c411fb7e869cc53b7f",
+  "size": 240
+ }
+}

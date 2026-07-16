@@ -1,0 +1,10 @@
+{
+ "expectation": "refuse_or_partial",
+ "must_not": [
+  "crash",
+  "hang",
+  "exec",
+  "spawn"
+ ],
+ "note": "central directory is absent; reader must not crash"
+}

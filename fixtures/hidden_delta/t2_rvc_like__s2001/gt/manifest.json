@@ -1,0 +1,48 @@
+{
+ "byteorder": "little",
+ "nulltorch_manifest": 1,
+ "tensors": {
+  "weight/dec.cond.bias": {
+   "dtype": "f16",
+   "nbytes": 16,
+   "shape": [
+    8
+   ],
+   "storage_key": "2",
+   "storage_offset": 0,
+   "stride": [
+    1
+   ]
+  },
+  "weight/dec.cond.weight": {
+   "dtype": "f16",
+   "nbytes": 64,
+   "shape": [
+    8,
+    4,
+    1
+   ],
+   "storage_key": "1",
+   "storage_offset": 0,
+   "stride": [
+    4,
+    1,
+    1
+   ]
+  },
+  "weight/enc_p.emb.weight": {
+   "dtype": "f16",
+   "nbytes": 256,
+   "shape": [
+    16,
+    8
+   ],
+   "storage_key": "0",
+   "storage_offset": 0,
+   "stride": [
+    8,
+    1
+   ]
+  }
+ }
+}

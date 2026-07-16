@@ -1,0 +1,11 @@
+{
+ "container": "zip_stored",
+ "fixture_id": "t3_transposed__s2003",
+ "n_tensors": 3,
+ "pickle_protocol": 2,
+ "recipe": "t3_transposed",
+ "seed": 2003,
+ "sha256_pth": "fe30e3b37e26b90bc54485f383a991141643397d575d6e45587d3f577c65e0ac",
+ "tier": "T3",
+ "torch_version": "2.12.0+cpu"
+}

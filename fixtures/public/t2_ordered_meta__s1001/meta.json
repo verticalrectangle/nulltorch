@@ -1,0 +1,11 @@
+{
+ "container": "zip_stored",
+ "fixture_id": "t2_ordered_meta__s1001",
+ "n_tensors": 2,
+ "pickle_protocol": 2,
+ "recipe": "t2_ordered_meta",
+ "seed": 1001,
+ "sha256_pth": "65e1ffb0dba588d74c88778888b56ad03938f7292b03b9594121fa141c461976",
+ "tier": "T2",
+ "torch_version": "2.12.0+cpu"
+}

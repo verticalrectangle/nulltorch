@@ -1,0 +1,11 @@
+{
+ "container": "zip_stored",
+ "fixture_id": "t3_scalar_zero__s2001",
+ "n_tensors": 4,
+ "pickle_protocol": 2,
+ "recipe": "t3_scalar_zero",
+ "seed": 2001,
+ "sha256_pth": "1d82c56e854159df436e5f62877c9ad30a1d4a1859cc2f3895ad2ebb76dfaeff",
+ "tier": "T3",
+ "torch_version": "2.12.0+cpu"
+}

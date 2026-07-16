@@ -1,0 +1,48 @@
+{
+ "byteorder": "little",
+ "nulltorch_manifest": 1,
+ "tensors": {
+  "strided": {
+   "dtype": "f32",
+   "nbytes": 80,
+   "shape": [
+    4,
+    5
+   ],
+   "storage_key": "1",
+   "storage_offset": 0,
+   "stride": [
+    30,
+    2
+   ]
+  },
+  "x": {
+   "dtype": "f32",
+   "nbytes": 216,
+   "shape": [
+    6,
+    9
+   ],
+   "storage_key": "0",
+   "storage_offset": 0,
+   "stride": [
+    9,
+    1
+   ]
+  },
+  "x_t": {
+   "dtype": "f32",
+   "nbytes": 216,
+   "shape": [
+    9,
+    6
+   ],
+   "storage_key": "0",
+   "storage_offset": 0,
+   "stride": [
+    1,
+    9
+   ]
+  }
+ }
+}

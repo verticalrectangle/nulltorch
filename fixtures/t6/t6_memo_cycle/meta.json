@@ -1,0 +1,9 @@
+{
+ "container": "adversarial",
+ "fixture_id": "t6_memo_cycle",
+ "grading": "policy",
+ "recipe": "t6_memo_cycle",
+ "seed": 0,
+ "sha256_pth": "87bdf013a70243ec31f6f6b32c3d61612527a6e3728850dc6ca539cb5533c172",
+ "tier": "T6"
+}

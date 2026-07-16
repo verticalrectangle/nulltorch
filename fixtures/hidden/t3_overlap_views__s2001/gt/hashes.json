@@ -1,0 +1,14 @@
+{
+ "a.bin": {
+  "sha256": "bce412fc59363885c717d1139cf6df48f78a46ae120b20749fad090f88ad9b54",
+  "size": 64
+ },
+ "b.bin": {
+  "sha256": "bd88be7647eed6f6ddcdcdcfa30cf40ef2222998dcae5d451fb4596318f58844",
+  "size": 96
+ },
+ "whole.bin": {
+  "sha256": "69cbeae8c9351fc57838686960e7371f0f2c7fbae6db882f30db7efa17782238",
+  "size": 160
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "container": "zip_stored_delta",
+ "fixture_id": "t3_offset_reshape__s2001",
+ "n_tensors": 3,
+ "pickle_protocol": 2,
+ "recipe": "t3_offset_reshape",
+ "seed": 2001,
+ "sha256_pth": "fcd13903c516da7c22cba6a1871f805fde8b9580d5fd11662fcdcbb42e9c6d8a",
+ "tier": "T3",
+ "torch_version": "2.12.0+cpu",
+ "variant": "delta"
+}

@@ -1,0 +1,74 @@
+{
+ "byteorder": "little",
+ "nulltorch_manifest": 1,
+ "tensors": {
+  "blk.0.w": {
+   "dtype": "f16",
+   "nbytes": 32,
+   "shape": [
+    8,
+    2
+   ],
+   "storage_key": "0",
+   "storage_offset": 0,
+   "stride": [
+    2,
+    1
+   ]
+  },
+  "blk.1.w": {
+   "dtype": "f16",
+   "nbytes": 48,
+   "shape": [
+    8,
+    3
+   ],
+   "storage_key": "1",
+   "storage_offset": 0,
+   "stride": [
+    3,
+    1
+   ]
+  },
+  "blk.2.w": {
+   "dtype": "f16",
+   "nbytes": 64,
+   "shape": [
+    8,
+    4
+   ],
+   "storage_key": "2",
+   "storage_offset": 0,
+   "stride": [
+    4,
+    1
+   ]
+  },
+  "blk.3.w": {
+   "dtype": "f16",
+   "nbytes": 80,
+   "shape": [
+    8,
+    5
+   ],
+   "storage_key": "3",
+   "storage_offset": 0,
+   "stride": [
+    5,
+    1
+   ]
+  },
+  "scale": {
+   "dtype": "f16",
+   "nbytes": 2,
+   "shape": [
+    1
+   ],
+   "storage_key": "4",
+   "storage_offset": 0,
+   "stride": [
+    1
+   ]
+  }
+ }
+}

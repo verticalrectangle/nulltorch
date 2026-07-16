@@ -1,0 +1,44 @@
+{
+ "byteorder": "little",
+ "nulltorch_manifest": 1,
+ "tensors": {
+  "big.2d": {
+   "dtype": "f32",
+   "nbytes": 1048576,
+   "shape": [
+    1024,
+    256
+   ],
+   "storage_key": "1",
+   "storage_offset": 0,
+   "stride": [
+    256,
+    1
+   ]
+  },
+  "big.flat": {
+   "dtype": "f32",
+   "nbytes": 1048576,
+   "shape": [
+    262144
+   ],
+   "storage_key": "0",
+   "storage_offset": 0,
+   "stride": [
+    1
+   ]
+  },
+  "half.vec": {
+   "dtype": "f16",
+   "nbytes": 524288,
+   "shape": [
+    262144
+   ],
+   "storage_key": "2",
+   "storage_offset": 0,
+   "stride": [
+    1
+   ]
+  }
+ }
+}

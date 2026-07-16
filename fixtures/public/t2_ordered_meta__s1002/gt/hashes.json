@@ -1,0 +1,10 @@
+{
+ "w1.bin": {
+  "sha256": "4b5e67937f3f2920c34f9edc71a93e69819ffce6d50f9b04a80ff67c1b29b333",
+  "size": 400
+ },
+ "w2.bin": {
+  "sha256": "e2580ec4ee3b20257cb5a2dd125458a826f2d9194faf07cfb09c88dce6a6e291",
+  "size": 80
+ }
+}

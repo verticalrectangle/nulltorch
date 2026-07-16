@@ -1,0 +1,122 @@
+{
+ "byteorder": "little",
+ "config": {
+  "filter_channels": 768,
+  "gin_channels": 256,
+  "hidden_channels": 192,
+  "inter_channels": 192,
+  "kernel_size": 3,
+  "n_heads": 2,
+  "n_layers": 6,
+  "n_speakers": 1,
+  "p_dropout": 0.0,
+  "phone_dim": 768,
+  "resblock": "1",
+  "resblock_dilation_sizes": [
+   [
+    1,
+    3,
+    5
+   ],
+   [
+    1,
+    3,
+    5
+   ],
+   [
+    1,
+    3,
+    5
+   ]
+  ],
+  "resblock_kernel_sizes": [
+   3,
+   7,
+   11
+  ],
+  "segment_size": 32,
+  "spec_channels": 1025,
+  "sr": 40000,
+  "upsample_initial_channel": 512,
+  "upsample_kernel_sizes": [
+   16,
+   16,
+   4,
+   4
+  ],
+  "upsample_rates": [
+   10,
+   10,
+   2,
+   2
+  ]
+ },
+ "nulltorch_manifest": 1,
+ "tensors": {
+  "dec.conv_pre.bias": {
+   "dtype": "f32",
+   "nbytes": 64,
+   "shape": [
+    16
+   ]
+  },
+  "dec.conv_pre.weight": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    16,
+    8,
+    3
+   ]
+  },
+  "dec.ups.0.weight": {
+   "dtype": "f32",
+   "nbytes": 2048,
+   "shape": [
+    16,
+    8,
+    4
+   ]
+  },
+  "emb_g.weight": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    1,
+    32
+   ]
+  },
+  "enc_p.emb_phone.bias": {
+   "dtype": "f32",
+   "nbytes": 32,
+   "shape": [
+    8
+   ]
+  },
+  "enc_p.emb_phone.weight": {
+   "dtype": "f32",
+   "nbytes": 24576,
+   "shape": [
+    8,
+    768
+   ]
+  },
+  "enc_p.emb_pitch.weight": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    8,
+    16
+   ]
+  },
+  "flow.flows.0.enc.cond_layer.weight": {
+   "dtype": "f32",
+   "nbytes": 384,
+   "shape": [
+    12,
+    8,
+    1
+   ]
+  }
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "container": "zip_stored_delta",
+ "fixture_id": "t3_overlap_views__s2003",
+ "n_tensors": 3,
+ "pickle_protocol": 2,
+ "recipe": "t3_overlap_views",
+ "seed": 2003,
+ "sha256_pth": "58fb6345e8ddf6f97ec37c9c9acc1ee33ff6c8137470d9e451cb8e4914743c20",
+ "tier": "T3",
+ "torch_version": "2.12.0+cpu",
+ "variant": "delta"
+}

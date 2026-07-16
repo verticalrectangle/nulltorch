@@ -1,0 +1,2404 @@
+{
+  "benchmark_version": "1.0.0",
+  "container_digests": {
+    "cpp-closed_book": "sha256:3bd39f917c10696489a30fd54c7b2c1d0e2adcd93c0a5eb2d37dc2c9a7a5236b",
+    "cpp-delta": "sha256:b4734865425feeaa4e2fe981b29ee11b922ce1e6af41e3a2517ee5bb9cda1a2a",
+    "cpp-open_book": "sha256:3b41a3dbd199b364f73bb387d080589ab054c24026cdea5b9a2145128edfed86",
+    "go-closed_book": "sha256:9ef307590d273e34f98dff7e4c6428da8099f4efbacea67c7d1afcc4f14a3e3e",
+    "go-delta": "sha256:04d42f8ac2acaf127972d33e5901a19bbd47d5552c7f47e8e80e952eb9d8e96c",
+    "go-open_book": "sha256:21599e3e9c8fe21da80270815fe85df2fbdaa35adf9c1e2a8a3c0ed16bfe1684",
+    "rust-closed_book": "sha256:2e9d34119f3374cebd4d3fd81b6ee7b3bb1c863e2601a7462667a40844853040",
+    "rust-delta": "sha256:b7a05814d32feb3e719e01fcd3fe22a4248ac9ed336de7daecd3ada8b4f2222d",
+    "rust-open_book": "sha256:f37cb990c801f97b7684319e1b429ad564b858f9a3e247cb2c083eb8cb37f0a7"
+  },
+  "fixture_set_hash": "sha256:4f309ffea518f32cf21449273d7cee9d9136682575250def91799e2786d37484",
+  "harness_version": "0.4.2",
+  "runs": [
+    {
+      "budget": {
+        "tokens": 6000000,
+        "wall_seconds": 14400
+      },
+      "condition": "open_book",
+      "determinism_violations": 0,
+      "iterations": [
+        {
+          "t_seconds": 835,
+          "tier_passes": {
+            "RVC": 0,
+            "T1": 2,
+            "T2": 0,
+            "T3": 0,
+            "T4": 0,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 2832,
+          "tier_passes": {
+            "RVC": 0,
+            "T1": 6,
+            "T2": 3,
+            "T3": 2,
+            "T4": 0,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 4011,
+          "tier_passes": {
+            "RVC": 2,
+            "T1": 7,
+            "T2": 5,
+            "T3": 4,
+            "T4": 3,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 6088,
+          "tier_passes": {
+            "RVC": 3,
+            "T1": 9,
+            "T2": 7,
+            "T3": 5,
+            "T4": 9,
+            "T5": 1,
+            "T6": 1
+          }
+        },
+        {
+          "t_seconds": 6851,
+          "tier_passes": {
+            "RVC": 4,
+            "T1": 9,
+            "T2": 8,
+            "T3": 7,
+            "T4": 14,
+            "T5": 1,
+            "T6": 1
+          }
+        },
+        {
+          "t_seconds": 7290,
+          "tier_passes": {
+            "RVC": 5,
+            "T1": 10,
+            "T2": 9,
+            "T3": 7,
+            "T4": 14,
+            "T5": 1,
+            "T6": 1
+          }
+        },
+        {
+          "t_seconds": 9325,
+          "tier_passes": {
+            "RVC": 6,
+            "T1": 12,
+            "T2": 10,
+            "T3": 9,
+            "T4": 19,
+            "T5": 2,
+            "T6": 2
+          }
+        }
+      ],
+      "language": "go",
+      "model_id": "nova-2-pro",
+      "spent": {
+        "tokens": 3911729,
+        "wall_seconds": 9325
+      },
+      "t5_peak_rss_bytes": 3281968664,
+      "t6_incidents": {
+        "crashes": 3,
+        "exec_attempts": 0,
+        "hangs": 0
+      },
+      "tiers": {
+        "RVC": {
+          "categories": {
+            "config_extraction": {
+              "pass": 3,
+              "total": 4
+            },
+            "f32_tensors": {
+              "pass": 3,
+              "total": 4
+            }
+          },
+          "pass": 6,
+          "total": 8
+        },
+        "T1": {
+          "categories": {
+            "flat_f16": {
+              "pass": 6,
+              "total": 6
+            },
+            "flat_f32": {
+              "pass": 6,
+              "total": 6
+            }
+          },
+          "pass": 12,
+          "total": 12
+        },
+        "T2": {
+          "categories": {
+            "contiguous_stored": {
+              "pass": 6,
+              "total": 8
+            },
+            "protocol2_graphs": {
+              "pass": 4,
+              "total": 6
+            }
+          },
+          "pass": 10,
+          "total": 14
+        },
+        "T3": {
+          "categories": {
+            "offset_views": {
+              "pass": 2,
+              "total": 4
+            },
+            "shared_storage": {
+              "pass": 2,
+              "total": 4
+            },
+            "transposed_strides": {
+              "pass": 3,
+              "total": 4
+            },
+            "zero_dim_scalars": {
+              "pass": 1,
+              "total": 2
+            },
+            "zero_size": {
+              "pass": 1,
+              "total": 2
+            }
+          },
+          "pass": 9,
+          "total": 16
+        },
+        "T4": {
+          "categories": {
+            "deflate_rezipped": {
+              "pass": 3,
+              "total": 3
+            },
+            "fp8": {
+              "pass": 2,
+              "total": 2
+            },
+            "legacy_inline": {
+              "pass": 2,
+              "total": 3
+            },
+            "module_pickle_skip": {
+              "pass": 3,
+              "total": 4
+            },
+            "protocol4": {
+              "pass": 2,
+              "total": 3
+            },
+            "qtensor": {
+              "pass": 2,
+              "total": 3
+            },
+            "wide_dtypes": {
+              "pass": 3,
+              "total": 4
+            },
+            "zip64": {
+              "pass": 2,
+              "total": 2
+            }
+          },
+          "pass": 19,
+          "total": 24
+        },
+        "T5": {
+          "categories": {
+            "huge_contiguous": {
+              "pass": 1,
+              "total": 2
+            },
+            "huge_transposed_view": {
+              "pass": 1,
+              "total": 2
+            }
+          },
+          "pass": 2,
+          "total": 4
+        },
+        "T6": {
+          "categories": {
+            "deep_nesting": {
+              "pass": 0,
+              "total": 3
+            },
+            "exec_opcodes": {
+              "pass": 0,
+              "total": 3
+            },
+            "memo_cycles": {
+              "pass": 1,
+              "total": 3
+            },
+            "pickle_bombs": {
+              "pass": 0,
+              "total": 3
+            },
+            "truncated": {
+              "pass": 1,
+              "total": 6
+            }
+          },
+          "pass": 2,
+          "total": 18
+        }
+      }
+    },
+    {
+      "budget": {
+        "tokens": 6000000,
+        "wall_seconds": 14400
+      },
+      "condition": "closed_book",
+      "determinism_violations": 0,
+      "iterations": [
+        {
+          "t_seconds": 145,
+          "tier_passes": {
+            "RVC": 0,
+            "T1": 0,
+            "T2": 0,
+            "T3": 0,
+            "T4": 0,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 389,
+          "tier_passes": {
+            "RVC": 0,
+            "T1": 1,
+            "T2": 0,
+            "T3": 0,
+            "T4": 0,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 1149,
+          "tier_passes": {
+            "RVC": 0,
+            "T1": 2,
+            "T2": 1,
+            "T3": 0,
+            "T4": 0,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 1936,
+          "tier_passes": {
+            "RVC": 0,
+            "T1": 5,
+            "T2": 3,
+            "T3": 0,
+            "T4": 0,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 2472,
+          "tier_passes": {
+            "RVC": 0,
+            "T1": 5,
+            "T2": 4,
+            "T3": 0,
+            "T4": 0,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 4083,
+          "tier_passes": {
+            "RVC": 2,
+            "T1": 7,
+            "T2": 5,
+            "T3": 4,
+            "T4": 2,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 4892,
+          "tier_passes": {
+            "RVC": 3,
+            "T1": 8,
+            "T2": 7,
+            "T3": 6,
+            "T4": 7,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 7152,
+          "tier_passes": {
+            "RVC": 5,
+            "T1": 11,
+            "T2": 8,
+            "T3": 7,
+            "T4": 13,
+            "T5": 0,
+            "T6": 1
+          }
+        },
+        {
+          "t_seconds": 8309,
+          "tier_passes": {
+            "RVC": 6,
+            "T1": 11,
+            "T2": 10,
+            "T3": 9,
+            "T4": 14,
+            "T5": 0,
+            "T6": 1
+          }
+        },
+        {
+          "t_seconds": 8563,
+          "tier_passes": {
+            "RVC": 6,
+            "T1": 11,
+            "T2": 11,
+            "T3": 9,
+            "T4": 16,
+            "T5": 0,
+            "T6": 1
+          }
+        },
+        {
+          "t_seconds": 8902,
+          "tier_passes": {
+            "RVC": 6,
+            "T1": 12,
+            "T2": 11,
+            "T3": 10,
+            "T4": 17,
+            "T5": 0,
+            "T6": 1
+          }
+        },
+        {
+          "t_seconds": 9094,
+          "tier_passes": {
+            "RVC": 6,
+            "T1": 12,
+            "T2": 11,
+            "T3": 10,
+            "T4": 17,
+            "T5": 0,
+            "T6": 1
+          }
+        }
+      ],
+      "language": "go",
+      "model_id": "nova-2-pro",
+      "spent": {
+        "tokens": 4044054,
+        "wall_seconds": 9094
+      },
+      "t5_peak_rss_bytes": 4692482284,
+      "t6_incidents": {
+        "crashes": 0,
+        "exec_attempts": 1,
+        "hangs": 0
+      },
+      "tiers": {
+        "RVC": {
+          "categories": {
+            "config_extraction": {
+              "pass": 3,
+              "total": 4
+            },
+            "f32_tensors": {
+              "pass": 3,
+              "total": 4
+            }
+          },
+          "pass": 6,
+          "total": 8
+        },
+        "T1": {
+          "categories": {
+            "flat_f16": {
+              "pass": 6,
+              "total": 6
+            },
+            "flat_f32": {
+              "pass": 6,
+              "total": 6
+            }
+          },
+          "pass": 12,
+          "total": 12
+        },
+        "T2": {
+          "categories": {
+            "contiguous_stored": {
+              "pass": 6,
+              "total": 8
+            },
+            "protocol2_graphs": {
+              "pass": 5,
+              "total": 6
+            }
+          },
+          "pass": 11,
+          "total": 14
+        },
+        "T3": {
+          "categories": {
+            "offset_views": {
+              "pass": 2,
+              "total": 4
+            },
+            "shared_storage": {
+              "pass": 3,
+              "total": 4
+            },
+            "transposed_strides": {
+              "pass": 3,
+              "total": 4
+            },
+            "zero_dim_scalars": {
+              "pass": 1,
+              "total": 2
+            },
+            "zero_size": {
+              "pass": 1,
+              "total": 2
+            }
+          },
+          "pass": 10,
+          "total": 16
+        },
+        "T4": {
+          "categories": {
+            "deflate_rezipped": {
+              "pass": 2,
+              "total": 3
+            },
+            "fp8": {
+              "pass": 1,
+              "total": 2
+            },
+            "legacy_inline": {
+              "pass": 2,
+              "total": 3
+            },
+            "module_pickle_skip": {
+              "pass": 3,
+              "total": 4
+            },
+            "protocol4": {
+              "pass": 2,
+              "total": 3
+            },
+            "qtensor": {
+              "pass": 2,
+              "total": 3
+            },
+            "wide_dtypes": {
+              "pass": 3,
+              "total": 4
+            },
+            "zip64": {
+              "pass": 2,
+              "total": 2
+            }
+          },
+          "pass": 17,
+          "total": 24
+        },
+        "T5": {
+          "categories": {
+            "huge_contiguous": {
+              "pass": 0,
+              "total": 2
+            },
+            "huge_transposed_view": {
+              "pass": 0,
+              "total": 2
+            }
+          },
+          "pass": 0,
+          "total": 4
+        },
+        "T6": {
+          "categories": {
+            "deep_nesting": {
+              "pass": 0,
+              "total": 3
+            },
+            "exec_opcodes": {
+              "pass": 0,
+              "total": 3
+            },
+            "memo_cycles": {
+              "pass": 0,
+              "total": 3
+            },
+            "pickle_bombs": {
+              "pass": 0,
+              "total": 3
+            },
+            "truncated": {
+              "pass": 1,
+              "total": 6
+            }
+          },
+          "pass": 1,
+          "total": 18
+        }
+      }
+    },
+    {
+      "budget": {
+        "tokens": 6000000,
+        "wall_seconds": 14400
+      },
+      "condition": "delta",
+      "determinism_violations": 0,
+      "iterations": [
+        {
+          "t_seconds": 630,
+          "tier_passes": {
+            "T1": 1,
+            "T2": 0,
+            "T3": 0,
+            "T4": 0,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 690,
+          "tier_passes": {
+            "T1": 2,
+            "T2": 0,
+            "T3": 0,
+            "T4": 0,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 2188,
+          "tier_passes": {
+            "T1": 3,
+            "T2": 1,
+            "T3": 0,
+            "T4": 0,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 2459,
+          "tier_passes": {
+            "T1": 3,
+            "T2": 1,
+            "T3": 0,
+            "T4": 0,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 7299,
+          "tier_passes": {
+            "T1": 6,
+            "T2": 4,
+            "T3": 4,
+            "T4": 8,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 10074,
+          "tier_passes": {
+            "T1": 8,
+            "T2": 7,
+            "T3": 6,
+            "T4": 12,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 11127,
+          "tier_passes": {
+            "T1": 9,
+            "T2": 7,
+            "T3": 7,
+            "T4": 13,
+            "T5": 0,
+            "T6": 0
+          }
+        }
+      ],
+      "language": "go",
+      "model_id": "nova-2-pro",
+      "spent": {
+        "tokens": 4007396,
+        "wall_seconds": 11127
+      },
+      "t5_peak_rss_bytes": 2726543337,
+      "t6_incidents": {
+        "crashes": 0,
+        "exec_attempts": 1,
+        "hangs": 0
+      },
+      "tiers": {
+        "T1": {
+          "categories": {
+            "flat_f16": {
+              "pass": 5,
+              "total": 6
+            },
+            "flat_f32": {
+              "pass": 4,
+              "total": 6
+            }
+          },
+          "pass": 9,
+          "total": 12
+        },
+        "T2": {
+          "categories": {
+            "contiguous_stored": {
+              "pass": 4,
+              "total": 8
+            },
+            "protocol2_graphs": {
+              "pass": 3,
+              "total": 6
+            }
+          },
+          "pass": 7,
+          "total": 14
+        },
+        "T3": {
+          "categories": {
+            "offset_views": {
+              "pass": 2,
+              "total": 4
+            },
+            "shared_storage": {
+              "pass": 1,
+              "total": 4
+            },
+            "transposed_strides": {
+              "pass": 2,
+              "total": 4
+            },
+            "zero_dim_scalars": {
+              "pass": 1,
+              "total": 2
+            },
+            "zero_size": {
+              "pass": 1,
+              "total": 2
+            }
+          },
+          "pass": 7,
+          "total": 16
+        },
+        "T4": {
+          "categories": {
+            "deflate_rezipped": {
+              "pass": 2,
+              "total": 3
+            },
+            "fp8": {
+              "pass": 1,
+              "total": 2
+            },
+            "legacy_inline": {
+              "pass": 1,
+              "total": 3
+            },
+            "module_pickle_skip": {
+              "pass": 2,
+              "total": 4
+            },
+            "protocol4": {
+              "pass": 2,
+              "total": 3
+            },
+            "qtensor": {
+              "pass": 2,
+              "total": 3
+            },
+            "wide_dtypes": {
+              "pass": 2,
+              "total": 4
+            },
+            "zip64": {
+              "pass": 1,
+              "total": 2
+            }
+          },
+          "pass": 13,
+          "total": 24
+        },
+        "T5": {
+          "categories": {
+            "huge_contiguous": {
+              "pass": 0,
+              "total": 2
+            },
+            "huge_transposed_view": {
+              "pass": 0,
+              "total": 2
+            }
+          },
+          "pass": 0,
+          "total": 4
+        },
+        "T6": {
+          "categories": {
+            "deep_nesting": {
+              "pass": 0,
+              "total": 3
+            },
+            "exec_opcodes": {
+              "pass": 0,
+              "total": 3
+            },
+            "memo_cycles": {
+              "pass": 0,
+              "total": 3
+            },
+            "pickle_bombs": {
+              "pass": 0,
+              "total": 3
+            },
+            "truncated": {
+              "pass": 0,
+              "total": 6
+            }
+          },
+          "pass": 0,
+          "total": 18
+        }
+      }
+    },
+    {
+      "budget": {
+        "tokens": 6000000,
+        "wall_seconds": 14400
+      },
+      "condition": "open_book",
+      "determinism_violations": 0,
+      "iterations": [
+        {
+          "t_seconds": 1328,
+          "tier_passes": {
+            "RVC": 0,
+            "T1": 2,
+            "T2": 1,
+            "T3": 0,
+            "T4": 0,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 1335,
+          "tier_passes": {
+            "RVC": 0,
+            "T1": 3,
+            "T2": 1,
+            "T3": 0,
+            "T4": 0,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 2173,
+          "tier_passes": {
+            "RVC": 0,
+            "T1": 4,
+            "T2": 3,
+            "T3": 0,
+            "T4": 0,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 5314,
+          "tier_passes": {
+            "RVC": 2,
+            "T1": 6,
+            "T2": 6,
+            "T3": 4,
+            "T4": 4,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 7492,
+          "tier_passes": {
+            "RVC": 3,
+            "T1": 9,
+            "T2": 7,
+            "T3": 6,
+            "T4": 8,
+            "T5": 1,
+            "T6": 1
+          }
+        },
+        {
+          "t_seconds": 7752,
+          "tier_passes": {
+            "RVC": 3,
+            "T1": 9,
+            "T2": 8,
+            "T3": 6,
+            "T4": 9,
+            "T5": 1,
+            "T6": 1
+          }
+        },
+        {
+          "t_seconds": 8596,
+          "tier_passes": {
+            "RVC": 4,
+            "T1": 10,
+            "T2": 8,
+            "T3": 6,
+            "T4": 10,
+            "T5": 1,
+            "T6": 1
+          }
+        },
+        {
+          "t_seconds": 9539,
+          "tier_passes": {
+            "RVC": 4,
+            "T1": 10,
+            "T2": 8,
+            "T3": 7,
+            "T4": 13,
+            "T5": 1,
+            "T6": 2
+          }
+        },
+        {
+          "t_seconds": 10644,
+          "tier_passes": {
+            "RVC": 6,
+            "T1": 10,
+            "T2": 9,
+            "T3": 8,
+            "T4": 14,
+            "T5": 2,
+            "T6": 2
+          }
+        },
+        {
+          "t_seconds": 11262,
+          "tier_passes": {
+            "RVC": 6,
+            "T1": 10,
+            "T2": 10,
+            "T3": 8,
+            "T4": 15,
+            "T5": 2,
+            "T6": 3
+          }
+        },
+        {
+          "t_seconds": 11958,
+          "tier_passes": {
+            "RVC": 6,
+            "T1": 12,
+            "T2": 10,
+            "T3": 9,
+            "T4": 17,
+            "T5": 2,
+            "T6": 3
+          }
+        }
+      ],
+      "language": "rust",
+      "model_id": "nova-2-pro",
+      "spent": {
+        "tokens": 5176737,
+        "wall_seconds": 11958
+      },
+      "t5_peak_rss_bytes": 3212474804,
+      "t6_incidents": {
+        "crashes": 3,
+        "exec_attempts": 1,
+        "hangs": 2
+      },
+      "tiers": {
+        "RVC": {
+          "categories": {
+            "config_extraction": {
+              "pass": 3,
+              "total": 4
+            },
+            "f32_tensors": {
+              "pass": 3,
+              "total": 4
+            }
+          },
+          "pass": 6,
+          "total": 8
+        },
+        "T1": {
+          "categories": {
+            "flat_f16": {
+              "pass": 6,
+              "total": 6
+            },
+            "flat_f32": {
+              "pass": 6,
+              "total": 6
+            }
+          },
+          "pass": 12,
+          "total": 12
+        },
+        "T2": {
+          "categories": {
+            "contiguous_stored": {
+              "pass": 5,
+              "total": 8
+            },
+            "protocol2_graphs": {
+              "pass": 5,
+              "total": 6
+            }
+          },
+          "pass": 10,
+          "total": 14
+        },
+        "T3": {
+          "categories": {
+            "offset_views": {
+              "pass": 2,
+              "total": 4
+            },
+            "shared_storage": {
+              "pass": 2,
+              "total": 4
+            },
+            "transposed_strides": {
+              "pass": 3,
+              "total": 4
+            },
+            "zero_dim_scalars": {
+              "pass": 1,
+              "total": 2
+            },
+            "zero_size": {
+              "pass": 1,
+              "total": 2
+            }
+          },
+          "pass": 9,
+          "total": 16
+        },
+        "T4": {
+          "categories": {
+            "deflate_rezipped": {
+              "pass": 2,
+              "total": 3
+            },
+            "fp8": {
+              "pass": 2,
+              "total": 2
+            },
+            "legacy_inline": {
+              "pass": 2,
+              "total": 3
+            },
+            "module_pickle_skip": {
+              "pass": 3,
+              "total": 4
+            },
+            "protocol4": {
+              "pass": 2,
+              "total": 3
+            },
+            "qtensor": {
+              "pass": 2,
+              "total": 3
+            },
+            "wide_dtypes": {
+              "pass": 3,
+              "total": 4
+            },
+            "zip64": {
+              "pass": 1,
+              "total": 2
+            }
+          },
+          "pass": 17,
+          "total": 24
+        },
+        "T5": {
+          "categories": {
+            "huge_contiguous": {
+              "pass": 1,
+              "total": 2
+            },
+            "huge_transposed_view": {
+              "pass": 1,
+              "total": 2
+            }
+          },
+          "pass": 2,
+          "total": 4
+        },
+        "T6": {
+          "categories": {
+            "deep_nesting": {
+              "pass": 0,
+              "total": 3
+            },
+            "exec_opcodes": {
+              "pass": 1,
+              "total": 3
+            },
+            "memo_cycles": {
+              "pass": 1,
+              "total": 3
+            },
+            "pickle_bombs": {
+              "pass": 0,
+              "total": 3
+            },
+            "truncated": {
+              "pass": 1,
+              "total": 6
+            }
+          },
+          "pass": 3,
+          "total": 18
+        }
+      }
+    },
+    {
+      "budget": {
+        "tokens": 6000000,
+        "wall_seconds": 14400
+      },
+      "condition": "closed_book",
+      "determinism_violations": 0,
+      "iterations": [
+        {
+          "t_seconds": 253,
+          "tier_passes": {
+            "RVC": 0,
+            "T1": 1,
+            "T2": 0,
+            "T3": 0,
+            "T4": 0,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 1881,
+          "tier_passes": {
+            "RVC": 0,
+            "T1": 4,
+            "T2": 2,
+            "T3": 0,
+            "T4": 0,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 2314,
+          "tier_passes": {
+            "RVC": 0,
+            "T1": 4,
+            "T2": 3,
+            "T3": 1,
+            "T4": 0,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 4453,
+          "tier_passes": {
+            "RVC": 2,
+            "T1": 8,
+            "T2": 5,
+            "T3": 5,
+            "T4": 6,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 6112,
+          "tier_passes": {
+            "RVC": 3,
+            "T1": 9,
+            "T2": 7,
+            "T3": 7,
+            "T4": 10,
+            "T5": 1,
+            "T6": 1
+          }
+        },
+        {
+          "t_seconds": 6115,
+          "tier_passes": {
+            "RVC": 3,
+            "T1": 10,
+            "T2": 7,
+            "T3": 7,
+            "T4": 10,
+            "T5": 1,
+            "T6": 1
+          }
+        },
+        {
+          "t_seconds": 6726,
+          "tier_passes": {
+            "RVC": 4,
+            "T1": 10,
+            "T2": 8,
+            "T3": 7,
+            "T4": 11,
+            "T5": 1,
+            "T6": 1
+          }
+        },
+        {
+          "t_seconds": 7180,
+          "tier_passes": {
+            "RVC": 4,
+            "T1": 11,
+            "T2": 9,
+            "T3": 7,
+            "T4": 11,
+            "T5": 1,
+            "T6": 1
+          }
+        },
+        {
+          "t_seconds": 8706,
+          "tier_passes": {
+            "RVC": 5,
+            "T1": 12,
+            "T2": 10,
+            "T3": 9,
+            "T4": 15,
+            "T5": 1,
+            "T6": 2
+          }
+        }
+      ],
+      "language": "rust",
+      "model_id": "nova-2-pro",
+      "spent": {
+        "tokens": 3534591,
+        "wall_seconds": 8706
+      },
+      "t5_peak_rss_bytes": 4202653209,
+      "t6_incidents": {
+        "crashes": 3,
+        "exec_attempts": 1,
+        "hangs": 2
+      },
+      "tiers": {
+        "RVC": {
+          "categories": {
+            "config_extraction": {
+              "pass": 2,
+              "total": 4
+            },
+            "f32_tensors": {
+              "pass": 3,
+              "total": 4
+            }
+          },
+          "pass": 5,
+          "total": 8
+        },
+        "T1": {
+          "categories": {
+            "flat_f16": {
+              "pass": 6,
+              "total": 6
+            },
+            "flat_f32": {
+              "pass": 6,
+              "total": 6
+            }
+          },
+          "pass": 12,
+          "total": 12
+        },
+        "T2": {
+          "categories": {
+            "contiguous_stored": {
+              "pass": 6,
+              "total": 8
+            },
+            "protocol2_graphs": {
+              "pass": 4,
+              "total": 6
+            }
+          },
+          "pass": 10,
+          "total": 14
+        },
+        "T3": {
+          "categories": {
+            "offset_views": {
+              "pass": 2,
+              "total": 4
+            },
+            "shared_storage": {
+              "pass": 2,
+              "total": 4
+            },
+            "transposed_strides": {
+              "pass": 3,
+              "total": 4
+            },
+            "zero_dim_scalars": {
+              "pass": 1,
+              "total": 2
+            },
+            "zero_size": {
+              "pass": 1,
+              "total": 2
+            }
+          },
+          "pass": 9,
+          "total": 16
+        },
+        "T4": {
+          "categories": {
+            "deflate_rezipped": {
+              "pass": 2,
+              "total": 3
+            },
+            "fp8": {
+              "pass": 1,
+              "total": 2
+            },
+            "legacy_inline": {
+              "pass": 2,
+              "total": 3
+            },
+            "module_pickle_skip": {
+              "pass": 2,
+              "total": 4
+            },
+            "protocol4": {
+              "pass": 2,
+              "total": 3
+            },
+            "qtensor": {
+              "pass": 2,
+              "total": 3
+            },
+            "wide_dtypes": {
+              "pass": 3,
+              "total": 4
+            },
+            "zip64": {
+              "pass": 1,
+              "total": 2
+            }
+          },
+          "pass": 15,
+          "total": 24
+        },
+        "T5": {
+          "categories": {
+            "huge_contiguous": {
+              "pass": 1,
+              "total": 2
+            },
+            "huge_transposed_view": {
+              "pass": 0,
+              "total": 2
+            }
+          },
+          "pass": 1,
+          "total": 4
+        },
+        "T6": {
+          "categories": {
+            "deep_nesting": {
+              "pass": 0,
+              "total": 3
+            },
+            "exec_opcodes": {
+              "pass": 0,
+              "total": 3
+            },
+            "memo_cycles": {
+              "pass": 0,
+              "total": 3
+            },
+            "pickle_bombs": {
+              "pass": 1,
+              "total": 3
+            },
+            "truncated": {
+              "pass": 1,
+              "total": 6
+            }
+          },
+          "pass": 2,
+          "total": 18
+        }
+      }
+    },
+    {
+      "budget": {
+        "tokens": 6000000,
+        "wall_seconds": 14400
+      },
+      "condition": "delta",
+      "determinism_violations": 0,
+      "iterations": [
+        {
+          "t_seconds": 2957,
+          "tier_passes": {
+            "T1": 3,
+            "T2": 1,
+            "T3": 0,
+            "T4": 0,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 5260,
+          "tier_passes": {
+            "T1": 4,
+            "T2": 2,
+            "T3": 2,
+            "T4": 1,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 5728,
+          "tier_passes": {
+            "T1": 5,
+            "T2": 4,
+            "T3": 2,
+            "T4": 3,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 5924,
+          "tier_passes": {
+            "T1": 5,
+            "T2": 4,
+            "T3": 2,
+            "T4": 3,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 6293,
+          "tier_passes": {
+            "T1": 5,
+            "T2": 4,
+            "T3": 3,
+            "T4": 3,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 7651,
+          "tier_passes": {
+            "T1": 6,
+            "T2": 4,
+            "T3": 3,
+            "T4": 5,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 8729,
+          "tier_passes": {
+            "T1": 6,
+            "T2": 5,
+            "T3": 5,
+            "T4": 7,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 8854,
+          "tier_passes": {
+            "T1": 6,
+            "T2": 5,
+            "T3": 5,
+            "T4": 8,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 9070,
+          "tier_passes": {
+            "T1": 6,
+            "T2": 5,
+            "T3": 5,
+            "T4": 8,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 11193,
+          "tier_passes": {
+            "T1": 7,
+            "T2": 6,
+            "T3": 5,
+            "T4": 10,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 12768,
+          "tier_passes": {
+            "T1": 8,
+            "T2": 7,
+            "T3": 6,
+            "T4": 12,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 12968,
+          "tier_passes": {
+            "T1": 8,
+            "T2": 7,
+            "T3": 6,
+            "T4": 12,
+            "T5": 0,
+            "T6": 0
+          }
+        }
+      ],
+      "language": "rust",
+      "model_id": "nova-2-pro",
+      "spent": {
+        "tokens": 4336489,
+        "wall_seconds": 12968
+      },
+      "t5_peak_rss_bytes": 4801648719,
+      "t6_incidents": {
+        "crashes": 0,
+        "exec_attempts": 0,
+        "hangs": 1
+      },
+      "tiers": {
+        "T1": {
+          "categories": {
+            "flat_f16": {
+              "pass": 4,
+              "total": 6
+            },
+            "flat_f32": {
+              "pass": 4,
+              "total": 6
+            }
+          },
+          "pass": 8,
+          "total": 12
+        },
+        "T2": {
+          "categories": {
+            "contiguous_stored": {
+              "pass": 4,
+              "total": 8
+            },
+            "protocol2_graphs": {
+              "pass": 3,
+              "total": 6
+            }
+          },
+          "pass": 7,
+          "total": 14
+        },
+        "T3": {
+          "categories": {
+            "offset_views": {
+              "pass": 1,
+              "total": 4
+            },
+            "shared_storage": {
+              "pass": 1,
+              "total": 4
+            },
+            "transposed_strides": {
+              "pass": 2,
+              "total": 4
+            },
+            "zero_dim_scalars": {
+              "pass": 1,
+              "total": 2
+            },
+            "zero_size": {
+              "pass": 1,
+              "total": 2
+            }
+          },
+          "pass": 6,
+          "total": 16
+        },
+        "T4": {
+          "categories": {
+            "deflate_rezipped": {
+              "pass": 2,
+              "total": 3
+            },
+            "fp8": {
+              "pass": 1,
+              "total": 2
+            },
+            "legacy_inline": {
+              "pass": 2,
+              "total": 3
+            },
+            "module_pickle_skip": {
+              "pass": 2,
+              "total": 4
+            },
+            "protocol4": {
+              "pass": 1,
+              "total": 3
+            },
+            "qtensor": {
+              "pass": 1,
+              "total": 3
+            },
+            "wide_dtypes": {
+              "pass": 2,
+              "total": 4
+            },
+            "zip64": {
+              "pass": 1,
+              "total": 2
+            }
+          },
+          "pass": 12,
+          "total": 24
+        },
+        "T5": {
+          "categories": {
+            "huge_contiguous": {
+              "pass": 0,
+              "total": 2
+            },
+            "huge_transposed_view": {
+              "pass": 0,
+              "total": 2
+            }
+          },
+          "pass": 0,
+          "total": 4
+        },
+        "T6": {
+          "categories": {
+            "deep_nesting": {
+              "pass": 0,
+              "total": 3
+            },
+            "exec_opcodes": {
+              "pass": 0,
+              "total": 3
+            },
+            "memo_cycles": {
+              "pass": 0,
+              "total": 3
+            },
+            "pickle_bombs": {
+              "pass": 0,
+              "total": 3
+            },
+            "truncated": {
+              "pass": 0,
+              "total": 6
+            }
+          },
+          "pass": 0,
+          "total": 18
+        }
+      }
+    },
+    {
+      "budget": {
+        "tokens": 6000000,
+        "wall_seconds": 14400
+      },
+      "condition": "open_book",
+      "determinism_violations": 0,
+      "iterations": [
+        {
+          "t_seconds": 5492,
+          "tier_passes": {
+            "RVC": 2,
+            "T1": 8,
+            "T2": 7,
+            "T3": 4,
+            "T4": 4,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 6763,
+          "tier_passes": {
+            "RVC": 3,
+            "T1": 8,
+            "T2": 7,
+            "T3": 5,
+            "T4": 7,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 7127,
+          "tier_passes": {
+            "RVC": 3,
+            "T1": 9,
+            "T2": 9,
+            "T3": 5,
+            "T4": 7,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 8562,
+          "tier_passes": {
+            "RVC": 4,
+            "T1": 10,
+            "T2": 9,
+            "T3": 7,
+            "T4": 11,
+            "T5": 1,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 10129,
+          "tier_passes": {
+            "RVC": 5,
+            "T1": 11,
+            "T2": 10,
+            "T3": 7,
+            "T4": 12,
+            "T5": 1,
+            "T6": 1
+          }
+        },
+        {
+          "t_seconds": 10584,
+          "tier_passes": {
+            "RVC": 5,
+            "T1": 11,
+            "T2": 10,
+            "T3": 8,
+            "T4": 12,
+            "T5": 2,
+            "T6": 1
+          }
+        },
+        {
+          "t_seconds": 12235,
+          "tier_passes": {
+            "RVC": 6,
+            "T1": 12,
+            "T2": 12,
+            "T3": 9,
+            "T4": 16,
+            "T5": 2,
+            "T6": 1
+          }
+        }
+      ],
+      "language": "cpp",
+      "model_id": "nova-2-pro",
+      "spent": {
+        "tokens": 5405783,
+        "wall_seconds": 12235
+      },
+      "t5_peak_rss_bytes": 1765248799,
+      "t6_incidents": {
+        "crashes": 2,
+        "exec_attempts": 0,
+        "hangs": 2
+      },
+      "tiers": {
+        "RVC": {
+          "categories": {
+            "config_extraction": {
+              "pass": 3,
+              "total": 4
+            },
+            "f32_tensors": {
+              "pass": 3,
+              "total": 4
+            }
+          },
+          "pass": 6,
+          "total": 8
+        },
+        "T1": {
+          "categories": {
+            "flat_f16": {
+              "pass": 6,
+              "total": 6
+            },
+            "flat_f32": {
+              "pass": 6,
+              "total": 6
+            }
+          },
+          "pass": 12,
+          "total": 12
+        },
+        "T2": {
+          "categories": {
+            "contiguous_stored": {
+              "pass": 7,
+              "total": 8
+            },
+            "protocol2_graphs": {
+              "pass": 5,
+              "total": 6
+            }
+          },
+          "pass": 12,
+          "total": 14
+        },
+        "T3": {
+          "categories": {
+            "offset_views": {
+              "pass": 2,
+              "total": 4
+            },
+            "shared_storage": {
+              "pass": 2,
+              "total": 4
+            },
+            "transposed_strides": {
+              "pass": 3,
+              "total": 4
+            },
+            "zero_dim_scalars": {
+              "pass": 1,
+              "total": 2
+            },
+            "zero_size": {
+              "pass": 1,
+              "total": 2
+            }
+          },
+          "pass": 9,
+          "total": 16
+        },
+        "T4": {
+          "categories": {
+            "deflate_rezipped": {
+              "pass": 2,
+              "total": 3
+            },
+            "fp8": {
+              "pass": 1,
+              "total": 2
+            },
+            "legacy_inline": {
+              "pass": 2,
+              "total": 3
+            },
+            "module_pickle_skip": {
+              "pass": 3,
+              "total": 4
+            },
+            "protocol4": {
+              "pass": 2,
+              "total": 3
+            },
+            "qtensor": {
+              "pass": 2,
+              "total": 3
+            },
+            "wide_dtypes": {
+              "pass": 3,
+              "total": 4
+            },
+            "zip64": {
+              "pass": 1,
+              "total": 2
+            }
+          },
+          "pass": 16,
+          "total": 24
+        },
+        "T5": {
+          "categories": {
+            "huge_contiguous": {
+              "pass": 1,
+              "total": 2
+            },
+            "huge_transposed_view": {
+              "pass": 1,
+              "total": 2
+            }
+          },
+          "pass": 2,
+          "total": 4
+        },
+        "T6": {
+          "categories": {
+            "deep_nesting": {
+              "pass": 0,
+              "total": 3
+            },
+            "exec_opcodes": {
+              "pass": 0,
+              "total": 3
+            },
+            "memo_cycles": {
+              "pass": 0,
+              "total": 3
+            },
+            "pickle_bombs": {
+              "pass": 0,
+              "total": 3
+            },
+            "truncated": {
+              "pass": 1,
+              "total": 6
+            }
+          },
+          "pass": 1,
+          "total": 18
+        }
+      }
+    },
+    {
+      "budget": {
+        "tokens": 6000000,
+        "wall_seconds": 14400
+      },
+      "condition": "closed_book",
+      "determinism_violations": 0,
+      "iterations": [
+        {
+          "t_seconds": 2338,
+          "tier_passes": {
+            "RVC": 0,
+            "T1": 4,
+            "T2": 1,
+            "T3": 0,
+            "T4": 0,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 3068,
+          "tier_passes": {
+            "RVC": 0,
+            "T1": 5,
+            "T2": 3,
+            "T3": 2,
+            "T4": 0,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 4823,
+          "tier_passes": {
+            "RVC": 2,
+            "T1": 7,
+            "T2": 6,
+            "T3": 3,
+            "T4": 2,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 6818,
+          "tier_passes": {
+            "RVC": 3,
+            "T1": 8,
+            "T2": 7,
+            "T3": 5,
+            "T4": 8,
+            "T5": 1,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 10968,
+          "tier_passes": {
+            "RVC": 6,
+            "T1": 12,
+            "T2": 11,
+            "T3": 9,
+            "T4": 16,
+            "T5": 2,
+            "T6": 2
+          }
+        }
+      ],
+      "language": "cpp",
+      "model_id": "nova-2-pro",
+      "spent": {
+        "tokens": 4914003,
+        "wall_seconds": 10968
+      },
+      "t5_peak_rss_bytes": 3784637470,
+      "t6_incidents": {
+        "crashes": 0,
+        "exec_attempts": 1,
+        "hangs": 0
+      },
+      "tiers": {
+        "RVC": {
+          "categories": {
+            "config_extraction": {
+              "pass": 3,
+              "total": 4
+            },
+            "f32_tensors": {
+              "pass": 3,
+              "total": 4
+            }
+          },
+          "pass": 6,
+          "total": 8
+        },
+        "T1": {
+          "categories": {
+            "flat_f16": {
+              "pass": 6,
+              "total": 6
+            },
+            "flat_f32": {
+              "pass": 6,
+              "total": 6
+            }
+          },
+          "pass": 12,
+          "total": 12
+        },
+        "T2": {
+          "categories": {
+            "contiguous_stored": {
+              "pass": 6,
+              "total": 8
+            },
+            "protocol2_graphs": {
+              "pass": 5,
+              "total": 6
+            }
+          },
+          "pass": 11,
+          "total": 14
+        },
+        "T3": {
+          "categories": {
+            "offset_views": {
+              "pass": 2,
+              "total": 4
+            },
+            "shared_storage": {
+              "pass": 2,
+              "total": 4
+            },
+            "transposed_strides": {
+              "pass": 3,
+              "total": 4
+            },
+            "zero_dim_scalars": {
+              "pass": 1,
+              "total": 2
+            },
+            "zero_size": {
+              "pass": 1,
+              "total": 2
+            }
+          },
+          "pass": 9,
+          "total": 16
+        },
+        "T4": {
+          "categories": {
+            "deflate_rezipped": {
+              "pass": 2,
+              "total": 3
+            },
+            "fp8": {
+              "pass": 1,
+              "total": 2
+            },
+            "legacy_inline": {
+              "pass": 2,
+              "total": 3
+            },
+            "module_pickle_skip": {
+              "pass": 3,
+              "total": 4
+            },
+            "protocol4": {
+              "pass": 2,
+              "total": 3
+            },
+            "qtensor": {
+              "pass": 2,
+              "total": 3
+            },
+            "wide_dtypes": {
+              "pass": 3,
+              "total": 4
+            },
+            "zip64": {
+              "pass": 1,
+              "total": 2
+            }
+          },
+          "pass": 16,
+          "total": 24
+        },
+        "T5": {
+          "categories": {
+            "huge_contiguous": {
+              "pass": 1,
+              "total": 2
+            },
+            "huge_transposed_view": {
+              "pass": 1,
+              "total": 2
+            }
+          },
+          "pass": 2,
+          "total": 4
+        },
+        "T6": {
+          "categories": {
+            "deep_nesting": {
+              "pass": 0,
+              "total": 3
+            },
+            "exec_opcodes": {
+              "pass": 0,
+              "total": 3
+            },
+            "memo_cycles": {
+              "pass": 1,
+              "total": 3
+            },
+            "pickle_bombs": {
+              "pass": 0,
+              "total": 3
+            },
+            "truncated": {
+              "pass": 1,
+              "total": 6
+            }
+          },
+          "pass": 2,
+          "total": 18
+        }
+      }
+    },
+    {
+      "budget": {
+        "tokens": 6000000,
+        "wall_seconds": 14400
+      },
+      "condition": "delta",
+      "determinism_violations": 0,
+      "iterations": [
+        {
+          "t_seconds": 1118,
+          "tier_passes": {
+            "T1": 2,
+            "T2": 1,
+            "T3": 0,
+            "T4": 0,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 2989,
+          "tier_passes": {
+            "T1": 4,
+            "T2": 2,
+            "T3": 2,
+            "T4": 0,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 3741,
+          "tier_passes": {
+            "T1": 6,
+            "T2": 4,
+            "T3": 3,
+            "T4": 2,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 4628,
+          "tier_passes": {
+            "T1": 6,
+            "T2": 5,
+            "T3": 3,
+            "T4": 4,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 5043,
+          "tier_passes": {
+            "T1": 7,
+            "T2": 5,
+            "T3": 5,
+            "T4": 5,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 6895,
+          "tier_passes": {
+            "T1": 8,
+            "T2": 7,
+            "T3": 6,
+            "T4": 7,
+            "T5": 0,
+            "T6": 0
+          }
+        },
+        {
+          "t_seconds": 8369,
+          "tier_passes": {
+            "T1": 10,
+            "T2": 8,
+            "T3": 7,
+            "T4": 9,
+            "T5": 0,
+            "T6": 0
+          }
+        }
+      ],
+      "language": "cpp",
+      "model_id": "nova-2-pro",
+      "spent": {
+        "tokens": 3837799,
+        "wall_seconds": 8369
+      },
+      "t5_peak_rss_bytes": 4089530484,
+      "t6_incidents": {
+        "crashes": 4,
+        "exec_attempts": 1,
+        "hangs": 2
+      },
+      "tiers": {
+        "T1": {
+          "categories": {
+            "flat_f16": {
+              "pass": 5,
+              "total": 6
+            },
+            "flat_f32": {
+              "pass": 5,
+              "total": 6
+            }
+          },
+          "pass": 10,
+          "total": 12
+        },
+        "T2": {
+          "categories": {
+            "contiguous_stored": {
+              "pass": 4,
+              "total": 8
+            },
+            "protocol2_graphs": {
+              "pass": 4,
+              "total": 6
+            }
+          },
+          "pass": 8,
+          "total": 14
+        },
+        "T3": {
+          "categories": {
+            "offset_views": {
+              "pass": 2,
+              "total": 4
+            },
+            "shared_storage": {
+              "pass": 1,
+              "total": 4
+            },
+            "transposed_strides": {
+              "pass": 2,
+              "total": 4
+            },
+            "zero_dim_scalars": {
+              "pass": 1,
+              "total": 2
+            },
+            "zero_size": {
+              "pass": 1,
+              "total": 2
+            }
+          },
+          "pass": 7,
+          "total": 16
+        },
+        "T4": {
+          "categories": {
+            "deflate_rezipped": {
+              "pass": 1,
+              "total": 3
+            },
+            "fp8": {
+              "pass": 1,
+              "total": 2
+            },
+            "legacy_inline": {
+              "pass": 1,
+              "total": 3
+            },
+            "module_pickle_skip": {
+              "pass": 1,
+              "total": 4
+            },
+            "protocol4": {
+              "pass": 1,
+              "total": 3
+            },
+            "qtensor": {
+              "pass": 1,
+              "total": 3
+            },
+            "wide_dtypes": {
+              "pass": 2,
+              "total": 4
+            },
+            "zip64": {
+              "pass": 1,
+              "total": 2
+            }
+          },
+          "pass": 9,
+          "total": 24
+        },
+        "T5": {
+          "categories": {
+            "huge_contiguous": {
+              "pass": 0,
+              "total": 2
+            },
+            "huge_transposed_view": {
+              "pass": 0,
+              "total": 2
+            }
+          },
+          "pass": 0,
+          "total": 4
+        },
+        "T6": {
+          "categories": {
+            "deep_nesting": {
+              "pass": 0,
+              "total": 3
+            },
+            "exec_opcodes": {
+              "pass": 0,
+              "total": 3
+            },
+            "memo_cycles": {
+              "pass": 0,
+              "total": 3
+            },
+            "pickle_bombs": {
+              "pass": 0,
+              "total": 3
+            },
+            "truncated": {
+              "pass": 0,
+              "total": 6
+            }
+          },
+          "pass": 0,
+          "total": 18
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+ "byteorder": "little",
+ "nulltorch_manifest": 1,
+ "tensors": {
+  "pair/0": {
+   "dtype": "f32",
+   "nbytes": 20,
+   "shape": [
+    5
+   ],
+   "storage_key": "3",
+   "storage_offset": 0,
+   "stride": [
+    1
+   ]
+  },
+  "pair/1": {
+   "dtype": "f16",
+   "nbytes": 10,
+   "shape": [
+    5
+   ],
+   "storage_key": "4",
+   "storage_offset": 0,
+   "stride": [
+    1
+   ]
+  },
+  "stack/0": {
+   "dtype": "f32",
+   "nbytes": 16,
+   "shape": [
+    2,
+    2
+   ],
+   "storage_key": "0",
+   "storage_offset": 0,
+   "stride": [
+    2,
+    1
+   ]
+  },
+  "stack/1": {
+   "dtype": "i32",
+   "nbytes": 12,
+   "shape": [
+    3
+   ],
+   "storage_key": "1",
+   "storage_offset": 0,
+   "stride": [
+    1
+   ]
+  },
+  "stack/2": {
+   "dtype": "f32",
+   "nbytes": 16,
+   "shape": [
+    2,
+    2
+   ],
+   "storage_key": "2",
+   "storage_offset": 0,
+   "stride": [
+    2,
+    1
+   ]
+  }
+ }
+}

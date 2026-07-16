@@ -1,0 +1,14 @@
+{
+ "bias.bin": {
+  "sha256": "d4bb4228336319ce31f8a16db8bbca0e7fb9ae043d9c6517be1f6edf6c87a7a3",
+  "size": 48
+ },
+ "emb.weight.bin": {
+  "sha256": "2415fd14311463f0939838807baec41ecb39dfd63a767ebd483172751bc0f817",
+  "size": 288
+ },
+ "head.weight.bin": {
+  "sha256": "2415fd14311463f0939838807baec41ecb39dfd63a767ebd483172751bc0f817",
+  "size": 288
+ }
+}

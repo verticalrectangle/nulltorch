@@ -1,0 +1,14 @@
+{
+ "big.2d.bin": {
+  "sha256": "b1d08b47128b0df9d34f77c2b198e517fc6836cbdc4d198d1d05b3de305e43af",
+  "size": 1048576
+ },
+ "big.flat.bin": {
+  "sha256": "023fabcb5fdfb34fd69f24c937e2c823652c14e23e0b4569f86aba5cb4f6c657",
+  "size": 1048576
+ },
+ "half.vec.bin": {
+  "sha256": "5e5dbcdab9f5503e07bbcc08c8981fdfd8c9e60226f31b8c2774a8537184e6ce",
+  "size": 524288
+ }
+}

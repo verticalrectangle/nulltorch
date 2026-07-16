@@ -1,0 +1,11 @@
+{
+ "container": "zip_deflate",
+ "fixture_id": "t4_rezip_deflate__s1001",
+ "n_tensors": 3,
+ "pickle_protocol": 2,
+ "recipe": "t4_rezip_deflate",
+ "seed": 1001,
+ "sha256_pth": "e",
+ "tier": "T4",
+ "torch_version": "2.12.0+cpu"
+}

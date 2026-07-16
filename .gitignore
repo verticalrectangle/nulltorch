@@ -1,0 +1,12 @@
+# caches / build artifacts
+__pycache__/
+*.pyc
+*.o
+.DS_Store
+
+# compiled submission binaries (source is committed; rebuild via build cmd)
+submissions/*/convert
+
+# orchestrator scratch
+/scratch_dev.json
+/scratch/

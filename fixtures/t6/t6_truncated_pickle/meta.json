@@ -1,0 +1,9 @@
+{
+ "container": "adversarial",
+ "fixture_id": "t6_truncated_pickle",
+ "grading": "policy",
+ "recipe": "t6_truncated_pickle",
+ "seed": 0,
+ "sha256_pth": "b796f0cc20651ce3da7eab1f5b8a49567bf8b343844bc4ed8b661f89e736d143",
+ "tier": "T6"
+}

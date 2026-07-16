@@ -1,0 +1,9 @@
+{
+ "container": "adversarial",
+ "fixture_id": "t6_exec_reduce",
+ "grading": "policy",
+ "recipe": "t6_exec_reduce",
+ "seed": 0,
+ "sha256_pth": "47b00c00cc4b5303d7dbbe6a1ab781c7b08122190aed5d0af37303f1def9adaf",
+ "tier": "T6"
+}

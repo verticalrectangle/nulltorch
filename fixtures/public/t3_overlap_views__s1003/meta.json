@@ -1,0 +1,11 @@
+{
+ "container": "zip_stored",
+ "fixture_id": "t3_overlap_views__s1003",
+ "n_tensors": 3,
+ "pickle_protocol": 2,
+ "recipe": "t3_overlap_views",
+ "seed": 1003,
+ "sha256_pth": "247fc1fb8e9444b9162fc89509b30c314b539b4deea0a396425211eec6b4790e",
+ "tier": "T3",
+ "torch_version": "2.12.0+cpu"
+}

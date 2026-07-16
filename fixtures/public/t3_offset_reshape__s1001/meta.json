@@ -1,0 +1,11 @@
+{
+ "container": "zip_stored",
+ "fixture_id": "t3_offset_reshape__s1001",
+ "n_tensors": 3,
+ "pickle_protocol": 2,
+ "recipe": "t3_offset_reshape",
+ "seed": 1001,
+ "sha256_pth": "a74c3f167b690f0986b26692535b2edf67274f5ae75c63053ca66d813c3e5879",
+ "tier": "T3",
+ "torch_version": "2.12.0+cpu"
+}

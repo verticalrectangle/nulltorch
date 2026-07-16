@@ -1,0 +1,205 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nulltorch.invalid/board/results.schema.json",
+  "title": "NullTorch benchmark results",
+  "description": "Results file consumed by a NullTorch-Board dashboard (SPEC.md §7–§8). One document per benchmark release run. NOTE: the memorization gap is NOT stored in this file — it is DERIVED by the consumer as (stock pass rate − delta pass rate) for the same (model_id, language) pair, where 'stock' is the open_book (or closed_book) condition and 'delta' is the delta condition. Storing it would invite drift from its inputs.",
+  "type": "object",
+  "required": [
+    "benchmark_version",
+    "fixture_set_hash",
+    "harness_version",
+    "container_digests",
+    "runs"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "benchmark_version": {
+      "type": "string",
+      "description": "NullTorch benchmark release version, e.g. '1.0.0'. Fixture sets rotate per release (SPEC §6).",
+      "minLength": 1
+    },
+    "fixture_set_hash": {
+      "type": "string",
+      "description": "Content hash of the frozen fixture set this run was graded against.",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "harness_version": {
+      "type": "string",
+      "description": "Version of the eval harness / grader CLI (SPEC §7).",
+      "minLength": 1
+    },
+    "container_digests": {
+      "type": "object",
+      "description": "Map from container name to image digest. One container exists per (language, condition) cell (SPEC §7); keys are '<language>-<condition>', e.g. 'go-open_book'.",
+      "patternProperties": {
+        "^(go|rust|cpp)-(open_book|closed_book|delta)$": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "runs": {
+      "type": "array",
+      "description": "One entry per (model × language × condition) cell. The full cross product is the rotation protocol (SPEC §3); an absent cell means the cell was not run. May be empty (degenerate dataset).",
+      "items": { "$ref": "#/$defs/run" }
+    }
+  },
+  "$defs": {
+    "run": {
+      "type": "object",
+      "description": "One (model, language, condition) cell: hidden-set state at budget exhaustion, plus the public-fixture iteration time-series.",
+      "required": [
+        "model_id",
+        "language",
+        "condition",
+        "budget",
+        "spent",
+        "tiers",
+        "iterations",
+        "determinism_violations",
+        "t5_peak_rss_bytes",
+        "t6_incidents"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "model_id": {
+          "type": "string",
+          "description": "Stable identifier of the model under test.",
+          "minLength": 1
+        },
+        "language": {
+          "type": "string",
+          "enum": ["go", "rust", "cpp"],
+          "description": "Target implementation language (SPEC §3). Scores are reported per-language and never silently averaged across the stdlib-asymmetry boundary."
+        },
+        "condition": {
+          "type": "string",
+          "enum": ["open_book", "closed_book", "delta"],
+          "description": "Evaluation condition (SPEC §4). Memorization gap = stock − delta for the same (model_id, language); derive it, do not store it."
+        },
+        "budget": {
+          "$ref": "#/$defs/budgetEnvelope",
+          "description": "Wall-clock and token budget allotted to this cell (SPEC §7)."
+        },
+        "spent": {
+          "$ref": "#/$defs/budgetEnvelope",
+          "description": "Wall-clock and tokens actually consumed. Must not exceed budget; the harness cuts the run at exhaustion."
+        },
+        "tiers": {
+          "type": "object",
+          "description": "Hidden-set pass counts per tier at budget exhaustion. Pass/fail is per fixture; partial credit only via category composition within a tier (SPEC §5). RVC is the OPTIONAL engine-fidelity track (docs/RVC_TRACK.md): it mirrors pop-maker-studio's pth_reader.cpp — config extraction + f16→f32 — a distinct output contract graded with the RVC converter, not a difficulty tier. Present only for cells that ran it.",
+          "required": ["T1", "T2", "T3", "T4", "T5", "T6"],
+          "additionalProperties": false,
+          "properties": {
+            "T1": { "$ref": "#/$defs/tierResult" },
+            "T2": { "$ref": "#/$defs/tierResult" },
+            "T3": { "$ref": "#/$defs/tierResult" },
+            "T4": { "$ref": "#/$defs/tierResult" },
+            "T5": { "$ref": "#/$defs/tierResult" },
+            "T6": { "$ref": "#/$defs/tierResult" },
+            "RVC": { "$ref": "#/$defs/tierResult" }
+          }
+        },
+        "iterations": {
+          "type": "array",
+          "description": "Time-series of self-grading iterations on the public fixture set, for iterations-to-green curves. Entries are ordered by strictly increasing t_seconds; tier_passes are non-decreasing.",
+          "items": { "$ref": "#/$defs/iteration" }
+        },
+        "determinism_violations": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Count of fixtures whose two conversion passes were not byte-identical (SPEC §7). Target: zero."
+        },
+        "t5_peak_rss_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Peak resident set size observed during T5 (resource-envelope) fixtures, in bytes. 0 if T5 was never attempted."
+        },
+        "t6_incidents": {
+          "type": "object",
+          "description": "Adversarial-tier incident counts (SPEC §5 T6). Target: all zero.",
+          "required": ["crashes", "hangs", "exec_attempts"],
+          "additionalProperties": false,
+          "properties": {
+            "crashes": { "type": "integer", "minimum": 0 },
+            "hangs": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Watchdog-terminated fixtures."
+            },
+            "exec_attempts": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Runtime spawn/exec attempts caught by seccomp/audit; any attempt fails the fixture."
+            }
+          }
+        }
+      }
+    },
+    "budgetEnvelope": {
+      "type": "object",
+      "required": ["wall_seconds", "tokens"],
+      "additionalProperties": false,
+      "properties": {
+        "wall_seconds": { "type": "integer", "minimum": 0 },
+        "tokens": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "tierResult": {
+      "type": "object",
+      "description": "Fixture pass counts for one tier. Invariants (asserted by the generator; not expressible in JSON Schema): pass <= total; sum of category passes == pass; sum of category totals == total.",
+      "required": ["pass", "total", "categories"],
+      "additionalProperties": false,
+      "properties": {
+        "pass": { "type": "integer", "minimum": 0 },
+        "total": { "type": "integer", "minimum": 0 },
+        "categories": {
+          "type": "object",
+          "description": "Fixture-category composition of the tier (e.g. T3: shared_storage, offset_views, ...). Category names are lower_snake_case and fixture-set-defined, not enumerated here; the fixture drill-down view keys off them.",
+          "patternProperties": {
+            "^[a-z0-9][a-z0-9_]*$": { "$ref": "#/$defs/categoryResult" }
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    "categoryResult": {
+      "type": "object",
+      "required": ["pass", "total"],
+      "additionalProperties": false,
+      "properties": {
+        "pass": { "type": "integer", "minimum": 0 },
+        "total": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "iteration": {
+      "type": "object",
+      "description": "Public-fixture grading snapshot at t_seconds into the run.",
+      "required": ["t_seconds", "tier_passes"],
+      "additionalProperties": false,
+      "properties": {
+        "t_seconds": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Seconds elapsed since cell start when this self-grade completed."
+        },
+        "tier_passes": {
+          "type": "object",
+          "description": "Public-fixture pass count per tier at this instant.",
+          "required": ["T1", "T2", "T3", "T4", "T5", "T6"],
+          "additionalProperties": false,
+          "properties": {
+            "T1": { "type": "integer", "minimum": 0 },
+            "T2": { "type": "integer", "minimum": 0 },
+            "T3": { "type": "integer", "minimum": 0 },
+            "T4": { "type": "integer", "minimum": 0 },
+            "T5": { "type": "integer", "minimum": 0 },
+            "T6": { "type": "integer", "minimum": 0 },
+            "RVC": { "type": "integer", "minimum": 0 }
+          }
+        }
+      }
+    }
+  }
+}

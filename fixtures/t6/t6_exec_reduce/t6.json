@@ -1,0 +1,11 @@
+{
+ "canary": "nulltorch_exec_canary",
+ "expectation": "refuse",
+ "must_not": [
+  "crash",
+  "hang",
+  "exec",
+  "spawn"
+ ],
+ "note": "GLOBAL os.system + REDUCE; safe reader must not execute"
+}

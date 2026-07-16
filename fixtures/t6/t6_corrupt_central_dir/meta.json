@@ -1,0 +1,9 @@
+{
+ "container": "adversarial",
+ "fixture_id": "t6_corrupt_central_dir",
+ "grading": "policy",
+ "recipe": "t6_corrupt_central_dir",
+ "seed": 0,
+ "sha256_pth": "433668d375817fa13536d589fdb7ae1caa17a07b37ee40d489d5a899451881d8",
+ "tier": "T6"
+}

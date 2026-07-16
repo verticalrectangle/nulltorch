@@ -1,0 +1,9 @@
+{
+ "container": "adversarial",
+ "fixture_id": "t6_deep_nesting",
+ "grading": "policy",
+ "recipe": "t6_deep_nesting",
+ "seed": 0,
+ "sha256_pth": "167c4dde62c0af89b6b918c25ea05c60f9cb7fa30b436bc32d387b209acbefc9",
+ "tier": "T6"
+}

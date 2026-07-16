@@ -1,0 +1,11 @@
+{
+ "container": "zip_stored",
+ "fixture_id": "t2_rvc_like__s2002",
+ "n_tensors": 3,
+ "pickle_protocol": 2,
+ "recipe": "t2_rvc_like",
+ "seed": 2002,
+ "sha256_pth": "a4763e2f5500cc48f7d74016a51f258c88b8c2c0f3353f050d1ab1b0750695af",
+ "tier": "T2",
+ "torch_version": "2.12.0+cpu"
+}

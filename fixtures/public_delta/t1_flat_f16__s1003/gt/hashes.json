@@ -1,0 +1,22 @@
+{
+ "blk.0.w.bin": {
+  "sha256": "2886e2c366ec7bf6770358d749dc806ef51fc0314d139b9bb554eb66571dbb0e",
+  "size": 32
+ },
+ "blk.1.w.bin": {
+  "sha256": "7a6ce60b8c4da809d615894d1a05d5ea9eea07e76658742f81f0f0638c916362",
+  "size": 48
+ },
+ "blk.2.w.bin": {
+  "sha256": "d8e68f48b97980b64221edb0708fd19052f939837bb52fc1b90add4e2e5829bd",
+  "size": 64
+ },
+ "blk.3.w.bin": {
+  "sha256": "8cf27dd885c45cf48ae140f40acafe637d09f939fdf2386abbc228ff2937128c",
+  "size": 80
+ },
+ "scale.bin": {
+  "sha256": "dc900baac9f7e631848ef5d21d09192856cd12a7a2d4ac942766d5ed96c32698",
+  "size": 2
+ }
+}

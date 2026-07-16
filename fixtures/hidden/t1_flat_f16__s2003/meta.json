@@ -1,0 +1,11 @@
+{
+ "container": "zip_stored",
+ "fixture_id": "t1_flat_f16__s2003",
+ "n_tensors": 5,
+ "pickle_protocol": 2,
+ "recipe": "t1_flat_f16",
+ "seed": 2003,
+ "sha256_pth": "771df6e620206a0450fcdb871e5464422fcdf6f6a6c85eba54021f3ad5b64025",
+ "tier": "T1",
+ "torch_version": "2.12.0+cpu"
+}

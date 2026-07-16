@@ -1,0 +1,68 @@
+{
+ "big.2d.bin": [
+  {
+   "len": 13800,
+   "off": 38228,
+   "sha256": "e9084fbfae03a3c279f0dbd8c828b9db6fb6f171b6aefcf76d46eaaad7f7c349"
+  },
+  {
+   "len": 14896,
+   "off": 109948,
+   "sha256": "eadafcb987378c6793a48b7c2330b9eafba2cadf116e2a2b098e38e8e8d47927"
+  },
+  {
+   "len": 7684,
+   "off": 705220,
+   "sha256": "0a6d3e4202ae971bde3ed52b89c6a23a676cce3ffb7e2001e817d28d729e5c7c"
+  },
+  {
+   "len": 14604,
+   "off": 825480,
+   "sha256": "9c3fa5231d777a6da2bbfdecd44c15ccc597877e39f81f1213dcc6dc8b42ea52"
+  }
+ ],
+ "big.flat.bin": [
+  {
+   "len": 15520,
+   "off": 425352,
+   "sha256": "b4ca9f4532a7817ba3c963ecfffdea74685ec104e68e7201ffa4f926da87c35e"
+  },
+  {
+   "len": 5560,
+   "off": 466784,
+   "sha256": "cd4703157fe44b448859cc5a4f6c585523949be66d7527598fce8e8d27a3049f"
+  },
+  {
+   "len": 13836,
+   "off": 779324,
+   "sha256": "d82507b1c7ee82e7b9c09d3d9ac55e7b60aa2c4ac282520776d578f81fec799f"
+  },
+  {
+   "len": 15776,
+   "off": 992332,
+   "sha256": "f947419eb619344fcc5de5a75809b1497ba2cb23cd93df64e6564be69f191af5"
+  }
+ ],
+ "half.vec.bin": [
+  {
+   "len": 6122,
+   "off": 3674,
+   "sha256": "6c061aa3c6be9d9816d3a75b4970fd850d36bc4fe9f2ac4f72392571814c33e7"
+  },
+  {
+   "len": 2528,
+   "off": 104550,
+   "sha256": "53653535c4bb75a1e03f1958dc0a36829ee913df752161d6088458e9a62dc8b6"
+  },
+  {
+   "len": 5454,
+   "off": 128706,
+   "sha256": "984a8d1fc2a533044b7481fb840ec9b458939b2cb007ff94d8317217de8d0c8f"
+  },
+  {
+   "len": 6806,
+   "off": 268702,
+   "sha256": "0008c93a87d52b9b806a84941db822e6bd498da380830b582538f8b4958fae9f"
+  }
+ ]
+}

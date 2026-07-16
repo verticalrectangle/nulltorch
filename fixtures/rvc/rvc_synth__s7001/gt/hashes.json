@@ -1,0 +1,34 @@
+{
+ "dec.conv_pre.bias.bin": {
+  "sha256": "f1921a216f1b7d5bbf8a35de0b9c7e188aa1099c5938300a159758957f326878",
+  "size": 64
+ },
+ "dec.conv_pre.weight.bin": {
+  "sha256": "bcc6b7935adf913cd473e7ad862880b01193da1986cae71a63dd16f4630deae1",
+  "size": 1536
+ },
+ "dec.ups.0.weight.bin": {
+  "sha256": "2dafb98bd8dfe3e26cc22492bf6e4f272813ee6f8673afdf4d570436bd768dde",
+  "size": 2048
+ },
+ "emb_g.weight.bin": {
+  "sha256": "e2c455692b87698d0125ba5ea2289c1c1afcf5b89b9bea2730b5a006a5287971",
+  "size": 128
+ },
+ "enc_p.emb_phone.bias.bin": {
+  "sha256": "38da30e188cd7be20591b58bf06ed3636f1eee5e328dde38983b3ebfb662c6d9",
+  "size": 32
+ },
+ "enc_p.emb_phone.weight.bin": {
+  "sha256": "9ba88bd85f5383c05c8d7ee4df686e2f320d38a6c332993cc5538150214db304",
+  "size": 24576
+ },
+ "enc_p.emb_pitch.weight.bin": {
+  "sha256": "3f62ff19cd9f83c37ef5247d98617967a30f629eae9d684e1d42e8f5efdcbde0",
+  "size": 512
+ },
+ "flow.flows.0.enc.cond_layer.weight.bin": {
+  "sha256": "98d3318ab4a8cb40bda44799ce5709cc9a7a432a681cdc79972013f7e5fee404",
+  "size": 384
+ }
+}

@@ -1,0 +1,9 @@
+{
+ "container": "adversarial",
+ "fixture_id": "t6_alloc_bomb",
+ "grading": "policy",
+ "recipe": "t6_alloc_bomb",
+ "seed": 0,
+ "sha256_pth": "6922cea11adc55cedcbf6b6875aeea790bcc95a30f1e85da599c342abb69d46b",
+ "tier": "T6"
+}

@@ -1,0 +1,9 @@
+{
+ "container": "adversarial",
+ "fixture_id": "t6_truncated_zip",
+ "grading": "policy",
+ "recipe": "t6_truncated_zip",
+ "seed": 0,
+ "sha256_pth": "53220214257bdbd9aa6f5725129d15022e22d15ebb06d5a8ea3982eccbee76c5",
+ "tier": "T6"
+}

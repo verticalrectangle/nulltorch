@@ -1,0 +1,9 @@
+{
+ "fixture_id": "rvc_real__InductiveGrub_DollyParton",
+ "grading": "byte",
+ "gt_bytes_stored": false,
+ "n_config_fields": 19,
+ "n_tensors": 457,
+ "recipe": "rvc",
+ "tier": "RVC"
+}

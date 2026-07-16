@@ -1,0 +1,3804 @@
+{
+ "byteorder": "little",
+ "config": {
+  "filter_channels": 768,
+  "gin_channels": 256,
+  "hidden_channels": 192,
+  "inter_channels": 192,
+  "kernel_size": 3,
+  "n_heads": 2,
+  "n_layers": 6,
+  "n_speakers": 109,
+  "p_dropout": 0.0,
+  "phone_dim": 768,
+  "resblock": "1",
+  "resblock_dilation_sizes": [
+   [
+    1,
+    3,
+    5
+   ],
+   [
+    1,
+    3,
+    5
+   ],
+   [
+    1,
+    3,
+    5
+   ]
+  ],
+  "resblock_kernel_sizes": [
+   3,
+   7,
+   11
+  ],
+  "segment_size": 32,
+  "spec_channels": 1025,
+  "sr": 40000,
+  "upsample_initial_channel": 512,
+  "upsample_kernel_sizes": [
+   16,
+   16,
+   4,
+   4
+  ],
+  "upsample_rates": [
+   10,
+   10,
+   2,
+   2
+  ]
+ },
+ "nulltorch_manifest": 1,
+ "tensors": {
+  "dec.cond.bias": {
+   "dtype": "f32",
+   "nbytes": 2048,
+   "shape": [
+    512
+   ]
+  },
+  "dec.cond.weight": {
+   "dtype": "f32",
+   "nbytes": 524288,
+   "shape": [
+    512,
+    256,
+    1
+   ]
+  },
+  "dec.conv_post.weight": {
+   "dtype": "f32",
+   "nbytes": 896,
+   "shape": [
+    1,
+    32,
+    7
+   ]
+  },
+  "dec.conv_pre.bias": {
+   "dtype": "f32",
+   "nbytes": 2048,
+   "shape": [
+    512
+   ]
+  },
+  "dec.conv_pre.weight": {
+   "dtype": "f32",
+   "nbytes": 2752512,
+   "shape": [
+    512,
+    192,
+    7
+   ]
+  },
+  "dec.m_source.l_linear.bias": {
+   "dtype": "f32",
+   "nbytes": 4,
+   "shape": [
+    1
+   ]
+  },
+  "dec.m_source.l_linear.weight": {
+   "dtype": "f32",
+   "nbytes": 4,
+   "shape": [
+    1,
+    1
+   ]
+  },
+  "dec.noise_convs.0.bias": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256
+   ]
+  },
+  "dec.noise_convs.0.weight": {
+   "dtype": "f32",
+   "nbytes": 81920,
+   "shape": [
+    256,
+    1,
+    80
+   ]
+  },
+  "dec.noise_convs.1.bias": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128
+   ]
+  },
+  "dec.noise_convs.1.weight": {
+   "dtype": "f32",
+   "nbytes": 4096,
+   "shape": [
+    128,
+    1,
+    8
+   ]
+  },
+  "dec.noise_convs.2.bias": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64
+   ]
+  },
+  "dec.noise_convs.2.weight": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    64,
+    1,
+    4
+   ]
+  },
+  "dec.noise_convs.3.bias": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32
+   ]
+  },
+  "dec.noise_convs.3.weight": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.0.convs1.0.bias": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256
+   ]
+  },
+  "dec.resblocks.0.convs1.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.0.convs1.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 786432,
+   "shape": [
+    256,
+    256,
+    3
+   ]
+  },
+  "dec.resblocks.0.convs1.1.bias": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256
+   ]
+  },
+  "dec.resblocks.0.convs1.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.0.convs1.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 786432,
+   "shape": [
+    256,
+    256,
+    3
+   ]
+  },
+  "dec.resblocks.0.convs1.2.bias": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256
+   ]
+  },
+  "dec.resblocks.0.convs1.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.0.convs1.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 786432,
+   "shape": [
+    256,
+    256,
+    3
+   ]
+  },
+  "dec.resblocks.0.convs2.0.bias": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256
+   ]
+  },
+  "dec.resblocks.0.convs2.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.0.convs2.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 786432,
+   "shape": [
+    256,
+    256,
+    3
+   ]
+  },
+  "dec.resblocks.0.convs2.1.bias": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256
+   ]
+  },
+  "dec.resblocks.0.convs2.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.0.convs2.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 786432,
+   "shape": [
+    256,
+    256,
+    3
+   ]
+  },
+  "dec.resblocks.0.convs2.2.bias": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256
+   ]
+  },
+  "dec.resblocks.0.convs2.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.0.convs2.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 786432,
+   "shape": [
+    256,
+    256,
+    3
+   ]
+  },
+  "dec.resblocks.1.convs1.0.bias": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256
+   ]
+  },
+  "dec.resblocks.1.convs1.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.1.convs1.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 1835008,
+   "shape": [
+    256,
+    256,
+    7
+   ]
+  },
+  "dec.resblocks.1.convs1.1.bias": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256
+   ]
+  },
+  "dec.resblocks.1.convs1.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.1.convs1.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 1835008,
+   "shape": [
+    256,
+    256,
+    7
+   ]
+  },
+  "dec.resblocks.1.convs1.2.bias": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256
+   ]
+  },
+  "dec.resblocks.1.convs1.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.1.convs1.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 1835008,
+   "shape": [
+    256,
+    256,
+    7
+   ]
+  },
+  "dec.resblocks.1.convs2.0.bias": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256
+   ]
+  },
+  "dec.resblocks.1.convs2.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.1.convs2.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 1835008,
+   "shape": [
+    256,
+    256,
+    7
+   ]
+  },
+  "dec.resblocks.1.convs2.1.bias": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256
+   ]
+  },
+  "dec.resblocks.1.convs2.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.1.convs2.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 1835008,
+   "shape": [
+    256,
+    256,
+    7
+   ]
+  },
+  "dec.resblocks.1.convs2.2.bias": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256
+   ]
+  },
+  "dec.resblocks.1.convs2.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.1.convs2.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 1835008,
+   "shape": [
+    256,
+    256,
+    7
+   ]
+  },
+  "dec.resblocks.10.convs1.0.bias": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32
+   ]
+  },
+  "dec.resblocks.10.convs1.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.10.convs1.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 28672,
+   "shape": [
+    32,
+    32,
+    7
+   ]
+  },
+  "dec.resblocks.10.convs1.1.bias": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32
+   ]
+  },
+  "dec.resblocks.10.convs1.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.10.convs1.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 28672,
+   "shape": [
+    32,
+    32,
+    7
+   ]
+  },
+  "dec.resblocks.10.convs1.2.bias": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32
+   ]
+  },
+  "dec.resblocks.10.convs1.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.10.convs1.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 28672,
+   "shape": [
+    32,
+    32,
+    7
+   ]
+  },
+  "dec.resblocks.10.convs2.0.bias": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32
+   ]
+  },
+  "dec.resblocks.10.convs2.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.10.convs2.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 28672,
+   "shape": [
+    32,
+    32,
+    7
+   ]
+  },
+  "dec.resblocks.10.convs2.1.bias": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32
+   ]
+  },
+  "dec.resblocks.10.convs2.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.10.convs2.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 28672,
+   "shape": [
+    32,
+    32,
+    7
+   ]
+  },
+  "dec.resblocks.10.convs2.2.bias": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32
+   ]
+  },
+  "dec.resblocks.10.convs2.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.10.convs2.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 28672,
+   "shape": [
+    32,
+    32,
+    7
+   ]
+  },
+  "dec.resblocks.11.convs1.0.bias": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32
+   ]
+  },
+  "dec.resblocks.11.convs1.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.11.convs1.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 45056,
+   "shape": [
+    32,
+    32,
+    11
+   ]
+  },
+  "dec.resblocks.11.convs1.1.bias": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32
+   ]
+  },
+  "dec.resblocks.11.convs1.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.11.convs1.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 45056,
+   "shape": [
+    32,
+    32,
+    11
+   ]
+  },
+  "dec.resblocks.11.convs1.2.bias": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32
+   ]
+  },
+  "dec.resblocks.11.convs1.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.11.convs1.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 45056,
+   "shape": [
+    32,
+    32,
+    11
+   ]
+  },
+  "dec.resblocks.11.convs2.0.bias": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32
+   ]
+  },
+  "dec.resblocks.11.convs2.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.11.convs2.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 45056,
+   "shape": [
+    32,
+    32,
+    11
+   ]
+  },
+  "dec.resblocks.11.convs2.1.bias": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32
+   ]
+  },
+  "dec.resblocks.11.convs2.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.11.convs2.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 45056,
+   "shape": [
+    32,
+    32,
+    11
+   ]
+  },
+  "dec.resblocks.11.convs2.2.bias": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32
+   ]
+  },
+  "dec.resblocks.11.convs2.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.11.convs2.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 45056,
+   "shape": [
+    32,
+    32,
+    11
+   ]
+  },
+  "dec.resblocks.2.convs1.0.bias": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256
+   ]
+  },
+  "dec.resblocks.2.convs1.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.2.convs1.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 2883584,
+   "shape": [
+    256,
+    256,
+    11
+   ]
+  },
+  "dec.resblocks.2.convs1.1.bias": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256
+   ]
+  },
+  "dec.resblocks.2.convs1.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.2.convs1.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 2883584,
+   "shape": [
+    256,
+    256,
+    11
+   ]
+  },
+  "dec.resblocks.2.convs1.2.bias": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256
+   ]
+  },
+  "dec.resblocks.2.convs1.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.2.convs1.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 2883584,
+   "shape": [
+    256,
+    256,
+    11
+   ]
+  },
+  "dec.resblocks.2.convs2.0.bias": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256
+   ]
+  },
+  "dec.resblocks.2.convs2.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.2.convs2.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 2883584,
+   "shape": [
+    256,
+    256,
+    11
+   ]
+  },
+  "dec.resblocks.2.convs2.1.bias": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256
+   ]
+  },
+  "dec.resblocks.2.convs2.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.2.convs2.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 2883584,
+   "shape": [
+    256,
+    256,
+    11
+   ]
+  },
+  "dec.resblocks.2.convs2.2.bias": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256
+   ]
+  },
+  "dec.resblocks.2.convs2.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.2.convs2.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 2883584,
+   "shape": [
+    256,
+    256,
+    11
+   ]
+  },
+  "dec.resblocks.3.convs1.0.bias": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128
+   ]
+  },
+  "dec.resblocks.3.convs1.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.3.convs1.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 196608,
+   "shape": [
+    128,
+    128,
+    3
+   ]
+  },
+  "dec.resblocks.3.convs1.1.bias": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128
+   ]
+  },
+  "dec.resblocks.3.convs1.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.3.convs1.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 196608,
+   "shape": [
+    128,
+    128,
+    3
+   ]
+  },
+  "dec.resblocks.3.convs1.2.bias": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128
+   ]
+  },
+  "dec.resblocks.3.convs1.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.3.convs1.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 196608,
+   "shape": [
+    128,
+    128,
+    3
+   ]
+  },
+  "dec.resblocks.3.convs2.0.bias": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128
+   ]
+  },
+  "dec.resblocks.3.convs2.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.3.convs2.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 196608,
+   "shape": [
+    128,
+    128,
+    3
+   ]
+  },
+  "dec.resblocks.3.convs2.1.bias": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128
+   ]
+  },
+  "dec.resblocks.3.convs2.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.3.convs2.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 196608,
+   "shape": [
+    128,
+    128,
+    3
+   ]
+  },
+  "dec.resblocks.3.convs2.2.bias": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128
+   ]
+  },
+  "dec.resblocks.3.convs2.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.3.convs2.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 196608,
+   "shape": [
+    128,
+    128,
+    3
+   ]
+  },
+  "dec.resblocks.4.convs1.0.bias": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128
+   ]
+  },
+  "dec.resblocks.4.convs1.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.4.convs1.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 458752,
+   "shape": [
+    128,
+    128,
+    7
+   ]
+  },
+  "dec.resblocks.4.convs1.1.bias": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128
+   ]
+  },
+  "dec.resblocks.4.convs1.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.4.convs1.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 458752,
+   "shape": [
+    128,
+    128,
+    7
+   ]
+  },
+  "dec.resblocks.4.convs1.2.bias": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128
+   ]
+  },
+  "dec.resblocks.4.convs1.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.4.convs1.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 458752,
+   "shape": [
+    128,
+    128,
+    7
+   ]
+  },
+  "dec.resblocks.4.convs2.0.bias": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128
+   ]
+  },
+  "dec.resblocks.4.convs2.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.4.convs2.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 458752,
+   "shape": [
+    128,
+    128,
+    7
+   ]
+  },
+  "dec.resblocks.4.convs2.1.bias": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128
+   ]
+  },
+  "dec.resblocks.4.convs2.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.4.convs2.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 458752,
+   "shape": [
+    128,
+    128,
+    7
+   ]
+  },
+  "dec.resblocks.4.convs2.2.bias": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128
+   ]
+  },
+  "dec.resblocks.4.convs2.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.4.convs2.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 458752,
+   "shape": [
+    128,
+    128,
+    7
+   ]
+  },
+  "dec.resblocks.5.convs1.0.bias": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128
+   ]
+  },
+  "dec.resblocks.5.convs1.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.5.convs1.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 720896,
+   "shape": [
+    128,
+    128,
+    11
+   ]
+  },
+  "dec.resblocks.5.convs1.1.bias": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128
+   ]
+  },
+  "dec.resblocks.5.convs1.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.5.convs1.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 720896,
+   "shape": [
+    128,
+    128,
+    11
+   ]
+  },
+  "dec.resblocks.5.convs1.2.bias": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128
+   ]
+  },
+  "dec.resblocks.5.convs1.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.5.convs1.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 720896,
+   "shape": [
+    128,
+    128,
+    11
+   ]
+  },
+  "dec.resblocks.5.convs2.0.bias": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128
+   ]
+  },
+  "dec.resblocks.5.convs2.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.5.convs2.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 720896,
+   "shape": [
+    128,
+    128,
+    11
+   ]
+  },
+  "dec.resblocks.5.convs2.1.bias": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128
+   ]
+  },
+  "dec.resblocks.5.convs2.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.5.convs2.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 720896,
+   "shape": [
+    128,
+    128,
+    11
+   ]
+  },
+  "dec.resblocks.5.convs2.2.bias": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128
+   ]
+  },
+  "dec.resblocks.5.convs2.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.5.convs2.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 720896,
+   "shape": [
+    128,
+    128,
+    11
+   ]
+  },
+  "dec.resblocks.6.convs1.0.bias": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64
+   ]
+  },
+  "dec.resblocks.6.convs1.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.6.convs1.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 49152,
+   "shape": [
+    64,
+    64,
+    3
+   ]
+  },
+  "dec.resblocks.6.convs1.1.bias": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64
+   ]
+  },
+  "dec.resblocks.6.convs1.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.6.convs1.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 49152,
+   "shape": [
+    64,
+    64,
+    3
+   ]
+  },
+  "dec.resblocks.6.convs1.2.bias": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64
+   ]
+  },
+  "dec.resblocks.6.convs1.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.6.convs1.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 49152,
+   "shape": [
+    64,
+    64,
+    3
+   ]
+  },
+  "dec.resblocks.6.convs2.0.bias": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64
+   ]
+  },
+  "dec.resblocks.6.convs2.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.6.convs2.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 49152,
+   "shape": [
+    64,
+    64,
+    3
+   ]
+  },
+  "dec.resblocks.6.convs2.1.bias": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64
+   ]
+  },
+  "dec.resblocks.6.convs2.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.6.convs2.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 49152,
+   "shape": [
+    64,
+    64,
+    3
+   ]
+  },
+  "dec.resblocks.6.convs2.2.bias": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64
+   ]
+  },
+  "dec.resblocks.6.convs2.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.6.convs2.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 49152,
+   "shape": [
+    64,
+    64,
+    3
+   ]
+  },
+  "dec.resblocks.7.convs1.0.bias": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64
+   ]
+  },
+  "dec.resblocks.7.convs1.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.7.convs1.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 114688,
+   "shape": [
+    64,
+    64,
+    7
+   ]
+  },
+  "dec.resblocks.7.convs1.1.bias": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64
+   ]
+  },
+  "dec.resblocks.7.convs1.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.7.convs1.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 114688,
+   "shape": [
+    64,
+    64,
+    7
+   ]
+  },
+  "dec.resblocks.7.convs1.2.bias": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64
+   ]
+  },
+  "dec.resblocks.7.convs1.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.7.convs1.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 114688,
+   "shape": [
+    64,
+    64,
+    7
+   ]
+  },
+  "dec.resblocks.7.convs2.0.bias": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64
+   ]
+  },
+  "dec.resblocks.7.convs2.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.7.convs2.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 114688,
+   "shape": [
+    64,
+    64,
+    7
+   ]
+  },
+  "dec.resblocks.7.convs2.1.bias": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64
+   ]
+  },
+  "dec.resblocks.7.convs2.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.7.convs2.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 114688,
+   "shape": [
+    64,
+    64,
+    7
+   ]
+  },
+  "dec.resblocks.7.convs2.2.bias": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64
+   ]
+  },
+  "dec.resblocks.7.convs2.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.7.convs2.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 114688,
+   "shape": [
+    64,
+    64,
+    7
+   ]
+  },
+  "dec.resblocks.8.convs1.0.bias": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64
+   ]
+  },
+  "dec.resblocks.8.convs1.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.8.convs1.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 180224,
+   "shape": [
+    64,
+    64,
+    11
+   ]
+  },
+  "dec.resblocks.8.convs1.1.bias": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64
+   ]
+  },
+  "dec.resblocks.8.convs1.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.8.convs1.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 180224,
+   "shape": [
+    64,
+    64,
+    11
+   ]
+  },
+  "dec.resblocks.8.convs1.2.bias": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64
+   ]
+  },
+  "dec.resblocks.8.convs1.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.8.convs1.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 180224,
+   "shape": [
+    64,
+    64,
+    11
+   ]
+  },
+  "dec.resblocks.8.convs2.0.bias": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64
+   ]
+  },
+  "dec.resblocks.8.convs2.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.8.convs2.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 180224,
+   "shape": [
+    64,
+    64,
+    11
+   ]
+  },
+  "dec.resblocks.8.convs2.1.bias": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64
+   ]
+  },
+  "dec.resblocks.8.convs2.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.8.convs2.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 180224,
+   "shape": [
+    64,
+    64,
+    11
+   ]
+  },
+  "dec.resblocks.8.convs2.2.bias": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64
+   ]
+  },
+  "dec.resblocks.8.convs2.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.8.convs2.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 180224,
+   "shape": [
+    64,
+    64,
+    11
+   ]
+  },
+  "dec.resblocks.9.convs1.0.bias": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32
+   ]
+  },
+  "dec.resblocks.9.convs1.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.9.convs1.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 12288,
+   "shape": [
+    32,
+    32,
+    3
+   ]
+  },
+  "dec.resblocks.9.convs1.1.bias": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32
+   ]
+  },
+  "dec.resblocks.9.convs1.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.9.convs1.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 12288,
+   "shape": [
+    32,
+    32,
+    3
+   ]
+  },
+  "dec.resblocks.9.convs1.2.bias": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32
+   ]
+  },
+  "dec.resblocks.9.convs1.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.9.convs1.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 12288,
+   "shape": [
+    32,
+    32,
+    3
+   ]
+  },
+  "dec.resblocks.9.convs2.0.bias": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32
+   ]
+  },
+  "dec.resblocks.9.convs2.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.9.convs2.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 12288,
+   "shape": [
+    32,
+    32,
+    3
+   ]
+  },
+  "dec.resblocks.9.convs2.1.bias": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32
+   ]
+  },
+  "dec.resblocks.9.convs2.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.9.convs2.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 12288,
+   "shape": [
+    32,
+    32,
+    3
+   ]
+  },
+  "dec.resblocks.9.convs2.2.bias": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32
+   ]
+  },
+  "dec.resblocks.9.convs2.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32,
+    1,
+    1
+   ]
+  },
+  "dec.resblocks.9.convs2.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 12288,
+   "shape": [
+    32,
+    32,
+    3
+   ]
+  },
+  "dec.ups.0.bias": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256
+   ]
+  },
+  "dec.ups.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 2048,
+   "shape": [
+    512,
+    1,
+    1
+   ]
+  },
+  "dec.ups.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 8388608,
+   "shape": [
+    512,
+    256,
+    16
+   ]
+  },
+  "dec.ups.1.bias": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128
+   ]
+  },
+  "dec.ups.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1024,
+   "shape": [
+    256,
+    1,
+    1
+   ]
+  },
+  "dec.ups.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 2097152,
+   "shape": [
+    256,
+    128,
+    16
+   ]
+  },
+  "dec.ups.2.bias": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64
+   ]
+  },
+  "dec.ups.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 512,
+   "shape": [
+    128,
+    1,
+    1
+   ]
+  },
+  "dec.ups.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 131072,
+   "shape": [
+    128,
+    64,
+    4
+   ]
+  },
+  "dec.ups.3.bias": {
+   "dtype": "f32",
+   "nbytes": 128,
+   "shape": [
+    32
+   ]
+  },
+  "dec.ups.3.weight_g": {
+   "dtype": "f32",
+   "nbytes": 256,
+   "shape": [
+    64,
+    1,
+    1
+   ]
+  },
+  "dec.ups.3.weight_v": {
+   "dtype": "f32",
+   "nbytes": 32768,
+   "shape": [
+    64,
+    32,
+    4
+   ]
+  },
+  "emb_g.weight": {
+   "dtype": "f32",
+   "nbytes": 111616,
+   "shape": [
+    109,
+    256
+   ]
+  },
+  "enc_p.emb_phone.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.emb_phone.weight": {
+   "dtype": "f32",
+   "nbytes": 589824,
+   "shape": [
+    192,
+    768
+   ]
+  },
+  "enc_p.emb_pitch.weight": {
+   "dtype": "f32",
+   "nbytes": 196608,
+   "shape": [
+    256,
+    192
+   ]
+  },
+  "enc_p.encoder.attn_layers.0.conv_k.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.attn_layers.0.conv_k.weight": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "enc_p.encoder.attn_layers.0.conv_o.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.attn_layers.0.conv_o.weight": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "enc_p.encoder.attn_layers.0.conv_q.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.attn_layers.0.conv_q.weight": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "enc_p.encoder.attn_layers.0.conv_v.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.attn_layers.0.conv_v.weight": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "enc_p.encoder.attn_layers.0.emb_rel_k": {
+   "dtype": "f32",
+   "nbytes": 8064,
+   "shape": [
+    1,
+    21,
+    96
+   ]
+  },
+  "enc_p.encoder.attn_layers.0.emb_rel_v": {
+   "dtype": "f32",
+   "nbytes": 8064,
+   "shape": [
+    1,
+    21,
+    96
+   ]
+  },
+  "enc_p.encoder.attn_layers.1.conv_k.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.attn_layers.1.conv_k.weight": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "enc_p.encoder.attn_layers.1.conv_o.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.attn_layers.1.conv_o.weight": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "enc_p.encoder.attn_layers.1.conv_q.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.attn_layers.1.conv_q.weight": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "enc_p.encoder.attn_layers.1.conv_v.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.attn_layers.1.conv_v.weight": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "enc_p.encoder.attn_layers.1.emb_rel_k": {
+   "dtype": "f32",
+   "nbytes": 8064,
+   "shape": [
+    1,
+    21,
+    96
+   ]
+  },
+  "enc_p.encoder.attn_layers.1.emb_rel_v": {
+   "dtype": "f32",
+   "nbytes": 8064,
+   "shape": [
+    1,
+    21,
+    96
+   ]
+  },
+  "enc_p.encoder.attn_layers.2.conv_k.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.attn_layers.2.conv_k.weight": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "enc_p.encoder.attn_layers.2.conv_o.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.attn_layers.2.conv_o.weight": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "enc_p.encoder.attn_layers.2.conv_q.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.attn_layers.2.conv_q.weight": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "enc_p.encoder.attn_layers.2.conv_v.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.attn_layers.2.conv_v.weight": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "enc_p.encoder.attn_layers.2.emb_rel_k": {
+   "dtype": "f32",
+   "nbytes": 8064,
+   "shape": [
+    1,
+    21,
+    96
+   ]
+  },
+  "enc_p.encoder.attn_layers.2.emb_rel_v": {
+   "dtype": "f32",
+   "nbytes": 8064,
+   "shape": [
+    1,
+    21,
+    96
+   ]
+  },
+  "enc_p.encoder.attn_layers.3.conv_k.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.attn_layers.3.conv_k.weight": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "enc_p.encoder.attn_layers.3.conv_o.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.attn_layers.3.conv_o.weight": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "enc_p.encoder.attn_layers.3.conv_q.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.attn_layers.3.conv_q.weight": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "enc_p.encoder.attn_layers.3.conv_v.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.attn_layers.3.conv_v.weight": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "enc_p.encoder.attn_layers.3.emb_rel_k": {
+   "dtype": "f32",
+   "nbytes": 8064,
+   "shape": [
+    1,
+    21,
+    96
+   ]
+  },
+  "enc_p.encoder.attn_layers.3.emb_rel_v": {
+   "dtype": "f32",
+   "nbytes": 8064,
+   "shape": [
+    1,
+    21,
+    96
+   ]
+  },
+  "enc_p.encoder.attn_layers.4.conv_k.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.attn_layers.4.conv_k.weight": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "enc_p.encoder.attn_layers.4.conv_o.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.attn_layers.4.conv_o.weight": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "enc_p.encoder.attn_layers.4.conv_q.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.attn_layers.4.conv_q.weight": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "enc_p.encoder.attn_layers.4.conv_v.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.attn_layers.4.conv_v.weight": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "enc_p.encoder.attn_layers.4.emb_rel_k": {
+   "dtype": "f32",
+   "nbytes": 8064,
+   "shape": [
+    1,
+    21,
+    96
+   ]
+  },
+  "enc_p.encoder.attn_layers.4.emb_rel_v": {
+   "dtype": "f32",
+   "nbytes": 8064,
+   "shape": [
+    1,
+    21,
+    96
+   ]
+  },
+  "enc_p.encoder.attn_layers.5.conv_k.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.attn_layers.5.conv_k.weight": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "enc_p.encoder.attn_layers.5.conv_o.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.attn_layers.5.conv_o.weight": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "enc_p.encoder.attn_layers.5.conv_q.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.attn_layers.5.conv_q.weight": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "enc_p.encoder.attn_layers.5.conv_v.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.attn_layers.5.conv_v.weight": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "enc_p.encoder.attn_layers.5.emb_rel_k": {
+   "dtype": "f32",
+   "nbytes": 8064,
+   "shape": [
+    1,
+    21,
+    96
+   ]
+  },
+  "enc_p.encoder.attn_layers.5.emb_rel_v": {
+   "dtype": "f32",
+   "nbytes": 8064,
+   "shape": [
+    1,
+    21,
+    96
+   ]
+  },
+  "enc_p.encoder.ffn_layers.0.conv_1.bias": {
+   "dtype": "f32",
+   "nbytes": 3072,
+   "shape": [
+    768
+   ]
+  },
+  "enc_p.encoder.ffn_layers.0.conv_1.weight": {
+   "dtype": "f32",
+   "nbytes": 1769472,
+   "shape": [
+    768,
+    192,
+    3
+   ]
+  },
+  "enc_p.encoder.ffn_layers.0.conv_2.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.ffn_layers.0.conv_2.weight": {
+   "dtype": "f32",
+   "nbytes": 1769472,
+   "shape": [
+    192,
+    768,
+    3
+   ]
+  },
+  "enc_p.encoder.ffn_layers.1.conv_1.bias": {
+   "dtype": "f32",
+   "nbytes": 3072,
+   "shape": [
+    768
+   ]
+  },
+  "enc_p.encoder.ffn_layers.1.conv_1.weight": {
+   "dtype": "f32",
+   "nbytes": 1769472,
+   "shape": [
+    768,
+    192,
+    3
+   ]
+  },
+  "enc_p.encoder.ffn_layers.1.conv_2.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.ffn_layers.1.conv_2.weight": {
+   "dtype": "f32",
+   "nbytes": 1769472,
+   "shape": [
+    192,
+    768,
+    3
+   ]
+  },
+  "enc_p.encoder.ffn_layers.2.conv_1.bias": {
+   "dtype": "f32",
+   "nbytes": 3072,
+   "shape": [
+    768
+   ]
+  },
+  "enc_p.encoder.ffn_layers.2.conv_1.weight": {
+   "dtype": "f32",
+   "nbytes": 1769472,
+   "shape": [
+    768,
+    192,
+    3
+   ]
+  },
+  "enc_p.encoder.ffn_layers.2.conv_2.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.ffn_layers.2.conv_2.weight": {
+   "dtype": "f32",
+   "nbytes": 1769472,
+   "shape": [
+    192,
+    768,
+    3
+   ]
+  },
+  "enc_p.encoder.ffn_layers.3.conv_1.bias": {
+   "dtype": "f32",
+   "nbytes": 3072,
+   "shape": [
+    768
+   ]
+  },
+  "enc_p.encoder.ffn_layers.3.conv_1.weight": {
+   "dtype": "f32",
+   "nbytes": 1769472,
+   "shape": [
+    768,
+    192,
+    3
+   ]
+  },
+  "enc_p.encoder.ffn_layers.3.conv_2.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.ffn_layers.3.conv_2.weight": {
+   "dtype": "f32",
+   "nbytes": 1769472,
+   "shape": [
+    192,
+    768,
+    3
+   ]
+  },
+  "enc_p.encoder.ffn_layers.4.conv_1.bias": {
+   "dtype": "f32",
+   "nbytes": 3072,
+   "shape": [
+    768
+   ]
+  },
+  "enc_p.encoder.ffn_layers.4.conv_1.weight": {
+   "dtype": "f32",
+   "nbytes": 1769472,
+   "shape": [
+    768,
+    192,
+    3
+   ]
+  },
+  "enc_p.encoder.ffn_layers.4.conv_2.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.ffn_layers.4.conv_2.weight": {
+   "dtype": "f32",
+   "nbytes": 1769472,
+   "shape": [
+    192,
+    768,
+    3
+   ]
+  },
+  "enc_p.encoder.ffn_layers.5.conv_1.bias": {
+   "dtype": "f32",
+   "nbytes": 3072,
+   "shape": [
+    768
+   ]
+  },
+  "enc_p.encoder.ffn_layers.5.conv_1.weight": {
+   "dtype": "f32",
+   "nbytes": 1769472,
+   "shape": [
+    768,
+    192,
+    3
+   ]
+  },
+  "enc_p.encoder.ffn_layers.5.conv_2.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.ffn_layers.5.conv_2.weight": {
+   "dtype": "f32",
+   "nbytes": 1769472,
+   "shape": [
+    192,
+    768,
+    3
+   ]
+  },
+  "enc_p.encoder.norm_layers_1.0.beta": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.norm_layers_1.0.gamma": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.norm_layers_1.1.beta": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.norm_layers_1.1.gamma": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.norm_layers_1.2.beta": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.norm_layers_1.2.gamma": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.norm_layers_1.3.beta": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.norm_layers_1.3.gamma": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.norm_layers_1.4.beta": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.norm_layers_1.4.gamma": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.norm_layers_1.5.beta": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.norm_layers_1.5.gamma": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.norm_layers_2.0.beta": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.norm_layers_2.0.gamma": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.norm_layers_2.1.beta": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.norm_layers_2.1.gamma": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.norm_layers_2.2.beta": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.norm_layers_2.2.gamma": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.norm_layers_2.3.beta": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.norm_layers_2.3.gamma": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.norm_layers_2.4.beta": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.norm_layers_2.4.gamma": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.norm_layers_2.5.beta": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.encoder.norm_layers_2.5.gamma": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "enc_p.proj.bias": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384
+   ]
+  },
+  "enc_p.proj.weight": {
+   "dtype": "f32",
+   "nbytes": 294912,
+   "shape": [
+    384,
+    192,
+    1
+   ]
+  },
+  "flow.flows.0.enc.cond_layer.bias": {
+   "dtype": "f32",
+   "nbytes": 4608,
+   "shape": [
+    1152
+   ]
+  },
+  "flow.flows.0.enc.cond_layer.weight_g": {
+   "dtype": "f32",
+   "nbytes": 4608,
+   "shape": [
+    1152,
+    1,
+    1
+   ]
+  },
+  "flow.flows.0.enc.cond_layer.weight_v": {
+   "dtype": "f32",
+   "nbytes": 1179648,
+   "shape": [
+    1152,
+    256,
+    1
+   ]
+  },
+  "flow.flows.0.enc.in_layers.0.bias": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384
+   ]
+  },
+  "flow.flows.0.enc.in_layers.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384,
+    1,
+    1
+   ]
+  },
+  "flow.flows.0.enc.in_layers.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 1474560,
+   "shape": [
+    384,
+    192,
+    5
+   ]
+  },
+  "flow.flows.0.enc.in_layers.1.bias": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384
+   ]
+  },
+  "flow.flows.0.enc.in_layers.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384,
+    1,
+    1
+   ]
+  },
+  "flow.flows.0.enc.in_layers.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 1474560,
+   "shape": [
+    384,
+    192,
+    5
+   ]
+  },
+  "flow.flows.0.enc.in_layers.2.bias": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384
+   ]
+  },
+  "flow.flows.0.enc.in_layers.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384,
+    1,
+    1
+   ]
+  },
+  "flow.flows.0.enc.in_layers.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 1474560,
+   "shape": [
+    384,
+    192,
+    5
+   ]
+  },
+  "flow.flows.0.enc.res_skip_layers.0.bias": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384
+   ]
+  },
+  "flow.flows.0.enc.res_skip_layers.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384,
+    1,
+    1
+   ]
+  },
+  "flow.flows.0.enc.res_skip_layers.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 294912,
+   "shape": [
+    384,
+    192,
+    1
+   ]
+  },
+  "flow.flows.0.enc.res_skip_layers.1.bias": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384
+   ]
+  },
+  "flow.flows.0.enc.res_skip_layers.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384,
+    1,
+    1
+   ]
+  },
+  "flow.flows.0.enc.res_skip_layers.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 294912,
+   "shape": [
+    384,
+    192,
+    1
+   ]
+  },
+  "flow.flows.0.enc.res_skip_layers.2.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "flow.flows.0.enc.res_skip_layers.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192,
+    1,
+    1
+   ]
+  },
+  "flow.flows.0.enc.res_skip_layers.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "flow.flows.0.post.bias": {
+   "dtype": "f32",
+   "nbytes": 384,
+   "shape": [
+    96
+   ]
+  },
+  "flow.flows.0.post.weight": {
+   "dtype": "f32",
+   "nbytes": 73728,
+   "shape": [
+    96,
+    192,
+    1
+   ]
+  },
+  "flow.flows.0.pre.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "flow.flows.0.pre.weight": {
+   "dtype": "f32",
+   "nbytes": 73728,
+   "shape": [
+    192,
+    96,
+    1
+   ]
+  },
+  "flow.flows.2.enc.cond_layer.bias": {
+   "dtype": "f32",
+   "nbytes": 4608,
+   "shape": [
+    1152
+   ]
+  },
+  "flow.flows.2.enc.cond_layer.weight_g": {
+   "dtype": "f32",
+   "nbytes": 4608,
+   "shape": [
+    1152,
+    1,
+    1
+   ]
+  },
+  "flow.flows.2.enc.cond_layer.weight_v": {
+   "dtype": "f32",
+   "nbytes": 1179648,
+   "shape": [
+    1152,
+    256,
+    1
+   ]
+  },
+  "flow.flows.2.enc.in_layers.0.bias": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384
+   ]
+  },
+  "flow.flows.2.enc.in_layers.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384,
+    1,
+    1
+   ]
+  },
+  "flow.flows.2.enc.in_layers.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 1474560,
+   "shape": [
+    384,
+    192,
+    5
+   ]
+  },
+  "flow.flows.2.enc.in_layers.1.bias": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384
+   ]
+  },
+  "flow.flows.2.enc.in_layers.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384,
+    1,
+    1
+   ]
+  },
+  "flow.flows.2.enc.in_layers.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 1474560,
+   "shape": [
+    384,
+    192,
+    5
+   ]
+  },
+  "flow.flows.2.enc.in_layers.2.bias": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384
+   ]
+  },
+  "flow.flows.2.enc.in_layers.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384,
+    1,
+    1
+   ]
+  },
+  "flow.flows.2.enc.in_layers.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 1474560,
+   "shape": [
+    384,
+    192,
+    5
+   ]
+  },
+  "flow.flows.2.enc.res_skip_layers.0.bias": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384
+   ]
+  },
+  "flow.flows.2.enc.res_skip_layers.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384,
+    1,
+    1
+   ]
+  },
+  "flow.flows.2.enc.res_skip_layers.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 294912,
+   "shape": [
+    384,
+    192,
+    1
+   ]
+  },
+  "flow.flows.2.enc.res_skip_layers.1.bias": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384
+   ]
+  },
+  "flow.flows.2.enc.res_skip_layers.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384,
+    1,
+    1
+   ]
+  },
+  "flow.flows.2.enc.res_skip_layers.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 294912,
+   "shape": [
+    384,
+    192,
+    1
+   ]
+  },
+  "flow.flows.2.enc.res_skip_layers.2.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "flow.flows.2.enc.res_skip_layers.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192,
+    1,
+    1
+   ]
+  },
+  "flow.flows.2.enc.res_skip_layers.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "flow.flows.2.post.bias": {
+   "dtype": "f32",
+   "nbytes": 384,
+   "shape": [
+    96
+   ]
+  },
+  "flow.flows.2.post.weight": {
+   "dtype": "f32",
+   "nbytes": 73728,
+   "shape": [
+    96,
+    192,
+    1
+   ]
+  },
+  "flow.flows.2.pre.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "flow.flows.2.pre.weight": {
+   "dtype": "f32",
+   "nbytes": 73728,
+   "shape": [
+    192,
+    96,
+    1
+   ]
+  },
+  "flow.flows.4.enc.cond_layer.bias": {
+   "dtype": "f32",
+   "nbytes": 4608,
+   "shape": [
+    1152
+   ]
+  },
+  "flow.flows.4.enc.cond_layer.weight_g": {
+   "dtype": "f32",
+   "nbytes": 4608,
+   "shape": [
+    1152,
+    1,
+    1
+   ]
+  },
+  "flow.flows.4.enc.cond_layer.weight_v": {
+   "dtype": "f32",
+   "nbytes": 1179648,
+   "shape": [
+    1152,
+    256,
+    1
+   ]
+  },
+  "flow.flows.4.enc.in_layers.0.bias": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384
+   ]
+  },
+  "flow.flows.4.enc.in_layers.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384,
+    1,
+    1
+   ]
+  },
+  "flow.flows.4.enc.in_layers.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 1474560,
+   "shape": [
+    384,
+    192,
+    5
+   ]
+  },
+  "flow.flows.4.enc.in_layers.1.bias": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384
+   ]
+  },
+  "flow.flows.4.enc.in_layers.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384,
+    1,
+    1
+   ]
+  },
+  "flow.flows.4.enc.in_layers.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 1474560,
+   "shape": [
+    384,
+    192,
+    5
+   ]
+  },
+  "flow.flows.4.enc.in_layers.2.bias": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384
+   ]
+  },
+  "flow.flows.4.enc.in_layers.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384,
+    1,
+    1
+   ]
+  },
+  "flow.flows.4.enc.in_layers.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 1474560,
+   "shape": [
+    384,
+    192,
+    5
+   ]
+  },
+  "flow.flows.4.enc.res_skip_layers.0.bias": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384
+   ]
+  },
+  "flow.flows.4.enc.res_skip_layers.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384,
+    1,
+    1
+   ]
+  },
+  "flow.flows.4.enc.res_skip_layers.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 294912,
+   "shape": [
+    384,
+    192,
+    1
+   ]
+  },
+  "flow.flows.4.enc.res_skip_layers.1.bias": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384
+   ]
+  },
+  "flow.flows.4.enc.res_skip_layers.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384,
+    1,
+    1
+   ]
+  },
+  "flow.flows.4.enc.res_skip_layers.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 294912,
+   "shape": [
+    384,
+    192,
+    1
+   ]
+  },
+  "flow.flows.4.enc.res_skip_layers.2.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "flow.flows.4.enc.res_skip_layers.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192,
+    1,
+    1
+   ]
+  },
+  "flow.flows.4.enc.res_skip_layers.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "flow.flows.4.post.bias": {
+   "dtype": "f32",
+   "nbytes": 384,
+   "shape": [
+    96
+   ]
+  },
+  "flow.flows.4.post.weight": {
+   "dtype": "f32",
+   "nbytes": 73728,
+   "shape": [
+    96,
+    192,
+    1
+   ]
+  },
+  "flow.flows.4.pre.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "flow.flows.4.pre.weight": {
+   "dtype": "f32",
+   "nbytes": 73728,
+   "shape": [
+    192,
+    96,
+    1
+   ]
+  },
+  "flow.flows.6.enc.cond_layer.bias": {
+   "dtype": "f32",
+   "nbytes": 4608,
+   "shape": [
+    1152
+   ]
+  },
+  "flow.flows.6.enc.cond_layer.weight_g": {
+   "dtype": "f32",
+   "nbytes": 4608,
+   "shape": [
+    1152,
+    1,
+    1
+   ]
+  },
+  "flow.flows.6.enc.cond_layer.weight_v": {
+   "dtype": "f32",
+   "nbytes": 1179648,
+   "shape": [
+    1152,
+    256,
+    1
+   ]
+  },
+  "flow.flows.6.enc.in_layers.0.bias": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384
+   ]
+  },
+  "flow.flows.6.enc.in_layers.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384,
+    1,
+    1
+   ]
+  },
+  "flow.flows.6.enc.in_layers.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 1474560,
+   "shape": [
+    384,
+    192,
+    5
+   ]
+  },
+  "flow.flows.6.enc.in_layers.1.bias": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384
+   ]
+  },
+  "flow.flows.6.enc.in_layers.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384,
+    1,
+    1
+   ]
+  },
+  "flow.flows.6.enc.in_layers.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 1474560,
+   "shape": [
+    384,
+    192,
+    5
+   ]
+  },
+  "flow.flows.6.enc.in_layers.2.bias": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384
+   ]
+  },
+  "flow.flows.6.enc.in_layers.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384,
+    1,
+    1
+   ]
+  },
+  "flow.flows.6.enc.in_layers.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 1474560,
+   "shape": [
+    384,
+    192,
+    5
+   ]
+  },
+  "flow.flows.6.enc.res_skip_layers.0.bias": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384
+   ]
+  },
+  "flow.flows.6.enc.res_skip_layers.0.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384,
+    1,
+    1
+   ]
+  },
+  "flow.flows.6.enc.res_skip_layers.0.weight_v": {
+   "dtype": "f32",
+   "nbytes": 294912,
+   "shape": [
+    384,
+    192,
+    1
+   ]
+  },
+  "flow.flows.6.enc.res_skip_layers.1.bias": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384
+   ]
+  },
+  "flow.flows.6.enc.res_skip_layers.1.weight_g": {
+   "dtype": "f32",
+   "nbytes": 1536,
+   "shape": [
+    384,
+    1,
+    1
+   ]
+  },
+  "flow.flows.6.enc.res_skip_layers.1.weight_v": {
+   "dtype": "f32",
+   "nbytes": 294912,
+   "shape": [
+    384,
+    192,
+    1
+   ]
+  },
+  "flow.flows.6.enc.res_skip_layers.2.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "flow.flows.6.enc.res_skip_layers.2.weight_g": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192,
+    1,
+    1
+   ]
+  },
+  "flow.flows.6.enc.res_skip_layers.2.weight_v": {
+   "dtype": "f32",
+   "nbytes": 147456,
+   "shape": [
+    192,
+    192,
+    1
+   ]
+  },
+  "flow.flows.6.post.bias": {
+   "dtype": "f32",
+   "nbytes": 384,
+   "shape": [
+    96
+   ]
+  },
+  "flow.flows.6.post.weight": {
+   "dtype": "f32",
+   "nbytes": 73728,
+   "shape": [
+    96,
+    192,
+    1
+   ]
+  },
+  "flow.flows.6.pre.bias": {
+   "dtype": "f32",
+   "nbytes": 768,
+   "shape": [
+    192
+   ]
+  },
+  "flow.flows.6.pre.weight": {
+   "dtype": "f32",
+   "nbytes": 73728,
+   "shape": [
+    192,
+    96,
+    1
+   ]
+  }
+ }
+}
