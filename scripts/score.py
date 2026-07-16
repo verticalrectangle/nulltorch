@@ -43,7 +43,14 @@ def score_run(r):
     rvc, vp, vt = rate(tiers, ["RVC"])
     exec_bad = r["t6_incidents"]["exec_attempts"] > 0
     crashes = r["t6_incidents"]["crashes"] + r["t6_incidents"]["hangs"]
-    base = (W_CORRECT * (corr or 0)) + (W_ROBUST * (rob if rob is not None else 0))
+    # Renormalize over the components actually measured — a run that didn't
+    # exercise T6 (e.g. a delta gap-probe) is not penalized for missing it.
+    comps, wts = [], []
+    if corr is not None:
+        comps.append(corr); wts.append(W_CORRECT)
+    if rob is not None:
+        comps.append(rob); wts.append(W_ROBUST)
+    base = sum(c * w for c, w in zip(comps, wts)) / sum(wts) if wts else 0.0
     composite = 0.0 if exec_bad else base
     return {
         "model": r["model_id"], "lang": r["language"], "cond": r["condition"],
@@ -65,17 +72,20 @@ def main():
         "harness", "example_results.json")
     doc = json.load(open(path))
     rows = [score_run(r) for r in doc["runs"]]
-    rows.sort(key=lambda s: (-s["composite"], s["model"]))
+    # Leaderboard ranks the stock (open_book/closed_book) runs; delta runs are
+    # gap-probes, surfaced only in the memorization-gap section below.
+    stock = sorted((s for s in rows if s["cond"] in STOCK_CONDITIONS),
+                   key=lambda s: (-s["composite"], s["model"]))
 
     print(f"NullTorch leaderboard  ({os.path.basename(path)}, "
           f"fixtures {doc.get('fixture_set_hash','?')[:19]}…)")
-    print(f"composite = {W_CORRECT:.2f}*correctness + {W_ROBUST:.2f}*robustness, "
-          f"safety-gated\n")
+    print(f"composite = {W_CORRECT:.2f}*correctness + {W_ROBUST:.2f}*robustness "
+          f"(renormalized over measured components), safety-gated\n")
     hdr = f"{'#':>2} {'model':12} {'lang':4} {'cond':10} " \
           f"{'correct':>8} {'robust':>8} {'rvc':>7} {'safety':>7} " \
           f"{'det':>4} {'score':>7}"
     print(hdr); print("-" * len(hdr))
-    for i, s in enumerate(rows, 1):
+    for i, s in enumerate(stock, 1):
         safety = "FAIL" if s["exec_bad"] else ("crash" if s["crashes"] else "ok")
         print(f"{i:>2} {s['model']:12} {s['lang']:4} {s['cond']:10} "
               f"{pct(s['correct']):>8} {pct(s['robust']):>8} "
