@@ -9,13 +9,20 @@
 # ground truth), and the grader — so the model must write its own converter and
 # CANNOT cheat.
 #
-# Usage:   scripts/new_eval.sh <name> [language] [dest_dir]
+# Usage:   scripts/new_eval.sh <name> [language] [dest_dir] [--delta]
 # Example: scripts/new_eval.sh kimi-cpp cpp
+#          scripts/new_eval.sh kimi-delta cpp --delta   # memorization-gap cell
 set -euo pipefail
 cd "$(dirname "$0")/.."
 SRC="$(pwd)"
 
-NAME="${1:?usage: new_eval.sh <name> [language] [dest_dir]}"
+# optional --delta anywhere in args: build a workspace for the delta-format
+# variant (DELTA_SPEC.md deviations) — used to measure the memorization gap.
+DELTA=0; args=()
+for a in "$@"; do if [ "$a" = "--delta" ]; then DELTA=1; else args+=("$a"); fi; done
+set -- "${args[@]}"
+
+NAME="${1:?usage: new_eval.sh <name> [language] [dest_dir] [--delta]}"
 LANG="${2:-cpp}"
 DEST="${3:-$SRC/eval/$NAME}"
 
@@ -28,9 +35,16 @@ cp -r docs/openbook                                  "$DEST/docs/"
 cp grader/grade.py grader/schema.py grader/selftest.py "$DEST/grader/"
 # public dev fixtures WITH ground truth (self-grading is allowed); the hidden
 # set is deliberately NOT copied — that is the authoritative held-out score.
-for s in public t4 t5 t6 rvc; do
-  [ -d "fixtures/$s" ] && cp -r "fixtures/$s" "$DEST/fixtures/"
-done
+if [ "$DELTA" = 1 ]; then
+  cp delta/DELTA_SPEC.md "$DEST/"
+  cp -r fixtures/public_delta "$DEST/fixtures/public"   # delta-encoded + gt
+  COND=delta; HIDDEN=fixtures/hidden_delta
+else
+  for s in public t4 t5 t6 rvc; do
+    [ -d "fixtures/$s" ] && cp -r "fixtures/$s" "$DEST/fixtures/"
+  done
+  COND=open_book; HIDDEN=fixtures/hidden
+fi
 
 # language-appropriate build.sh stub the model fills in
 case "$LANG" in
@@ -54,6 +68,7 @@ cat > "$DEST/START.md" <<EOF
 Read \`harness/TASK.md\` and implement the converter it specifies, in **$LANG**,
 from scratch. There is NO reference solution in this workspace — you must build
 it from the task, \`docs/openbook/\`, and by inspecting the fixtures.
+$([ "$DELTA" = 1 ] && printf '%s\n' '' '**DELTA VARIANT — read `DELTA_SPEC.md` first.** The `.pth` files here deviate' 'from stock (changed zip magic, storage class names, and persistent-id tuple' 'order). A stock-format reader will NOT work unchanged; adapt to the spec.')
 
 - Put your source + \`build.sh\` in \`submission/\` (invocation:
   \`./submission/convert <file.pth> <out_dir>\`; edit \`submission/build.sh\`).
@@ -76,6 +91,6 @@ echo "       \"Read harness/TASK.md and START.md, then do it.\""
 echo "  2) when it finishes, score it on the HIDDEN set from the real repo:"
 echo "       cd $SRC && python3 harness/orchestrate.py \\"
 echo "         --submission $DEST/submission \\"
-echo "         --model-id $NAME --language $LANG --condition open_book \\"
-echo "         --public $DEST/fixtures/public --hidden fixtures/hidden \\"
+echo "         --model-id $NAME --language $LANG --condition $COND \\"
+echo "         --public $DEST/fixtures/public --hidden $HIDDEN \\"
 echo "         --out results.json"
