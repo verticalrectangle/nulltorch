@@ -112,6 +112,16 @@ python3 harness/orchestrate.py --submission eval/kimi-cpp/submission \
 ```
 `submissions/claude-cpp/` was produced this way (via Claude as the agent).
 
+**5. Score / rank the results**:
+```
+python3 scripts/score.py [results.json]   # default: harness/example_results.json
+```
+A leaderboard with per-model correctness, T6 robustness, a safety gate (any
+executed hostile pickle → disqualified), the RVC track, and the memorization
+gap (stock − delta, when both conditions are present). NullTorch reports a
+*profile*, not one number — the composite is a convenience for ranking, with
+adjustable weights at the top of `scripts/score.py`.
+
 **Regenerate fixtures** (optional; the only step that needs torch):
 ```
 python3 fixtures/gen/generate.py      --out fixtures/public --seeds 1001,1002,1003
