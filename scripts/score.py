@@ -103,17 +103,31 @@ def main():
         if note:
             print(f"{'':>36}({', '.join(note)})")
 
-    # memorization gap: stock vs delta correctness per (model, lang)
-    by = {}
-    for s in rows:
-        by.setdefault((s["model"], s["lang"]), {})[s["cond"]] = s["correct"]
+    # memorization gap: stock vs delta correctness per (model, lang), computed
+    # over the tiers MEASURED IN BOTH conditions (delta usually covers only
+    # T1-T3, so comparing against a stock rate that includes T4/T5 would be
+    # apples-to-oranges — a model that skipped optional deflate at T4 would show
+    # a spurious negative gap).
+    def corr_over(tiers, keys):
+        p = sum(tiers[k]["pass"] for k in keys)
+        t = sum(tiers[k]["total"] for k in keys)
+        return p / t if t else None
+    pairs = {}
+    for r in doc["runs"]:
+        pairs.setdefault((r["model_id"], r["language"]), {})[r["condition"]] = \
+            r["tiers"]
     gaps = []
-    for (m, lang), conds in by.items():
-        stock = next((conds[c] for c in ("open_book", "closed_book")
-                      if c in conds and conds[c] is not None), None)
-        delta = conds.get("delta")
-        if stock is not None and delta is not None:
-            gaps.append((m, lang, stock - delta))
+    for (m, lang), conds in pairs.items():
+        sc = next((conds[c] for c in ("open_book", "closed_book")
+                   if c in conds), None)
+        dt = conds.get("delta")
+        if sc is None or dt is None:
+            continue
+        matched = [t for t in CORRECT_TIERS
+                   if t in sc and sc[t]["total"] > 0
+                   and t in dt and dt[t]["total"] > 0]
+        if matched:
+            gaps.append((m, lang, corr_over(sc, matched) - corr_over(dt, matched)))
     if gaps:
         print("\nmemorization gap (stock - delta correctness; lower = less "
               "format-memorized):")
