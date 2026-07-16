@@ -1,0 +1,26 @@
+{
+ "bool.bin": {
+  "sha256": "c2ae5b10a4a21b323aa60b9245648c94d05b2ef204d51f5649210ce10bf5294d",
+  "size": 8
+ },
+ "i16.bin": {
+  "sha256": "bf46081db5adcb4e4bf76d89c3dadc4ea98de1b68d71e448bf50e463d627b6c2",
+  "size": 8
+ },
+ "i32.bin": {
+  "sha256": "c34118a3aaca51548f7801f32d947864b074d0cd1b754138a022cf028462b223",
+  "size": 16
+ },
+ "i64.bin": {
+  "sha256": "c201fc12f0c93fa96467b3b75a8f78ef907bea13cb5f1f7dd308a30f852672ae",
+  "size": 32
+ },
+ "i8.bin": {
+  "sha256": "38ed752658a7f4d78ffe78de7b74d561f26e7b3e9af7fd311f0fea74e51e4217",
+  "size": 4
+ },
+ "u8.bin": {
+  "sha256": "20769d39024fbce2f0083f1ee8b75a141188095fe1b768067ddccbd8d80ceaac",
+  "size": 4
+ }
+}

@@ -1,0 +1,11 @@
+{
+ "container": "zip64_stored",
+ "fixture_id": "t4_zip64__s2001",
+ "n_tensors": 4,
+ "pickle_protocol": 2,
+ "recipe": "t4_zip64",
+ "seed": 2001,
+ "sha256_pth": "8",
+ "tier": "T4",
+ "torch_version": "2.12.0+cpu"
+}

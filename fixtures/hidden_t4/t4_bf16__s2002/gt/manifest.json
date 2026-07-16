@@ -1,0 +1,32 @@
+{
+ "byteorder": "little",
+ "nulltorch_manifest": 1,
+ "tensors": {
+  "b": {
+   "dtype": "bf16",
+   "nbytes": 16,
+   "shape": [
+    8
+   ],
+   "storage_key": "1",
+   "storage_offset": 0,
+   "stride": [
+    1
+   ]
+  },
+  "w": {
+   "dtype": "bf16",
+   "nbytes": 128,
+   "shape": [
+    8,
+    8
+   ],
+   "storage_key": "0",
+   "storage_offset": 0,
+   "stride": [
+    8,
+    1
+   ]
+  }
+ }
+}

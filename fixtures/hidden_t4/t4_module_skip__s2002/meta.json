@@ -1,0 +1,11 @@
+{
+ "container": "zip_stored",
+ "fixture_id": "t4_module_skip__s2002",
+ "n_tensors": 2,
+ "pickle_protocol": 2,
+ "recipe": "t4_module_skip",
+ "seed": 2002,
+ "sha256_pth": "2",
+ "tier": "T4",
+ "torch_version": "2.12.0+cpu"
+}

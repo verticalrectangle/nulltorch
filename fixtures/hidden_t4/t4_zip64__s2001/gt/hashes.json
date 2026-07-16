@@ -1,0 +1,18 @@
+{
+ "dec__lin.bias.bin": {
+  "sha256": "f8d1d6f5f98ea9fae851d0b1f3a8e5467e209b1c8c631d0f5a85e1dbfcaad516",
+  "size": 12
+ },
+ "dec__lin.weight.bin": {
+  "sha256": "769d4404af06fd963ad853292b875bbea6132242b61f4c1f30921129be7c7109",
+  "size": 48
+ },
+ "enc__conv.bias.bin": {
+  "sha256": "bbf3fbb02ee6b41382da4fe609d6bd4913350068d2eda706b224b2cdee3297e8",
+  "size": 16
+ },
+ "enc__conv.weight.bin": {
+  "sha256": "1e43c9837c0f61cc8ea0a4c82b215ecce0133e2a85f0c3c3183880a5ef0d48a9",
+  "size": 432
+ }
+}

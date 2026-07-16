@@ -1,0 +1,10 @@
+{
+ "b.bin": {
+  "sha256": "0ca8ae38daf4750665b85e113a5b7f93055adabbe0ba7a152109b38bb1e9eb58",
+  "size": 10
+ },
+ "w.bin": {
+  "sha256": "dbad121a07c8b416d025d9324bbcc1a776bd4a485bad138b4f97d2b5ae32731c",
+  "size": 100
+ }
+}

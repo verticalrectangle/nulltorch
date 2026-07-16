@@ -1,0 +1,14 @@
+{
+ "container": "zip_stored",
+ "fixture_id": "t5_stream__s5002",
+ "grading": "byte_sampled",
+ "mem_cap_bytes": 1258291,
+ "n_tensors": 3,
+ "pickle_protocol": 2,
+ "recipe": "t5_stream",
+ "seed": 5002,
+ "sha256_pth": "0",
+ "tier": "T5",
+ "torch_version": "2.12.0+cpu",
+ "total_tensor_bytes": 2621440
+}
