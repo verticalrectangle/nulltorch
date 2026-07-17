@@ -69,9 +69,13 @@ def gate(sub):
 def main():
     scores = code_scores()
     models = sorted(scores, key=lambda m: -scores[m]["composite"])
-    if os.path.isdir(SHOW):
-        shutil.rmtree(SHOW)
-    os.makedirs(os.path.join(SHOW, "dashboards"))
+    # Refresh ONLY the generated parts (dashboards/ + manifest/results below);
+    # NEVER wipe the gallery a model built here (index.html + its assets).
+    os.makedirs(SHOW, exist_ok=True)
+    dash_dir = os.path.join(SHOW, "dashboards")
+    if os.path.isdir(dash_dir):
+        shutil.rmtree(dash_dir)
+    os.makedirs(dash_dir)
 
     entries = []
     for m in models:
