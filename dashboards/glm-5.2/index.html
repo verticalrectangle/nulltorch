@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<title>NullTorch Board</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="favicon.svg">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#" aria-label="NullTorch Board home">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <defs>
+          <linearGradient id="flame" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0" stop-color="#f59e0b"/>
+            <stop offset="0.55" stop-color="#fb923c"/>
+            <stop offset="1" stop-color="#fde68a"/>
+          </linearGradient>
+        </defs>
+        <path d="M16 2c2 5-3 7-3 11a3 3 0 0 0 6 0c0-1 0-2-1-3 3 1 5 4 5 8a7 7 0 1 1-14 0c0-5 4-7 7-16z" fill="url(#flame)"/>
+        <circle cx="16" cy="22" r="2.4" fill="#0a0a0f" opacity="0.55"/>
+      </svg>
+      <span class="brand-text">NullTorch<small>board</small></span>
+    </a>
+    <nav class="tabs" role="tablist" aria-label="Views">
+      <button class="tab" role="tab" aria-selected="true" data-tab="overview">Overview</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="leaderboard">Leaderboard</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="model">Model</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="gap">Memorization</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="compare">Compare</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="fixtures">Fixtures</button>
+    </nav>
+    <button class="icon-btn theme-toggle" id="themeToggle" aria-label="Toggle color theme" title="Toggle theme">
+      <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5 5l1.7 1.7M17.3 17.3 19 19M19 5l-1.7 1.7M6.7 17.3 5 19"/></g></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main" class="main">
+
+  <!-- OVERVIEW -->
+  <section class="view" data-view="overview" role="tabpanel" aria-label="Overview">
+    <div class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow" id="ovVersion">benchmark v—</p>
+        <h1 class="hero-title">Can your model <em>unpickle</em> the unpicklable?</h1>
+        <p class="hero-sub">NullTorch stress-tests language models on PyTorch <code>.pt</code> deserialization — six tiers from flat tensors to hostile pickles. Correctness is T1–T5. Robustness is T6. Any model that executes a hostile pickle is disqualified.</p>
+      </div>
+      <div class="hero-stats" id="ovStats" aria-live="polite"></div>
+    </div>
+    <div class="repro card" id="reproStrip"></div>
+    <div class="grid-2">
+      <div class="card" id="ovTopCard">
+        <h2 class="card-title">Top performers <span class="muted">by correctness</span></h2>
+        <div id="ovTop"></div>
+      </div>
+      <div class="card" id="ovIncCard">
+        <h2 class="card-title">Safety &amp; incidents</h2>
+        <div id="ovIncidents"></div>
+      </div>
+    </div>
+    <div class="card" id="ovTierCard">
+      <h2 class="card-title">Tier landscape <span class="muted">mean pass rate across all runs</span></h2>
+      <div id="ovTierBars"></div>
+    </div>
+  </section>
+
+  <!-- LEADERBOARD -->
+  <section class="view" data-view="leaderboard" role="tabpanel" aria-label="Leaderboard" hidden>
+    <div class="view-head">
+      <h2 class="view-title">Leaderboard</h2>
+      <div class="filters" id="lbFilters"></div>
+    </div>
+    <div class="table-wrap"><table class="board" id="lbTable"><thead></thead><tbody></tbody></table></div>
+    <p class="legend" id="lbLegend"></p>
+  </section>
+
+  <!-- MODEL DETAIL -->
+  <section class="view" data-view="model" role="tabpanel" aria-label="Model detail" hidden>
+    <div class="view-head">
+      <h2 class="view-title">Model detail</h2>
+      <div class="filters" id="mdFilters"></div>
+    </div>
+    <div id="mdBody"></div>
+  </section>
+
+  <!-- MEMORIZATION GAP -->
+  <section class="view" data-view="gap" role="tabpanel" aria-label="Memorization gap" hidden>
+    <div class="view-head">
+      <h2 class="view-title">Memorization gap</h2>
+      <p class="muted head-note">Stock pass rate minus delta pass rate, per (model, language) over T1–T6. RVC excluded. A large gap means the model leans on memorized fixtures rather than generalizing.</p>
+    </div>
+    <div id="gapBody"></div>
+  </section>
+
+  <!-- COMPARE -->
+  <section class="view" data-view="compare" role="tabpanel" aria-label="Compare models" hidden>
+    <div class="view-head">
+      <h2 class="view-title">Side-by-side</h2>
+      <div class="filters" id="cmpFilters"></div>
+    </div>
+    <div id="cmpBody"></div>
+  </section>
+
+  <!-- FIXTURES -->
+  <section class="view" data-view="fixtures" role="tabpanel" aria-label="Fixture drill-down" hidden>
+    <div class="view-head">
+      <h2 class="view-title">Fixture drill-down</h2>
+      <div class="filters" id="fxFilters"></div>
+    </div>
+    <div id="fxBody"></div>
+  </section>
+
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<dialog id="hashDialog" class="hash-dialog" aria-label="Full hash">
+  <div class="hash-dialog-body">
+    <h3 id="hashDialogTitle">Full hash</h3>
+    <pre id="hashDialogValue"></pre>
+    <div class="hash-dialog-actions">
+      <button class="btn" id="hashDialogCopy">Copy</button>
+      <button class="btn ghost" id="hashDialogClose">Close</button>
+    </div>
+  </div>
+</dialog>
+
+<footer class="footer">
+  <span>NullTorch Board · hand-built, zero dependencies, runs offline</span>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NullTorch Results</title>
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --card: #1f2833;
+      --fg: #c5c6c7;
+      --muted: #8a8d91;
+      --accent: #45a29e;
+      --accent2: #66fcf1;
+      --good: #2ecc71;
+      --bad: #e74c3c;
+      --warn: #f1c40f;
+      --border: rgba(255,255,255,0.08);
+      color-scheme: dark;
+    }
+    [data-theme="light"] {
+      --bg: #f4f6f8;
+      --card: #ffffff;
+      --fg: #1f2937;
+      --muted: #5b626a;
+      --accent: #0d9488;
+      --accent2: #0f766e;
+      --border: rgba(0,0,0,0.08);
+      color-scheme: light;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+    .wrap {
+      width: min(1200px, 100% - 2rem);
+      margin: 0 auto;
+      padding: 1rem 0;
+    }
+    h1, h2, h3, p { margin: 0 0 0.5rem; }
+    h1 { font-size: 1.6rem; color: var(--accent2); }
+    h2 { font-size: 1.15rem; color: var(--accent2); margin-top: 0; }
+    h3 { font-size: 1rem; color: var(--accent); }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    header.card { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: center; }
+    header p { margin: 0; color: var(--muted); }
+    button, input, select {
+      font: inherit;
+      color: inherit;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.45rem 0.7rem;
+    }
+    button { cursor: pointer; background: var(--accent); color: #000; font-weight: 600; border-color: var(--accent); }
+    button:hover, button:focus { background: var(--accent2); border-color: var(--accent2); }
+    [data-theme="light"] button { color: #fff; }
+    input, select { background: var(--bg); color: var(--fg); }
+    *:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+    input:focus, select:focus, button:focus-visible, summary:focus-visible, .sort-btn:focus-visible, .cell-btn:focus-visible, .chip:focus-visible, .cond-tab:focus-visible {
+      outline: 2px solid var(--accent2);
+      outline-offset: 2px;
+    }
+    .secondary { background: transparent; color: var(--fg); border-color: var(--border); }
+    .secondary:hover { background: rgba(255,255,255,0.06); }
+    .repro {
+      display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.85rem;
+    }
+    .repro .kv { display: inline-flex; align-items: center; gap: 0.4rem; }
+    .repro b { color: var(--muted); font-weight: 600; }
+    .repro code {
+      background: rgba(0,0,0,0.25); padding: 0.15rem 0.4rem; border-radius: 4px;
+      word-break: break-all; max-width: 240px;
+    }
+    [data-theme="light"] .repro code { background: rgba(0,0,0,0.06); }
+    .repro button { padding: 0.2rem 0.45rem; font-size: 0.75rem; }
+    details { margin-top: 0.5rem; }
+    summary { cursor: pointer; color: var(--accent); font-weight: 600; }
+    dl.inline { display: grid; grid-template-columns: auto 1fr; gap: 0.35rem 0.75rem; font-size: 0.85rem; margin: 0.5rem 0 0; }
+    dt { color: var(--muted); }
+    dd { margin: 0; word-break: break-all; font-family: ui-monospace, monospace; }
+    .controls {
+      display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: end;
+    }
+    .controls label { display: flex; flex-direction: column; gap: 0.2rem; font-size: 0.85rem; color: var(--muted); }
+    fieldset { border: 1px solid var(--border); border-radius: 8px; padding: 0.4rem 0.6rem; margin: 0; }
+    legend { font-size: 0.8rem; color: var(--muted); padding: 0 0.3rem; }
+    .chip-group { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .chip {
+      position: relative; cursor: pointer; padding: 0.25rem 0.55rem; border-radius: 999px;
+      border: 1px solid var(--border); background: var(--bg); font-size: 0.85rem;
+    }
+    .chip input { display: none; }
+    [data-theme="light"] .chip.checked { color: #fff; }
+    .badge {
+      display: inline-block; padding: 0.15rem 0.5rem; border-radius: 999px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em;
+    }
+    .badge.dq { background: var(--bad); color: #fff; }
+    .badge.ok { background: var(--good); color: #000; }
+    .badge.warn { background: var(--warn); color: #000; }
+    .table-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th, td { padding: 0.55rem 0.65rem; text-align: left; border-bottom: 1px solid var(--border); white-space: nowrap; }
+    th { background: rgba(0,0,0,0.2); position: sticky; top: 0; font-weight: 600; color: var(--accent2); }
+    [data-theme="light"] th { background: rgba(0,0,0,0.04); }
+    tr:hover td { background: rgba(255,255,255,0.03); }
+    [data-theme="light"] tr:hover td { background: rgba(0,0,0,0.02); }
+    .sort-btn { background: transparent; border: none; color: inherit; padding: 0; font-weight: inherit; display: inline-flex; align-items: center; gap: 0.2rem; }
+    .sort-btn .arrow { opacity: 0.4; font-size: 0.7rem; }
+    .sort-btn[aria-sort="ascending"] .arrow::after { content: "▲"; opacity: 1; }
+    .sort-btn[aria-sort="descending"] .arrow::after { content: "▼"; opacity: 1; }
+    .num { text-align: right; font-variant-numeric: tabular-nums; }
+    .center { text-align: center; }
+    .rvc { color: var(--accent2); font-style: italic; }
+    .tier { font-weight: 700; }
+    .mini-bar {
+      display: inline-block; width: 2.2rem; height: 0.4rem; background: rgba(255,255,255,0.15); border-radius: 2px; vertical-align: middle; margin-left: 0.3rem;
+    }
+    [data-theme="light"] .mini-bar { background: rgba(0,0,0,0.12); }
+    .mini-bar i { display: block; height: 100%; border-radius: 2px; background: var(--good); }
+    .pagination { display: flex; gap: 0.75rem; justify-content: center; margin-top: 0.75rem; flex-wrap: wrap; }
+    .pagination button { padding: 0.35rem 0.7rem; }
+    .pagination .info { align-self: center; color: var(--muted); font-size: 0.85rem; }
+    .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 0.75rem; margin-bottom: 1rem; }
+    .stat { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem; }
+    .stat .label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+    .stat .value { font-size: 1.35rem; font-weight: 700; color: var(--accent2); }
+    .cond-tabs { display: flex; gap: 0.5rem; margin: 1rem 0; flex-wrap: wrap; }
+    .cond-tab { background: var(--bg); color: var(--fg); border-color: var(--border); }
+    .cond-tab[aria-selected="true"] { background: var(--accent); color: #000; border-color: var(--accent); }
+    [data-theme="light"] .cond-tab[aria-selected="true"] { color: #fff; }
+    .heatmap { display: grid; grid-template-columns: auto repeat(3, minmax(90px, 1fr)); gap: 0.5rem; min-width: 360px; }
+    .heatmap > div { padding: 0.5rem; border-radius: 8px; text-align: center; }
+    .heatmap .h { font-weight: 700; color: var(--accent2); background: rgba(0,0,0,0.2); }
+    .cell-btn { width: 100%; min-height: 3.5rem; border: none; background: rgba(255,255,255,0.04); color: var(--fg); border-radius: 8px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.15rem; font-size: 0.85rem; }
+    [data-theme="light"] .cell-btn { background: rgba(0,0,0,0.03); }
+    .cell-btn .frac { font-weight: 700; font-size: 0.95rem; }
+    .cell-btn .pct { font-size: 0.75rem; color: var(--muted); }
+    .cell-btn[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--accent2); }
+    .drill { margin-top: 1rem; padding: 0.75rem; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; }
+    .drill h4 { margin: 0 0 0.5rem; color: var(--accent2); }
+    .cat { display: grid; grid-template-columns: 1fr auto; gap: 0.4rem 0.75rem; align-items: center; margin-bottom: 0.5rem; }
+    .cat .bar { height: 0.5rem; background: rgba(255,255,255,0.12); border-radius: 2px; grid-column: 1 / -1; }
+    [data-theme="light"] .cat .bar { background: rgba(0,0,0,0.1); }
+    .cat .bar i { display: block; height: 100%; border-radius: 2px; background: var(--good); }
+    .compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+    .chart-wrap { overflow-x: auto; }
+    .empty { text-align: center; color: var(--muted); padding: 2rem 1rem; }
+    .danger { background: rgba(231,76,60,0.12); border: 1px solid rgba(231,76,60,0.3); border-radius: 8px; padding: 0.75rem; margin-bottom: 1rem; color: var(--bad); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+    @media (max-width: 640px) {
+      h1 { font-size: 1.3rem; }
+      .repro code { max-width: 160px; }
+      th, td { padding: 0.45rem 0.5rem; font-size: 0.82rem; }
+      .stat .value { font-size: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="card">
+      <div>
+        <h1>NullTorch Benchmark</h1>
+        <p>Results brought to life</p>
+      </div>
+      <button id="themeBtn" class="secondary" aria-label="Toggle theme" title="Toggle light/dark">🌙</button>
+    </header>
+
+    <section class="card" aria-label="Reproducibility">
+      <div class="repro" id="reproBar"></div>
+      <details id="digestDetails">
+        <summary>Container digests</summary>
+        <dl class="inline" id="digestList"></dl>
+      </details>
+    </section>
+
+    <section class="card">
+      <div class="controls">
+        <label>Search models
+          <input type="search" id="search" placeholder="Filter by model name…" autocomplete="off">
+        </label>
+        <fieldset>
+          <legend>Languages</legend>
+          <div class="chip-group" id="langFilter"></div>
+        </fieldset>
+        <fieldset>
+          <legend>Conditions</legend>
+          <div class="chip-group" id="condFilter"></div>
+        </fieldset>
+        <button id="resetFilters" class="secondary">Reset filters</button>
+      </div>
+    </section>
+
+    <section class="card" id="emptyState" hidden>
+      <div class="empty">
+        <p>No benchmark runs found.</p>
+        <p>Load a <code>results.json</code> with at least one model.</p>
+      </div>
+    </section>
+
+    <main id="app" hidden>
+      <section class="card" aria-label="Leaderboard" id="leaderboard">
+        <h2>Leaderboard</h2>
+        <div class="table-wrap">
+          <table id="lbTable">
+            <thead>
+              <tr>
+                <th class="center">#</th>
+                <th><button class="sort-btn" data-col="model_id">Model <span class="arrow"></span></button></th>
+                <th><button class="sort-btn" data-col="language">Lang <span class="arrow"></span></button></th>
+                <th><button class="sort-btn" data-col="condition">Condition <span class="arrow"></span></button></th>
+                <th class="center rvc"><button class="sort-btn" data-col="rvc">RVC <span class="arrow"></span></button></th>
+                <th class="center"><button class="sort-btn" data-col="T1">T1 <span class="arrow"></span></button></th>
+                <th class="center"><button class="sort-btn" data-col="T2">T2 <span class="arrow"></span></button></th>
+                <th class="center"><button class="sort-btn" data-col="T3">T3 <span class="arrow"></span></button></th>
+                <th class="center"><button class="sort-btn" data-col="T4">T4 <span class="arrow"></span></button></th>
+                <th class="center"><button class="sort-btn" data-col="T5">T5 <span class="arrow"></span></button></th>
+                <th class="center"><button class="sort-btn" data-col="T6">T6 <span class="arrow"></span></button></th>
+                <th class="center"><button class="sort-btn" data-col="correctness">Correct <span class="arrow"></span></button></th>
+                <th class="center"><button class="sort-btn" data-col="robustness">Robust <span class="arrow"></span></button></th>
+                <th class="center">View</th>
+              </tr>
+            </thead>
+            <tbody id="lbBody"></tbody>
+          </table>
+        </div>
+        <div class="pagination" id="lbPage"></div>
+      </section>
+
+      <section class="card" aria-label="Model detail" id="modelDetail">
+        <h2>Model Detail</h2>
+        <div class="controls" style="margin-bottom:1rem;">
+          <label>Model
+            <select id="modelSelect"></select>
+          </label>
+        </div>
+        <div id="modelSummary"></div>
+
+        <h3>Tier Heatmap</h3>
+        <div class="cond-tabs" role="tablist" aria-label="Condition" id="condTabs"></div>
+        <div class="table-wrap" id="heatmapWrap"></div>
+
+        <div id="drillDown" class="drill" hidden>
+          <h4 id="drillTitle"></h4>
+          <div id="drillBody"></div>
+        </div>
+
+        <h3 style="margin-top:1rem;">Iteration Progress</h3>
+        <div class="chart-wrap" id="progressChart"></div>
+      </section>
+
+      <section class="card" aria-label="Memorization gap" id="memGap">
+        <h2>Memorization Gap</h2>
+        <p style="color:var(--muted); font-size:0.85rem; margin-top:-0.25rem;">Stock (open book, or closed book) average pass rate on T1–T6 minus delta average pass rate on T1–T6, in percentage points.</p>
+        <div class="table-wrap">
+          <table id="gapTable">
+            <thead>
+              <tr>
+                <th>Language</th>
+                <th>Stock condition</th>
+                <th>Stock rate (T1–T6)</th>
+                <th>Delta rate (T1–T6)</th>
+                <th>Gap</th>
+              </tr>
+            </thead>
+            <tbody id="gapBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card" aria-label="Compare" id="compare">
+        <h2>Compare Models</h2>
+        <div class="controls" style="margin-bottom:1rem;">
+          <label>Model A
+            <select id="compareA"></select>
+          </label>
+          <label>Model B
+            <select id="compareB"></select>
+          </label>
+        </div>
+        <div id="compareWrap"></div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const TIER_ORDER = ['RVC', 'T1', 'T2', 'T3', 'T4', 'T5', 'T6'];
+      const LANGS = ['go', 'rust', 'cpp'];
+      const CONDS = ['open_book', 'closed_book', 'delta'];
+      const COND_LABEL = { open_book: 'Open Book', closed_book: 'Closed Book', delta: 'Delta' };
+      const PAGE_SIZE = 50;
+
+      const $ = (sel) => document.querySelector(sel);
+      const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+
+      const state = {
+        data: null,
+        models: new Map(),
+        allRuns: [],
+        filtered: [],
+        sort: { col: 'correctness', dir: -1 },
+        filters: { q: '', langs: new Set(LANGS), conds: new Set(CONDS) },
+        page: 0,
+        selectedModel: null,
+        selectedCondition: 'open_book',
+        selectedDrill: null
+      };
+
+      function esc(s) {
+        return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+      }
+
+      function fmtPct(n, digits) {
+        if (n == null || !isFinite(n)) return '—';
+        return (n * 100).toFixed(digits == null ? 1 : digits) + '%';
+      }
+
+      function fmtRate(pass, total, digits) {
+        if (total == null || total === 0) return '—';
+        return (pass / total * 100).toFixed(digits == null ? 1 : digits) + '%';
+      }
+
+      function colorClass(rate) {
+        if (rate == null) return '';
+        if (rate >= 0.8) return 'ok';
+        if (rate >= 0.5) return 'warn';
+        return 'bad';
+      }
+
+      function cellBg(rate) {
+        if (rate == null || !isFinite(rate)) return 'transparent';
+        const r = Math.min(255, Math.round((1 - rate) * 510));
+        const g = Math.min(255, Math.round(rate * 510));
+        return `rgba(${r}, ${g}, 80, 0.18)`;
+      }
+
+      function aggregate(run) {
+        const t = run.tiers || {};
+        const out = { exec: 0 };
+        for (const k of TIER_ORDER) {
+          const tier = t[k];
+          if (tier) out[k] = { pass: tier.pass, total: tier.total, rate: tier.total ? tier.pass / tier.total : 0 };
+          else out[k] = null;
+        }
+        let cp = 0, ct = 0;
+        for (const k of ['T1', 'T2', 'T3', 'T4', 'T5']) {
+          cp += (t[k]?.pass || 0);
+          ct += (t[k]?.total || 0);
+        }
+        out.correctness = ct ? cp / ct : null;
+        out.correctnessPass = cp;
+        out.correctnessTotal = ct;
+        out.robustness = t.T6?.total ? t.T6.pass / t.T6.total : null;
+        out.robustnessPass = t.T6?.pass || 0;
+        out.robustnessTotal = t.T6?.total || 0;
+        out.exec = run.t6_incidents?.exec_attempts || 0;
+        return out;
+      }
+
+      function buildState(data) {
+        state.data = data;
+        state.allRuns = (data && data.runs) || [];
+        state.models = new Map();
+        for (const run of state.allRuns) {
+          const m = state.models.get(run.model_id) || {
+            id: run.model_id,
+            runs: new Map(),
+            languages: new Set(),
+            conditions: new Set(),
+            disqualified: false
+          };
+          m.runs.set(run.language + '-' + run.condition, run);
+          m.languages.add(run.language);
+          m.conditions.add(run.condition);
+          if ((run.t6_incidents?.exec_attempts || 0) > 0) m.disqualified = true;
+          state.models.set(run.model_id, m);
+        }
+        const ids = Array.from(state.models.keys()).sort();
+        state.selectedModel = ids[0] || null;
+        state.selectedCondition = 'open_book';
+        state.selectedDrill = null;
+      }
+
+      function loadJSON(url, cb) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200 || xhr.status === 0) {
+              try { cb(null, JSON.parse(xhr.responseText)); }
+              catch (e) { cb(e); }
+            } else {
+              cb(new Error('HTTP ' + xhr.status + ' for ' + url));
+            }
+          }
+        };
+        xhr.onerror = () => cb(new Error('Network error for ' + url));
+        xhr.send();
+      }
+
+      function tryLoad(urls, cb) {
+        let i = 0;
+        function next(err) {
+          if (i >= urls.length) return cb(err || new Error('No results.json found'));
+          loadJSON(urls[i++], (err2, data) => {
+            if (!err2) return cb(null, data);
+            next(err2);
+          });
+        }
+        next();
+      }
+
+      function init() {
+        tryLoad(['results.json', '../results.json'], (err, data) => {
+          if (err) {
+            console.error(err);
+            document.body.innerHTML = '<div class="wrap"><div class="card empty"><p>Could not load <code>results.json</code>.</p><p>' + esc(err.message) + '</p></div></div>';
+            return;
+          }
+          buildState(data);
+          renderFilters();
+          bindGlobal();
+          if (state.allRuns.length === 0) {
+            $('#emptyState').hidden = false;
+            $('#app').hidden = true;
+            renderRepro();
+          } else {
+            $('#emptyState').hidden = true;
+            $('#app').hidden = false;
+            renderRepro();
+            renderSelectors();
+            applyFilters();
+            renderModelDetail();
+            renderGap();
+            renderCompare();
+          }
+        });
+      }
+
+      function renderRepro() {
+        const m = state.data || {};
+        const entries = Object.entries(m.container_digests || {}).sort((a, b) => a[0].localeCompare(b[0]));
+        const first = entries[0];
+        const fixtureHash = m.fixture_set_hash || '—';
+        const digestHtml = first
+          ? `<span class="kv"><b>Digest</b> <code title="${esc(first[1])}">${esc(first[0])}: ${esc(first[1].slice(0, 20))}…</code></span>`
+          : `<span class="kv"><b>Digest</b> <span style="color:var(--muted)">No container digests</span></span>`;
+        $('#reproBar').innerHTML = `
+          <span class="kv"><b>Benchmark</b> <code>${esc(m.benchmark_version || '—')}</code></span>
+          <span class="kv"><b>Harness</b> <code>${esc(m.harness_version || '—')}</code></span>
+          <span class="kv"><b>Fixture</b> <code title="${esc(fixtureHash)}">${esc(fixtureHash.length > 28 ? fixtureHash.slice(0, 28) + '…' : fixtureHash)}</code></span>
+          ${digestHtml}
+          <button class="secondary" id="copyFixture" title="Copy fixture hash">Copy</button>
+        `;
+        $('#copyFixture')?.addEventListener('click', () => {
+          try { navigator.clipboard.writeText(fixtureHash); } catch (e) {}
+        });
+        $('#digestList').innerHTML = entries.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('');
+      }
+      function renderFilters() {
+        const renderChips = (containerId, values, activeSet) => {
+          const el = $('#' + containerId);
+          el.innerHTML = values.map(v => {
+            const checked = activeSet.has(v) ? 'checked' : '';
+            const cls = activeSet.has(v) ? 'chip checked' : 'chip';
+            return `<label class="${cls}" tabindex="0" role="checkbox" aria-checked="${activeSet.has(v)}" data-value="${esc(v)}">
+              <input type="checkbox" value="${esc(v)}" ${checked}>
+              <span>${esc(v)}</span>
+            </label>`;
+          }).join('');
+          for (const label of el.querySelectorAll('label')) {
+            const input = label.querySelector('input');
+            input.addEventListener('change', () => {
+              const val = input.value;
+              if (containerId === 'langFilter') {
+                if (state.filters.langs.has(val)) state.filters.langs.delete(val); else state.filters.langs.add(val);
+              } else {
+                if (state.filters.conds.has(val)) state.filters.conds.delete(val); else state.filters.conds.add(val);
+              }
+              renderFilters();
+              applyFilters();
+            });
+            label.addEventListener('keydown', (e) => {
+              if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); input.click(); }
+            });
+          }
+        };
+        renderChips('langFilter', LANGS, state.filters.langs);
+        renderChips('condFilter', CONDS, state.filters.conds);
+      }
+
+      function bindGlobal() {
+        $('#search').addEventListener('input', (e) => {
+          state.filters.q = e.target.value.trim().toLowerCase();
+          state.page = 0;
+          applyFilters();
+        });
+        $('#resetFilters').addEventListener('click', () => {
+          state.filters.q = '';
+          state.filters.langs = new Set(LANGS);
+          state.filters.conds = new Set(CONDS);
+          $('#search').value = '';
+          state.page = 0;
+          renderFilters();
+          applyFilters();
+        });
+        $('#themeBtn').addEventListener('click', () => {
+          const html = document.documentElement;
+          const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+          html.setAttribute('data-theme', next);
+        });
+      }
+
+      function renderSelectors() {
+        const ids = Array.from(state.models.keys()).sort();
+        const opts = ids.map(id => `<option value="${esc(id)}">${esc(id)}${state.models.get(id).disqualified ? ' [DQ]' : ''}</option>`).join('');
+        $('#modelSelect').innerHTML = opts;
+        $('#compareA').innerHTML = opts;
+        $('#compareB').innerHTML = ids.length > 1 ? opts : '<option value="">—</option>';
+        if (ids.length > 1) $('#compareB').value = ids[1];
+        $('#modelSelect').value = state.selectedModel || ids[0];
+        $('#modelSelect').addEventListener('change', (e) => { state.selectedModel = e.target.value; state.selectedDrill = null; renderModelDetail(); renderGap(); });
+        $('#compareA').addEventListener('change', renderCompare);
+        $('#compareB').addEventListener('change', renderCompare);
+      }
+
+      function getSortValue(item) {
+        const run = item.run;
+        const col = item.col;
+        if (col === 'model_id' || col === 'model') return run.model_id || '';
+        if (['language', 'condition'].includes(col)) return run[col] || '';
+        const agg = aggregate(run);
+        if (col === 'rvc') {
+          const rvc = run.tiers?.RVC;
+          return rvc ? rvc.pass / rvc.total : -1;
+        }
+        if (col === 'correctness') return agg.correctness == null ? -1 : agg.correctness;
+        if (col === 'robustness') return agg.robustness == null ? -1 : agg.robustness;
+        if (/^T[1-6]$/.test(col)) {
+          const t = run.tiers?.[col];
+          return t ? t.pass / t.total : -1;
+        }
+        return 0;
+      }
+
+      function applyFilters() {
+        const q = state.filters.q;
+        state.filtered = state.allRuns.filter(r => {
+          if (!state.filters.langs.has(r.language)) return false;
+          if (!state.filters.conds.has(r.condition)) return false;
+          if (q && !r.model_id.toLowerCase().includes(q)) return false;
+          return true;
+        });
+        state.filtered.sort((a, b) => {
+          let va = getSortValue({ col: state.sort.col, run: a });
+          let vb = getSortValue({ col: state.sort.col, run: b });
+          if (typeof va === 'string' && typeof vb === 'string') {
+            return va.localeCompare(vb) * state.sort.dir;
+          }
+          if (va == null) va = -1; if (vb == null) vb = -1;
+          if (va === vb) return a.model_id.localeCompare(b.model_id);
+          return (va > vb ? 1 : -1) * state.sort.dir;
+        });
+        renderLeaderboard();
+      }
+
+      function renderLeaderboard() {
+        const start = state.page * PAGE_SIZE;
+        const pageRows = state.filtered.slice(start, start + PAGE_SIZE);
+        const totalPages = Math.max(1, Math.ceil(state.filtered.length / PAGE_SIZE));
+        const tbody = $('#lbBody');
+        tbody.innerHTML = pageRows.map((r, i) => {
+          const rank = start + i + 1;
+          const agg = aggregate(r);
+          const m = state.models.get(r.model_id);
+          const dq = m && m.disqualified ? '<span class="badge dq">DQ</span>' : '';
+          const rvc = r.tiers?.RVC;
+          const rvcHtml = rvc ? `<span title="${fmtRate(rvc.pass, rvc.total, 1)}">${rvc.pass}/${rvc.total}</span>` : (r.condition === 'delta' ? '<span class="rvc">n/a</span>' : '<span class="rvc">—</span>');
+          const cells = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6'].map(t => {
+            const tier = r.tiers?.[t];
+            if (!tier || tier.total === 0) return `<td class="center">—</td>`;
+            return `<td class="center" title="${fmtRate(tier.pass, tier.total, 1)}"><span class="tier">${tier.pass}/${tier.total}</span></td>`;
+          }).join('');
+          return `<tr>
+            <td class="center num">${rank}</td>
+            <td><strong>${esc(r.model_id)}</strong> ${dq}</td>
+            <td>${esc(r.language)}</td>
+            <td>${esc(COND_LABEL[r.condition])}</td>
+            <td class="center rvc">${rvcHtml}</td>
+            ${cells}
+            <td class="center num">${agg.correctness == null ? '—' : fmtRate(agg.correctnessPass, agg.correctnessTotal, 1)}</td>
+            <td class="center num">${agg.robustness == null ? '—' : fmtRate(agg.robustnessPass, agg.robustnessTotal, 1)}</td>
+            <td class="center"><button class="secondary" data-model="${esc(r.model_id)}" data-cond="${esc(r.condition)}">View</button></td>
+          </tr>`;
+        }).join('');
+        tbody.querySelectorAll('button[data-model]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            state.selectedModel = btn.dataset.model;
+            state.selectedCondition = btn.dataset.cond;
+            state.selectedDrill = null;
+            $('#modelSelect').value = state.selectedModel;
+            renderModelDetail();
+            renderGap();
+            $('#modelDetail').scrollIntoView({ behavior: 'smooth' });
+          });
+        });
+
+        const heads = $$('#lbTable thead .sort-btn');
+        heads.forEach(btn => {
+          const col = btn.dataset.col;
+          btn.setAttribute('aria-sort', state.sort.col === col ? (state.sort.dir === 1 ? 'ascending' : 'descending') : 'none');
+          btn.onclick = () => {
+            if (state.sort.col === col) state.sort.dir *= -1;
+            else { state.sort.col = col; state.sort.dir = -1; }
+            state.page = 0;
+            applyFilters();
+          };
+        });
+
+        const pg = $('#lbPage');
+        let pgHtml = '';
+        if (totalPages > 1) {
+          pgHtml += `<button class="secondary" ${state.page === 0 ? 'disabled' : ''}>Prev</button>`;
+          pgHtml += `<span class="info">Page ${state.page + 1} / ${totalPages}</span>`;
+          pgHtml += `<button class="secondary" ${state.page + 1 >= totalPages ? 'disabled' : ''}>Next</button>`;
+        }
+        pg.innerHTML = pgHtml;
+        const [prev, next] = pg.querySelectorAll('button');
+        if (prev) prev.addEventListener('click', () => { state.page = Math.max(0, state.page - 1); renderLeaderboard(); });
+        if (next) next.addEventListener('click', () => { state.page = Math.min(totalPages - 1, state.page + 1); renderLeaderboard(); });
+      }
+
+      function renderModelDetail() {
+        const model = state.models.get(state.selectedModel);
+        if (!model) { $('#modelSummary').innerHTML = '<p class="empty">Select a model to view details.</p>'; return; }
+        const aggByRun = Array.from(model.runs.values()).map(aggregate);
+        const totalCorrectPass = aggByRun.reduce((s, a) => s + (a.correctnessPass || 0), 0);
+        const totalCorrectTotal = aggByRun.reduce((s, a) => s + (a.correctnessTotal || 0), 0);
+        const totalRobustPass = aggByRun.reduce((s, a) => s + (a.robustnessPass || 0), 0);
+        const totalRobustTotal = aggByRun.reduce((s, a) => s + (a.robustnessTotal || 0), 0);
+        const totalExec = Array.from(model.runs.values()).reduce((s, r) => s + (r.t6_incidents?.exec_attempts || 0), 0);
+        const banner = model.disqualified ? `<div class="danger">This model is disqualified: ${totalExec} hostile pickle execution attempt(s).</div>` : '';
+        $('#modelSummary').innerHTML = banner + `
+          <div class="summary-grid">
+            <div class="stat"><div class="label">Model</div><div class="value" style="font-size:1rem; word-break:break-word;">${esc(model.id)}</div></div>
+            <div class="stat"><div class="label">Languages</div><div class="value">${Array.from(model.languages).join(', ')}</div></div>
+            <div class="stat"><div class="label">Conditions</div><div class="value">${Array.from(model.conditions).map(c => COND_LABEL[c]).join(', ')}</div></div>
+            <div class="stat"><div class="label">Correctness (T1–T5)</div><div class="value">${fmtRate(totalCorrectPass, totalCorrectTotal, 1)}</div></div>
+            <div class="stat"><div class="label">Robustness (T6)</div><div class="value">${fmtRate(totalRobustPass, totalRobustTotal, 1)}</div></div>
+            <div class="stat"><div class="label">T6 exec attempts</div><div class="value" style="color:${totalExec ? 'var(--bad)' : 'var(--good)'}">${totalExec}</div></div>
+          </div>
+        `;
+
+        $('#condTabs').innerHTML = CONDS.map(c => {
+          const sel = state.selectedCondition === c ? 'true' : 'false';
+          const cls = state.selectedCondition === c ? 'cond-tab' : 'cond-tab secondary';
+          return `<button class="${cls}" role="tab" aria-selected="${sel}" data-cond="${esc(c)}">${esc(COND_LABEL[c])}</button>`;
+        }).join('');
+        $('#condTabs').querySelectorAll('button').forEach(btn => {
+          btn.addEventListener('click', () => { state.selectedCondition = btn.dataset.cond; state.selectedDrill = null; renderModelDetail(); renderGap(); });
+        });
+
+        const rows = TIER_ORDER.map(tier => {
+          const header = `<div class="h">${esc(tier)}</div>`;
+          const cells = LANGS.map(lang => {
+            const run = model.runs.get(lang + '-' + state.selectedCondition);
+            if (tier === 'RVC' && (state.selectedCondition === 'delta' || !run || !run.tiers || !run.tiers.RVC)) {
+              return `<button class="cell-btn" disabled><span class="frac">n/a</span></button>`;
+            }
+            if (!run || !run.tiers || !run.tiers[tier]) {
+              return `<button class="cell-btn" disabled><span class="frac">—</span></button>`;
+            }
+            const t = run.tiers[tier];
+            const rate = t.total ? t.pass / t.total : null;
+            const selected = state.selectedDrill && state.selectedDrill.tier === tier && state.selectedDrill.lang === lang ? 'true' : 'false';
+            return `<button class="cell-btn" style="background:${cellBg(rate)}" aria-pressed="${selected}" data-tier="${esc(tier)}" data-lang="${esc(lang)}">
+              <span class="frac">${t.pass}/${t.total}</span>
+              <span class="pct">${fmtRate(t.pass, t.total, 0)}</span>
+            </button>`;
+          }).join('');
+          return header + cells;
+        }).join('');
+        $('#heatmapWrap').innerHTML = `
+          <div class="heatmap" role="grid" aria-label="Tier heatmap">
+            <div class="h">Tier \ Lang</div>
+            <div class="h">Go</div><div class="h">Rust</div><div class="h">C++</div>
+            ${rows}
+          </div>
+        `;
+        $('#heatmapWrap').querySelectorAll('.cell-btn:not([disabled])').forEach(btn => {
+          btn.addEventListener('click', () => {
+            state.selectedDrill = { lang: btn.dataset.lang, tier: btn.dataset.tier };
+            renderModelDetail();
+            renderDrill();
+          });
+        });
+
+        if (state.selectedDrill) renderDrill(); else $('#drillDown').hidden = true;
+        renderProgress();
+      }
+
+      function renderDrill() {
+        const model = state.models.get(state.selectedModel);
+        if (!model || !state.selectedDrill) return;
+        const run = model.runs.get(state.selectedDrill.lang + '-' + state.selectedCondition);
+        if (!run) return;
+        const tier = run.tiers?.[state.selectedDrill.tier];
+        if (!tier) return;
+        $('#drillDown').hidden = false;
+        $('#drillTitle').textContent = `${esc(model.id)} · ${esc(state.selectedDrill.lang)} · ${esc(COND_LABEL[state.selectedCondition])} · ${esc(state.selectedDrill.tier)} — ${tier.pass}/${tier.total}`;
+        const cats = tier.categories || {};
+        const names = Object.keys(cats).sort();
+        if (!names.length) {
+          $('#drillBody').innerHTML = '<p class="empty">No category breakdown available.</p>';
+          return;
+        }
+        $('#drillBody').innerHTML = names.map(name => {
+          const c = cats[name];
+          const rate = c.total ? c.pass / c.total : 0;
+          const fail = c.pass < c.total;
+          return `<div class="cat">
+            <div><strong>${esc(name)}</strong> ${fail ? '<span class="badge warn">failing</span>' : ''}</div>
+            <div class="num">${c.pass}/${c.total} · ${fmtRate(c.pass, c.total, 1)}</div>
+            <div class="bar"><i style="width:${Math.max(0, Math.min(100, rate*100))}%; background:${rate >= 1 ? 'var(--good)' : (rate >= 0.5 ? 'var(--warn)' : 'var(--bad)')}"></i></div>
+          </div>`;
+        }).join('');
+        $('#drillDown').focus();
+      }
+
+      function renderProgress() {
+        const model = state.models.get(state.selectedModel);
+        const svgW = 500, svgH = 120;
+        const colors = { go: '#2ecc71', rust: '#f1c40f', cpp: '#3498db' };
+        let series = [];
+        for (const lang of LANGS) {
+          const run = model?.runs.get(lang + '-' + state.selectedCondition);
+          if (!run || !run.iterations || !run.iterations.length) continue;
+          const totals = { T1: run.tiers?.T1?.total||0, T2: run.tiers?.T2?.total||0, T3: run.tiers?.T3?.total||0, T4: run.tiers?.T4?.total||0, T5: run.tiers?.T5?.total||0 };
+          const total = Object.values(totals).reduce((a, b) => a + b, 0);
+          if (!total) continue;
+          const points = run.iterations.map((it, i) => {
+            const pass = ['T1', 'T2', 'T3', 'T4', 'T5'].reduce((s, t) => s + (it.tier_passes?.[t] || 0), 0);
+            const x = (i / Math.max(1, run.iterations.length - 1)) * svgW;
+            const y = svgH - (pass / total) * svgH;
+            return `${x},${y}`;
+          }).join(' ');
+          series.push({ lang, color: colors[lang], points });
+        }
+        if (!series.length) {
+          $('#progressChart').innerHTML = '<p class="empty">No iteration data for this condition.</p>';
+          return;
+        }
+        const polylines = series.map(s => `<polyline fill="none" stroke="${s.color}" stroke-width="2.5" points="${s.points}"/>`).join('');
+        const legend = series.map(s => `<span style="color:${s.color}">● ${esc(s.lang)}</span>`).join(' ');
+        $('#progressChart').innerHTML = `
+          <svg viewBox="0 0 ${svgW} ${svgH}" preserveAspectRatio="xMidYMid meet" style="width:100%; min-width:320px; height:auto;" aria-label="Iteration progress chart">
+            <rect x="0" y="0" width="${svgW}" height="${svgH}" fill="none" stroke="var(--border)" stroke-width="1"/>
+            ${polylines}
+          </svg>
+          <p style="font-size:0.85rem; color:var(--muted); margin-top:0.5rem;">${legend}</p>
+        `;
+      }
+
+      function computeGap(model, lang) {
+        const stock = model.runs.get(lang + '-open_book') || model.runs.get(lang + '-closed_book');
+        const delta = model.runs.get(lang + '-delta');
+        if (!stock || !delta) return null;
+        const stockPass = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6'].reduce((s, t) => s + (stock.tiers[t]?.pass || 0), 0);
+        const stockTotal = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6'].reduce((s, t) => s + (stock.tiers[t]?.total || 0), 0);
+        const deltaPass = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6'].reduce((s, t) => s + (delta.tiers[t]?.pass || 0), 0);
+        const deltaTotal = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6'].reduce((s, t) => s + (delta.tiers[t]?.total || 0), 0);
+        if (!stockTotal || !deltaTotal) return null;
+        const stockRate = stockPass / stockTotal;
+        const deltaRate = deltaPass / deltaTotal;
+        return { stockCond: stock.condition, stockRate, deltaRate, gap: stockRate - deltaRate, stockPass, stockTotal, deltaPass, deltaTotal };
+      }
+
+      function renderGap() {
+        const model = state.models.get(state.selectedModel);
+        const tbody = $('#gapBody');
+        if (!model) { tbody.innerHTML = '<tr><td colspan="5" class="empty">—</td></tr>'; return; }
+        tbody.innerHTML = LANGS.map(lang => {
+          const g = computeGap(model, lang);
+          if (!g) return `<tr><td>${esc(lang)}</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>`;
+          const sign = g.gap >= 0 ? '+' : '';
+          const w = Math.max(0, Math.min(100, Math.abs(g.gap) * 100));
+          const color = g.gap >= 0 ? 'var(--bad)' : 'var(--good)'; // positive gap means memorization (stock higher than delta)
+          return `<tr>
+            <td>${esc(lang)}</td>
+            <td>${esc(COND_LABEL[g.stockCond])}</td>
+            <td class="num">${fmtRate(g.stockPass, g.stockTotal, 1)}</td>
+            <td class="num">${fmtRate(g.deltaPass, g.deltaTotal, 1)}</td>
+            <td class="num" data-gap="${(g.gap * 100).toFixed(3)}">
+              <strong>${sign}${fmtPct(g.gap, 1)}</strong>
+              <div class="mini-bar"><i style="width:${w}%; background:${color}"></i></div>
+            </td>
+          </tr>`;
+        }).join('');
+      }
+
+      function renderCompare() {
+        const ids = Array.from(state.models.keys()).sort();
+        if (ids.length < 2) {
+          $('#compareWrap').innerHTML = '<p class="empty">Need at least two models to compare.</p>';
+          return;
+        }
+        const a = $('#compareA').value || ids[0];
+        const b = $('#compareB').value || ids[1];
+        $('#compareA').value = a; $('#compareB').value = b;
+        const ma = state.models.get(a), mb = state.models.get(b);
+        $('#compareWrap').innerHTML = [ma, mb].map((m, idx) => {
+          const runs = Array.from(m.runs.values());
+          const aggAll = runs.map(aggregate);
+          const cp = aggAll.reduce((s, x) => s + x.correctnessPass, 0);
+          const ct = aggAll.reduce((s, x) => s + x.correctnessTotal, 0);
+          const rp = aggAll.reduce((s, x) => s + x.robustnessPass, 0);
+          const rt = aggAll.reduce((s, x) => s + x.robustnessTotal, 0);
+          const exec = runs.reduce((s, r) => s + (r.t6_incidents?.exec_attempts || 0), 0);
+          const gapInfo = LANGS.map(lang => {
+            const g = computeGap(m, lang);
+            if (!g) return `<li>${esc(lang)}: no delta pair</li>`;
+            return `<li>${esc(lang)}: ${(g.gap >= 0 ? '+' : '') + fmtPct(g.gap, 1)}</li>`;
+          }).join('');
+          return `<div class="card" style="margin-bottom:0;">
+            <h3>${esc(m.id)} ${m.disqualified ? '<span class="badge dq">DQ</span>' : ''}</h3>
+            <div class="summary-grid" style="grid-template-columns:repeat(auto-fit, minmax(100px,1fr));">
+              <div class="stat"><div class="label">Correctness</div><div class="value">${fmtRate(cp, ct, 1)}</div></div>
+              <div class="stat"><div class="label">Robustness</div><div class="value">${fmtRate(rp, rt, 1)}</div></div>
+              <div class="stat"><div class="label">Exec attempts</div><div class="value" style="color:${exec ? 'var(--bad)' : 'var(--good)'}">${exec}</div></div>
+            </div>
+            <h4>Gaps</h4>
+            <ul style="font-size:0.9rem; margin:0; padding-left:1.2rem; color:var(--fg);">${gapInfo}</ul>
+          </div>`;
+        }).join('');
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>

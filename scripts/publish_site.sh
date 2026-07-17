@@ -32,7 +32,7 @@ fi
 # copy the site into the repo root (never touch .git / CNAME / .nojekyll / the
 # benchmark dirs). The site's own files land at root; Pages serves them.
 echo "== copying $SRC -> repo root =="
-rsync -a --exclude='.git' "$SRC"/ "$ROOT"/
+rsync -a --exclude='.git' --exclude='SHOWCASE_BRIEF.md' "$SRC"/ "$ROOT"/
 cp "$ROOT/harness/example_results.json" "$ROOT/results.json"
 
 git add -A

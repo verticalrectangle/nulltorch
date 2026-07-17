@@ -1,0 +1,76 @@
+{
+  "title": "NullTorch \u2014 model dashboards",
+  "note": "Each model built a dashboard of the SAME results.json; compare presentations. Per model: code_composite (mechanical), elegance (/30, judge-based), and overall (0.6*mech + 0.4*elegance, same as scripts/score.py) \u2014 rank the exhibits by overall.",
+  "models": [
+    {
+      "model": "swe-1.7",
+      "dashboard": "dashboards/swe-1.7/index.html",
+      "gate": "pass",
+      "code_composite": 100.0,
+      "correct": 100.0,
+      "robust": 100.0,
+      "elegance": 26.5,
+      "overall": 95.3
+    },
+    {
+      "model": "glm-5.2",
+      "dashboard": "dashboards/glm-5.2/index.html",
+      "gate": "pass",
+      "code_composite": 100.0,
+      "correct": 100.0,
+      "robust": 100.0,
+      "elegance": 25.5,
+      "overall": 94.0
+    },
+    {
+      "model": "kimi-3",
+      "dashboard": "dashboards/kimi-3/index.html",
+      "gate": "pass",
+      "code_composite": 100.0,
+      "correct": 100.0,
+      "robust": 100.0,
+      "elegance": 25.0,
+      "overall": 93.3
+    },
+    {
+      "model": "gpt-sol",
+      "dashboard": "dashboards/gpt-sol/index.html",
+      "gate": "pass",
+      "code_composite": 95.7,
+      "correct": 100.0,
+      "robust": 85.7,
+      "elegance": 24.5,
+      "overall": 90.1
+    },
+    {
+      "model": "grok-4.5",
+      "dashboard": "dashboards/grok-4.5/index.html",
+      "gate": "pass",
+      "code_composite": 91.4,
+      "correct": 100.0,
+      "robust": 71.4,
+      "elegance": 23.0,
+      "overall": 85.5
+    },
+    {
+      "model": "fable-cpp",
+      "dashboard": "dashboards/fable-cpp/index.html",
+      "gate": "pass",
+      "code_composite": 91.4,
+      "correct": 100.0,
+      "robust": 71.4,
+      "elegance": 20.0,
+      "overall": 81.5
+    },
+    {
+      "model": "gpt-luna",
+      "dashboard": "dashboards/gpt-luna/index.html",
+      "gate": "pass",
+      "code_composite": 97.3,
+      "correct": 96.1,
+      "robust": 100.0,
+      "elegance": 9.0,
+      "overall": 70.4
+    }
+  ]
+}

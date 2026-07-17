@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NullTorch — model dashboards</title>
+<meta name="description" content="Gallery of per-model dashboards over the same NullTorch results.json — compare presentations, ranked by overall score.">
+<style>
+  /* ── Rose Pine palettes ───────────────────────────────────────────── */
+  :root {
+    color-scheme: light;
+    --base: #faf4ed; --surface: #fffaf3; --overlay: #f2e9e1;
+    --text: #575279; --subtle: #797593; --muted: #9893a5;
+    --love: #b4637a; --gold: #ea9d34; --rose: #d7827e;
+    --pine: #286983; --foam: #56949f; --iris: #907aa9;
+    --hl-med: #dfdad9;
+    --shadow: 0 1px 2px rgba(87, 82, 121, .06), 0 4px 16px rgba(87, 82, 121, .08);
+  }
+  html[data-theme="dark"] {
+    color-scheme: dark;
+    --base: #191724; --surface: #1f1d2e; --overlay: #26233a;
+    --text: #e0def4; --subtle: #908caa; --muted: #6e6a86;
+    --love: #eb6f92; --gold: #f6c177; --rose: #ebbcba;
+    --pine: #31748f; --foam: #9ccfd8; --iris: #c4a7e7;
+    --hl-med: #403d52;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 4px 18px rgba(0, 0, 0, .35);
+  }
+
+  /* ── Base ─────────────────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { overflow-x: clip; }
+  body {
+    margin: 0;
+    background: var(--base);
+    color: var(--text);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    overflow-x: clip;
+    transition: background-color .2s ease, color .2s ease;
+  }
+  .wrap { max-width: 1680px; margin: 0 auto; padding: 0 clamp(12px, 3vw, 40px); }
+
+  /* ── Header ───────────────────────────────────────────────────────── */
+  header.site {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px 20px;
+    padding: clamp(22px, 4vw, 44px) 0 18px;
+  }
+  .brand h1 {
+    margin: 0; font-size: clamp(22px, 3vw, 30px); font-weight: 700; letter-spacing: -.01em;
+  }
+  .brand h1 .null { color: var(--pine); }
+  .brand h1 .torch { color: var(--love); }
+  .brand p { margin: 4px 0 0; color: var(--subtle); max-width: 70ch; font-size: 14px; }
+
+  button.theme {
+    appearance: none; border: 1px solid var(--hl-med); background: var(--surface);
+    color: var(--text); border-radius: 999px; padding: 8px 14px; cursor: pointer;
+    font: inherit; font-size: 13px; display: inline-flex; align-items: center; gap: 8px;
+    box-shadow: var(--shadow); transition: border-color .15s ease, background-color .2s ease;
+  }
+  button.theme:hover { border-color: var(--foam); }
+  button.theme:focus-visible, a.btn:focus-visible, button.btn:focus-visible {
+    outline: 2px solid var(--iris); outline-offset: 2px;
+  }
+  .theme .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--gold); }
+  html[data-theme="dark"] .theme .dot { background: var(--iris); }
+
+  /* ── Grid ─────────────────────────────────────────────────────────── */
+  main.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 34rem), 1fr));
+    gap: clamp(14px, 2vw, 26px);
+    padding: 10px 0 30px;
+  }
+
+  /* ── Exhibit card ─────────────────────────────────────────────────── */
+  figure.card {
+    margin: 0; background: var(--surface); border: 1px solid var(--hl-med);
+    border-radius: 14px; overflow: clip; box-shadow: var(--shadow);
+    display: flex; flex-direction: column;
+    transition: background-color .2s ease, border-color .2s ease;
+  }
+  .card header {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    padding: 12px 16px 8px;
+  }
+  .rank { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; min-width: 2.2ch; }
+  .name { font-weight: 650; font-size: 16px; letter-spacing: .01em; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  .badge {
+    font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    padding: 2px 9px; border-radius: 999px; border: 1px solid transparent;
+  }
+  .badge.pass    { color: var(--pine); border-color: var(--pine); background: color-mix(in srgb, var(--pine) 10%, transparent); }
+  .badge.fail    { color: var(--love); border-color: var(--love); background: color-mix(in srgb, var(--love) 10%, transparent); }
+  .badge.pending { color: var(--gold); border-color: var(--gold); background: color-mix(in srgb, var(--gold) 12%, transparent); }
+  .card header .spacer { flex: 1; }
+
+  .actions { display: inline-flex; gap: 6px; }
+  a.btn, button.btn {
+    appearance: none; display: inline-flex; align-items: center; gap: 6px;
+    font: inherit; font-size: 12.5px; color: var(--subtle); text-decoration: none;
+    background: var(--overlay); border: 1px solid var(--hl-med); border-radius: 8px;
+    padding: 4px 10px; cursor: pointer; transition: color .15s, border-color .15s, background-color .2s;
+  }
+  a.btn:hover, button.btn:hover { color: var(--pine); border-color: var(--pine); }
+  a.btn svg, button.btn svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* scores */
+  .scores {
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    padding: 2px 16px 10px; font-size: 12.5px; color: var(--subtle);
+    font-variant-numeric: tabular-nums;
+  }
+  .scores b { color: var(--text); font-weight: 600; }
+  .scores .overall { display: inline-flex; align-items: center; gap: 8px; }
+  .bar {
+    width: 84px; height: 6px; border-radius: 999px; background: var(--overlay);
+    border: 1px solid var(--hl-med); overflow: clip;
+  }
+  .bar > i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--pine), var(--foam)); }
+  .robust-low b { color: var(--love); }
+
+  /* iframe stage */
+  .stage {
+    position: relative; margin: 0 12px 12px; border-radius: 10px; overflow: clip;
+    border: 1px solid var(--hl-med); background: var(--overlay);
+    aspect-ratio: 16 / 10;
+  }
+  .stage iframe {
+    display: block; width: 100%; height: 100%; border: 0; background: var(--base);
+  }
+  .stage:fullscreen {
+    aspect-ratio: auto; margin: 0; border-radius: 0; border: 0; background: var(--base);
+  }
+
+  /* placeholder (not built yet) */
+  .placeholder {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 8px; text-align: center; color: var(--muted);
+    border: 1.5px dashed var(--hl-med); background: var(--overlay);
+  }
+  .placeholder svg { width: 30px; height: 30px; stroke: var(--muted); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; opacity: .8; }
+  .placeholder strong { color: var(--subtle); font-weight: 600; }
+  .placeholder span { font-size: 12.5px; }
+
+  /* ── Footer ───────────────────────────────────────────────────────── */
+  footer.site {
+    border-top: 1px solid var(--hl-med); margin-top: 10px;
+    padding: 20px 0 30px; color: var(--muted); font-size: 13px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px 16px;
+  }
+  footer.site .credit b { color: var(--subtle); font-weight: 600; }
+  footer.site .sig { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--iris); }
+
+  @media (max-width: 560px) {
+    .scores { gap: 10px; }
+    .bar { width: 60px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="site">
+    <div class="brand">
+      <h1><span class="null">Null</span><span class="torch">Torch</span> — dashboard gallery</h1>
+      <p id="tagline">Every model built a dashboard of the same results.json. Compare presentations, ranked by overall score (0.6 · code composite + 0.4 · elegance).</p>
+    </div>
+    <button class="theme" id="themeToggle" type="button" aria-label="Toggle dark mode">
+      <span class="dot" aria-hidden="true"></span><span id="themeLabel">dark</span>
+    </button>
+  </header>
+
+  <main class="grid" id="grid" aria-live="polite"></main>
+
+  <footer class="site">
+    <span class="credit">data: <b>manifest.json</b> · <b>results.json</b> — each exhibit is a self-contained static dashboard</span>
+    <span class="credit">built by <span class="sig">Kimi 3</span></span>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ── Theme ──────────────────────────────────────────────────────── */
+  var root = document.documentElement;
+  var toggle = document.getElementById("themeToggle");
+  var label = document.getElementById("themeLabel");
+  var stored = null;
+  try { stored = localStorage.getItem("nt-theme"); } catch (e) {}
+  var systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  function applyTheme(mode) {
+    root.setAttribute("data-theme", mode);
+    label.textContent = mode === "dark" ? "light" : "dark";
+  }
+  applyTheme(stored === "dark" || stored === "light" ? stored : (systemDark ? "dark" : "light"));
+
+  toggle.addEventListener("click", function () {
+    var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    applyTheme(next);
+    try { localStorage.setItem("nt-theme", next); } catch (e) {}
+  });
+
+  /* ── Icons (inline, no deps) ────────────────────────────────────── */
+  var ICON_EXPAND = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></svg>';
+  var ICON_NEW_TAB = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg>';
+  var ICON_WRENCH = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.1-2.1 2.7-2.5z"/></svg>';
+
+  /* ── Number formatting ──────────────────────────────────────────── */
+  function fmt(n, digits) {
+    if (typeof n !== "number" || !isFinite(n)) return "—";
+    return n.toFixed(digits == null ? 1 : digits);
+  }
+
+  /* ── Card builders ──────────────────────────────────────────────── */
+  function gateBadge(gate) {
+    var g = (gate || "pending").toLowerCase();
+    if (g !== "pass" && g !== "fail") g = "pending";
+    var b = document.createElement("span");
+    b.className = "badge " + g;
+    b.textContent = g;
+    return b;
+  }
+
+  function scoreStrip(m) {
+    var s = document.createElement("div");
+    s.className = "scores";
+    var robustLow = typeof m.robust === "number" && m.robust < 100;
+    var overall = typeof m.overall === "number" ? m.overall : null;
+    var pct = overall == null ? 0 : Math.max(0, Math.min(100, overall));
+    s.innerHTML =
+      '<span>code <b>' + fmt(m.code_composite) + '</b></span>' +
+      '<span>correct <b>' + fmt(m.correct) + '</b></span>' +
+      '<span class="' + (robustLow ? "robust-low" : "") + '">robust <b>' + fmt(m.robust) + '</b></span>' +
+      '<span>elegance <b>' + fmt(m.elegance) + '</b>/30</span>' +
+      '<span class="overall">overall <b>' + fmt(overall) + '</b>' +
+        '<span class="bar" role="img" aria-label="overall ' + fmt(overall) + ' of 100"><i style="width:' + pct + '%"></i></span>' +
+      '</span>';
+    return s;
+  }
+
+  function builtCard(m, rank) {
+    var card = document.createElement("figure");
+    card.className = "card";
+
+    var head = document.createElement("header");
+    var r = document.createElement("span"); r.className = "rank"; r.textContent = "#" + rank;
+    var n = document.createElement("span"); n.className = "name"; n.textContent = m.model;
+    head.appendChild(r); head.appendChild(n); head.appendChild(gateBadge(m.gate));
+
+    var spacer = document.createElement("span"); spacer.className = "spacer";
+    head.appendChild(spacer);
+
+    var actions = document.createElement("div"); actions.className = "actions";
+
+    var fs = document.createElement("button");
+    fs.className = "btn"; fs.type = "button";
+    fs.innerHTML = ICON_EXPAND + "<span>fullscreen</span>";
+    fs.addEventListener("click", function () {
+      var stage = card.querySelector(".stage");
+      if (!stage) return;
+      if (document.fullscreenElement) {
+        (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+      } else {
+        var req = stage.requestFullscreen || stage.webkitRequestFullscreen;
+        if (req) req.call(stage); else window.open(m.dashboard, "_blank", "noopener");
+      }
+    });
+
+    var open = document.createElement("a");
+    open.className = "btn"; open.href = m.dashboard; open.target = "_blank"; open.rel = "noopener";
+    open.innerHTML = ICON_NEW_TAB + "<span>open</span>";
+
+    actions.appendChild(fs); actions.appendChild(open);
+    head.appendChild(actions);
+
+    var stage = document.createElement("div");
+    stage.className = "stage";
+    var frame = document.createElement("iframe");
+    frame.src = m.dashboard;
+    frame.loading = "lazy";
+    frame.title = m.model + " dashboard";
+    frame.setAttribute("allowfullscreen", "");
+    stage.appendChild(frame);
+
+    card.appendChild(head);
+    card.appendChild(scoreStrip(m));
+    card.appendChild(stage);
+    return card;
+  }
+
+  function placeholderCard(m, rank) {
+    var card = document.createElement("figure");
+    card.className = "card";
+    var head = document.createElement("header");
+    var r = document.createElement("span"); r.className = "rank"; r.textContent = "#" + rank;
+    var n = document.createElement("span"); n.className = "name"; n.textContent = m.model;
+    head.appendChild(r); head.appendChild(n); head.appendChild(gateBadge(m.gate));
+    card.appendChild(head);
+    card.appendChild(scoreStrip(m));
+    var ph = document.createElement("div");
+    ph.className = "stage placeholder";
+    ph.innerHTML = ICON_WRENCH + "<strong>not built yet</strong><span>this model has no dashboard yet</span>";
+    card.appendChild(ph);
+    return card;
+  }
+
+  /* ── Render ─────────────────────────────────────────────────────── */
+  function render(manifest) {
+    if (manifest && manifest.title) {
+      document.title = manifest.title;
+    }
+    var models = (manifest && Array.isArray(manifest.models)) ? manifest.models.slice() : [];
+    models.sort(function (a, b) {
+      var ao = typeof a.overall === "number" ? a.overall : -Infinity;
+      var bo = typeof b.overall === "number" ? b.overall : -Infinity;
+      return bo - ao;
+    });
+
+    var grid = document.getElementById("grid");
+    grid.textContent = "";
+    if (models.length === 0) {
+      var empty = document.createElement("p");
+      empty.style.color = "var(--muted)";
+      empty.textContent = "No models listed in manifest.json yet.";
+      grid.appendChild(empty);
+      return;
+    }
+    models.forEach(function (m, i) {
+      grid.appendChild(m.dashboard ? builtCard(m, i + 1) : placeholderCard(m, i + 1));
+    });
+  }
+
+  /* ── Load manifest (inline fallback for file:// contexts) ───────── */
+  var FALLBACK = {
+    "title": "NullTorch — model dashboards",
+    "models": [
+      { "model": "swe-1.7",  "dashboard": "dashboards/swe-1.7/index.html",  "gate": "pass", "code_composite": 100.0, "correct": 100.0, "robust": 100.0, "elegance": 26.5, "overall": 95.3 },
+      { "model": "glm-5.2",  "dashboard": "dashboards/glm-5.2/index.html",  "gate": "pass", "code_composite": 100.0, "correct": 100.0, "robust": 100.0, "elegance": 25.5, "overall": 94.0 },
+      { "model": "kimi-3",   "dashboard": "dashboards/kimi-3/index.html",   "gate": "pass", "code_composite": 100.0, "correct": 100.0, "robust": 100.0, "elegance": 25.0, "overall": 93.3 },
+      { "model": "gpt-sol",  "dashboard": "dashboards/gpt-sol/index.html",  "gate": "pass", "code_composite": 95.7,  "correct": 100.0, "robust": 85.7,  "elegance": 24.5, "overall": 90.1 },
+      { "model": "grok-4.5", "dashboard": "dashboards/grok-4.5/index.html", "gate": "pass", "code_composite": 91.4,  "correct": 100.0, "robust": 71.4,  "elegance": 23.0, "overall": 85.5 },
+      { "model": "fable-cpp","dashboard": "dashboards/fable-cpp/index.html","gate": "pass", "code_composite": 91.4,  "correct": 100.0, "robust": 71.4,  "elegance": 20.0, "overall": 81.5 },
+      { "model": "gpt-luna", "dashboard": "dashboards/gpt-luna/index.html", "gate": "pass", "code_composite": 97.3,  "correct": 96.1,  "robust": 100.0, "elegance": 9.0,  "overall": 70.4 }
+    ]
+  };
+
+  fetch("manifest.json").then(function (res) {
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    return res.json();
+  }).then(render, function () {
+    render(FALLBACK); // file:// or fetch failure: still render, dashboards are relative paths
+  });
+})();
+</script>
+</body>
+</html>

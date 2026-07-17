@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NullTorch — torchless checkpoint gauntlet</title>
+<meta name="description" content="Models write a PyTorch checkpoint reader from scratch — no Python, no torch — then face six tiers of hostile fixtures.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2c1.2 4.2 5.8 6.2 7.2 10.4 1 3.1.2 6.6-2.2 8.9A8.6 8.6 0 0 1 7 15.8C7 10.4 13.8 8.6 16 2z' fill='%23ff6b35'/%3E%3Ccircle cx='16' cy='22' r='3.2' fill='%23ffd166'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="./styles.css">
+<script>
+(function () {
+  var t = 'dark';
+  try {
+    var s = localStorage.getItem('nt-theme');
+    if (s === 'light' || s === 'dark') t = s;
+    else if (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches) t = 'light';
+  } catch (e) {}
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#leaderboard">Skip to leaderboard</a>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="#top" aria-label="NullTorch home">
+      <svg class="brand-mark" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true">
+        <path d="M16 2c1.2 4.2 5.8 6.2 7.2 10.4 1 3.1.2 6.6-2.2 8.9A8.6 8.6 0 0 1 7 15.8C7 10.4 13.8 8.6 16 2z" fill="currentColor"/>
+        <circle cx="16" cy="22" r="3.2" fill="var(--ember)"/>
+      </svg>
+      <span class="brand-text">
+        <span class="brand-name">NullTorch</span>
+        <span class="brand-tag">checkpoint gauntlet</span>
+      </span>
+    </a>
+    <nav class="topnav" aria-label="Primary">
+      <a href="#leaderboard">Board</a>
+      <a href="#detail">Detail</a>
+      <a href="#gap">Gap</a>
+      <a href="#compare">Compare</a>
+      <a href="#repro">Repro</a>
+    </nav>
+    <div class="topbar-actions">
+      <button type="button" class="icon-btn" id="themeBtn" aria-label="Toggle color theme" title="Toggle theme">
+        <svg class="ico-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="currentColor"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>
+        <svg class="ico-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M16.5 3.5A8.5 8.5 0 1 0 20.5 15 7 7 0 0 1 16.5 3.5z" fill="currentColor"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero wrap" aria-labelledby="heroTitle">
+    <div class="hero-copy">
+      <p class="eyebrow">No Python. No torch. Just a reader.</p>
+      <h1 id="heroTitle">Which model survives the pickle?</h1>
+      <p class="lede">Coding models write a pure-language PyTorch checkpoint reader, then face six tiers of increasingly hostile fixtures — plus an optional engine-fidelity track.</p>
+    </div>
+    <div class="hero-stats" id="heroStats" aria-live="polite"></div>
+  </section>
+
+  <div class="filterbar" id="filterbar" hidden>
+    <div class="wrap filterbar-inner">
+      <div class="filter-group" role="group" aria-label="Language filter">
+        <span class="filter-label">Language</span>
+        <div class="seg" id="langFilter"></div>
+      </div>
+      <div class="filter-group" role="group" aria-label="Condition filter">
+        <span class="filter-label">Condition</span>
+        <div class="seg" id="condFilter"></div>
+      </div>
+      <p class="filter-hint" id="filterHint"></p>
+    </div>
+  </div>
+
+  <section class="section wrap" id="leaderboard" aria-labelledby="lbTitle">
+    <div class="section-head">
+      <div>
+        <h2 id="lbTitle">Leaderboard</h2>
+        <p class="section-sub">Correctness is T1–T5. Robustness is T6. Hostile pickle exec = disqualified. RVC is a separate fidelity track.</p>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="table-scroll" role="region" aria-label="Leaderboard table" tabindex="0">
+        <table class="lb-table" id="lbTable">
+          <thead id="lbHead"></thead>
+          <tbody id="lbBody"></tbody>
+        </table>
+      </div>
+      <div class="empty-state" id="lbEmpty" hidden></div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="detail" aria-labelledby="detailTitle">
+    <div class="section-head">
+      <div>
+        <h2 id="detailTitle">Model detail</h2>
+        <p class="section-sub">Tier × language heatmap for the selected condition. Click a cell to drill into fixture categories.</p>
+      </div>
+      <div class="section-controls">
+        <label class="field">
+          <span class="field-label">Model</span>
+          <select id="modelSelect" aria-label="Select model for detail"></select>
+        </label>
+      </div>
+    </div>
+    <div class="panel">
+      <div id="detailBody"></div>
+      <div class="empty-state" id="detailEmpty" hidden></div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="gap" aria-labelledby="gapTitle">
+    <div class="section-head">
+      <div>
+        <h2 id="gapTitle">Memorization gap</h2>
+        <p class="section-sub">Stock (open book, else closed) minus delta, over T1–T6 only. RVC excluded. Positive = more memorization of the public set.</p>
+      </div>
+    </div>
+    <div class="panel">
+      <div id="gapBody"></div>
+      <div class="empty-state" id="gapEmpty" hidden></div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="compare" aria-labelledby="cmpTitle">
+    <div class="section-head">
+      <div>
+        <h2 id="cmpTitle">Side-by-side</h2>
+        <p class="section-sub">Pick two models. Profiles stay visible — never collapsed into a single score.</p>
+      </div>
+      <div class="section-controls cmp-picks">
+        <label class="field">
+          <span class="field-label">A</span>
+          <select id="cmpA" aria-label="Compare model A"></select>
+        </label>
+        <label class="field">
+          <span class="field-label">B</span>
+          <select id="cmpB" aria-label="Compare model B"></select>
+        </label>
+      </div>
+    </div>
+    <div class="panel">
+      <div id="cmpBody"></div>
+      <div class="empty-state" id="cmpEmpty" hidden></div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="repro" aria-labelledby="reproTitle">
+    <div class="section-head">
+      <div>
+        <h2 id="reproTitle">Reproducibility</h2>
+        <p class="section-sub">Harness, fixture set, and container digests from the run file — full hashes available to copy.</p>
+      </div>
+    </div>
+    <div class="panel" id="reproBody"></div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-inner">
+    <p>NullTorch board · vanilla HTML/CSS/JS · loads <code>results.json</code> locally</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<div class="visually-hidden" id="announcer" aria-live="polite"></div>
+<noscript>
+  <div class="noscript">This explorer needs JavaScript to read <code>results.json</code>. No network scripts — everything ships in this folder.</div>
+</noscript>
+<script src="./app.js"></script>
+</body>
+</html>

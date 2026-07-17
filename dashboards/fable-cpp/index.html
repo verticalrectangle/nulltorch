@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NullTorch — the torchless checkpoint gauntlet</title>
+<meta name="description" content="Coding models write a PyTorch checkpoint reader from scratch — no Python, no torch — then face six tiers of increasingly hostile fixtures.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2c.9 3.4 4.6 5 5.7 8.4.8 2.5.2 5.3-1.7 7.1A7 7 0 0 1 5.4 12.6C5.4 8.4 10.7 6.9 12 2z' fill='%23eb6834'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="./app.css">
+<script>
+(function () {
+  var t = 'dark';
+  try {
+    var s = localStorage.getItem('nulltorch-theme');
+    if (s === 'light' || s === 'dark') t = s;
+    else if (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches) t = 'light';
+  } catch (e) { /* storage unavailable — keep default */ }
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#leaderboard">Skip to leaderboard</a>
+
+<header class="site-head">
+  <div class="wrap head-row">
+    <a class="brand" href="#top" aria-label="NullTorch — back to top">
+      <svg class="flame" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path class="flame-body" d="M12 1.6c.9 3.5 4.7 5.1 5.8 8.6.9 2.6.2 5.5-1.8 7.4A7.2 7.2 0 0 1 5.2 12.7C5.2 8.4 10.7 6.7 12 1.6z"/>
+        <path class="flame-core" d="M12 11.2c1.6 1.5 2.4 2.8 2 4.4a3 3 0 0 1-5-1.4c-.3-1.4 1.7-2 3-3z"/>
+        <path class="flame-slash" d="M5.2 20.4 19 3.4"/>
+      </svg>
+      <span class="brand-name">NullTorch</span>
+      <span class="brand-ver" id="brandVer" hidden></span>
+    </a>
+    <nav class="site-nav" aria-label="Sections">
+      <a href="#leaderboard">Leaderboard</a>
+      <a href="#gauntlet">Gauntlet</a>
+      <a href="#race">Race</a>
+      <a href="#gap">Memorization</a>
+      <a href="#cost">Cost</a>
+      <a href="#compare">Head-to-head</a>
+      <a href="#repro">Provenance</a>
+    </nav>
+    <button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false">
+      <span class="tt-icon" aria-hidden="true"></span><span class="tt-label">Theme</span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" id="hero" aria-labelledby="heroTitle">
+    <div class="wrap">
+      <p class="eyebrow">Torchless checkpoint-reader benchmark</p>
+      <h1 id="heroTitle">Loading the gauntlet…</h1>
+      <p class="hero-sub" id="heroSub"></p>
+      <div class="kpis" id="heroKpis"></div>
+    </div>
+  </section>
+
+  <div class="filterbar" id="filterbar" hidden>
+    <div class="wrap filter-row">
+      <div class="fgroup" role="group" aria-label="Language filter">
+        <span class="flabel" id="langLabel">Language</span>
+        <div class="chips" id="langChips"></div>
+      </div>
+      <div class="fgroup" role="group" aria-label="Condition filter">
+        <span class="flabel" id="condLabel">Condition</span>
+        <div class="chips" id="condChips"></div>
+      </div>
+      <p class="slice-note" id="sliceNote"></p>
+    </div>
+  </div>
+
+  <section class="section" id="leaderboard" aria-labelledby="lbTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="lbTitle">Leaderboard</h2>
+        <p class="sec-sub" id="lbSub"></p>
+      </div>
+      <div id="lbBody"></div>
+    </div>
+  </section>
+
+  <section class="section" id="gauntlet" aria-labelledby="gauntletTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="gauntletTitle">The gauntlet</h2>
+        <p class="sec-sub">Six tiers of hidden fixtures, easy to hostile. Every line is a model; watch where each one falls off the cliff.</p>
+      </div>
+      <div class="tier-chips" id="tierChips"></div>
+      <div id="gauntletBody"></div>
+    </div>
+  </section>
+
+  <section class="section" id="race" aria-labelledby="raceTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="raceTitle">Race to green</h2>
+        <p class="sec-sub" id="raceSub">Self-graded public-fixture passes over each run's wall clock — who converged, and how fast.</p>
+      </div>
+      <div id="raceBody"></div>
+    </div>
+  </section>
+
+  <section class="section" id="gap" aria-labelledby="gapTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="gapTitle">The memorization gap</h2>
+        <p class="sec-sub" id="gapSub"></p>
+      </div>
+      <div id="gapBody"></div>
+    </div>
+  </section>
+
+  <section class="section" id="cost" aria-labelledby="costTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="costTitle">Cost of correctness</h2>
+        <p class="sec-sub" id="costSub">What each run spent to get its score.</p>
+      </div>
+      <div id="costBody"></div>
+    </div>
+  </section>
+
+  <section class="section" id="compare" aria-labelledby="cmpTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="cmpTitle">Head to head</h2>
+        <p class="sec-sub" id="cmpSub">Pick any two models and put their tier profiles back to back.</p>
+      </div>
+      <div id="cmpBody"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="section repro" id="repro" aria-labelledby="reproTitle">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="reproTitle">Provenance</h2>
+      <p class="sec-sub">Everything needed to reproduce this run, verbatim from the results file.</p>
+    </div>
+    <div id="reproBody"></div>
+    <p class="colophon">NullTorch results explorer · vanilla HTML/CSS/SVG, zero dependencies · data: <code>results.json</code></p>
+  </div>
+</footer>
+
+<div id="drawerRoot"></div>
+<div class="tooltip" id="tooltip" hidden></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="visually-hidden" id="announcer" aria-live="polite"></div>
+<noscript><div class="noscript-note">This results explorer needs JavaScript to read <code>results.json</code> and draw its charts. No scripts are loaded from the network — everything ships in this folder.</div></noscript>
+<script src="./app.js"></script>
+</body>
+</html>

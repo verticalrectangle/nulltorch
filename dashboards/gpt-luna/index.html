@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="NullTorch benchmark results — interactive editorial dashboard">
+<title>NullTorch Board</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header" role="banner">
+  <div class="header-inner">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <rect x="2" y="2" width="28" height="28" rx="6" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M9 22 L16 10 L23 22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="12" y1="18" x2="20" y2="18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <div class="brand-text">
+        <h1 class="brand-title">NullTorch<span class="brand-accent">Board</span></h1>
+        <p class="brand-sub" id="brandSub">Benchmark results</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle color theme" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></g></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+  <nav class="view-nav" role="tablist" aria-label="Views">
+    <button class="view-tab" role="tab" aria-selected="true" aria-controls="view-overview" data-view="overview" id="tab-overview">Overview</button>
+    <button class="view-tab" role="tab" aria-selected="false" aria-controls="view-leaderboard" data-view="leaderboard" id="tab-leaderboard" tabindex="-1">Leaderboard</button>
+    <button class="view-tab" role="tab" aria-selected="false" aria-controls="view-detail" data-view="detail" id="tab-detail" tabindex="-1">Model Detail</button>
+    <button class="view-tab" role="tab" aria-selected="false" aria-controls="view-gap" data-view="gap" id="tab-gap" tabindex="-1">Memorization Gap</button>
+    <button class="view-tab" role="tab" aria-selected="false" aria-controls="view-fixture" data-view="fixture" id="tab-fixture" tabindex="-1">Fixture Drill-down</button>
+  </nav>
+</header>
+
+<main id="main" role="main">
+
+  <!-- OVERVIEW -->
+  <section class="view" id="view-overview" role="tabpanel" aria-labelledby="tab-overview">
+    <div class="view-head">
+      <h2 class="view-title">Overview</h2>
+      <p class="view-desc" id="overviewDesc">Cross-model summary across all tiers and conditions.</p>
+    </div>
+    <div class="overview-grid" id="overviewGrid"></div>
+    <div class="repro-strip" id="reproStrip" aria-label="Reproducibility metadata"></div>
+  </section>
+
+  <!-- LEADERBOARD -->
+  <section class="view hidden" id="view-leaderboard" role="tabpanel" aria-labelledby="tab-leaderboard">
+    <div class="view-head">
+      <h2 class="view-title">Leaderboard</h2>
+      <p class="view-desc">Per (model, language, condition) pass rates. Sort by any column.</p>
+    </div>
+    <div class="controls" id="lbControls">
+      <div class="control-group">
+        <label class="ctrl-label" for="lbLang">Language</label>
+        <select class="ctrl-select" id="lbLang" aria-label="Filter by language"></select>
+      </div>
+      <div class="control-group">
+        <label class="ctrl-label" for="lbCond">Condition</label>
+        <select class="ctrl-select" id="lbCond" aria-label="Filter by condition"></select>
+      </div>
+      <div class="control-group">
+        <label class="ctrl-label" for="lbTier">Tier column</label>
+        <select class="ctrl-select" id="lbTier" aria-label="Select tier column to sort and highlight"></select>
+      </div>
+    </div>
+    <div class="table-scroll">
+      <table class="lb-table" id="lbTable">
+        <thead id="lbHead"></thead>
+        <tbody id="lbBody"></tbody>
+      </table>
+    </div>
+    <p class="hint" id="lbHint"></p>
+  </section>
+
+  <!-- MODEL DETAIL -->
+  <section class="view hidden" id="view-detail" role="tabpanel" aria-labelledby="tab-detail">
+    <div class="view-head">
+      <h2 class="view-title">Model Detail</h2>
+      <p class="view-desc">Tier × language heatmap for a single model, with iteration curve.</p>
+    </div>
+    <div class="controls">
+      <div class="control-group">
+        <label class="ctrl-label" for="detailModel">Model</label>
+        <select class="ctrl-select" id="detailModel" aria-label="Select model"></select>
+      </div>
+      <div class="control-group">
+        <label class="ctrl-label" for="detailCond">Condition</label>
+        <select class="ctrl-select" id="detailCond" aria-label="Select condition"></select>
+      </div>
+    </div>
+    <div id="detailContent"></div>
+  </section>
+
+  <!-- MEMORIZATION GAP -->
+  <section class="view hidden" id="view-gap" role="tabpanel" aria-labelledby="tab-gap">
+    <div class="view-head">
+      <h2 class="view-title">Memorization Gap</h2>
+      <p class="view-desc">Stock pass rate minus delta pass rate, per language. Derived from T1–T6 only; RVC excluded.</p>
+    </div>
+    <div class="controls">
+      <div class="control-group">
+        <label class="ctrl-label" for="gapModel">Model</label>
+        <select class="ctrl-select" id="gapModel" aria-label="Select model for gap analysis"></select>
+      </div>
+    </div>
+    <div id="gapContent"></div>
+  </section>
+
+  <!-- FIXTURE DRILL-DOWN -->
+  <section class="view hidden" id="view-fixture" role="tabpanel" aria-labelledby="tab-fixture">
+    <div class="view-head">
+      <h2 class="view-title">Fixture Drill-down</h2>
+      <p class="view-desc">Category-level pass/total within each tier for a specific run.</p>
+    </div>
+    <div class="controls">
+      <div class="control-group">
+        <label class="ctrl-label" for="fxModel">Model</label>
+        <select class="ctrl-select" id="fxModel" aria-label="Select model"></select>
+      </div>
+      <div class="control-group">
+        <label class="ctrl-label" for="fxLang">Language</label>
+        <select class="ctrl-select" id="fxLang" aria-label="Select language"></select>
+      </div>
+      <div class="control-group">
+        <label class="ctrl-label" for="fxCond">Condition</label>
+        <select class="ctrl-select" id="fxCond" aria-label="Select condition"></select>
+      </div>
+    </div>
+    <div id="fxContent"></div>
+  </section>
+
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="app.js"></script>
+</body>
+</html>

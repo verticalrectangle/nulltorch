@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#10100f">
+  <title>NullTorch — safe tensor reading, measured</title>
+  <meta name="description" content="An interactive field guide to NullTorch benchmark results.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to results</a>
+  <header class="site-header">
+    <a class="brand" href="#leaderboard" aria-label="NullTorch home"><span class="brand-mark" aria-hidden="true">N/</span><span>NULLTORCH</span></a>
+    <div class="header-meta"><span id="run-count">Loading field notes…</span><button class="icon-button" id="theme-toggle" type="button" aria-label="Use light theme" title="Change theme"><span aria-hidden="true">◐</span></button></div>
+  </header>
+  <nav class="view-nav" aria-label="Explore results"><div class="nav-scroll" role="tablist" aria-label="Benchmark views">
+    <button class="nav-tab active" role="tab" aria-selected="true" aria-controls="leaderboard" id="tab-leaderboard" data-view="leaderboard">01 / Field</button>
+    <button class="nav-tab" role="tab" aria-selected="false" aria-controls="models" id="tab-models" data-view="models">02 / Models</button>
+    <button class="nav-tab" role="tab" aria-selected="false" aria-controls="gap" id="tab-gap" data-view="gap">03 / Gap</button>
+    <button class="nav-tab" role="tab" aria-selected="false" aria-controls="fixtures" id="tab-fixtures" data-view="fixtures">04 / Fixtures</button>
+    <button class="nav-tab" role="tab" aria-selected="false" aria-controls="reproduce" id="tab-reproduce" data-view="reproduce">05 / Reproduce</button>
+  </div></nav>
+  <main id="main">
+    <div class="loading-state" id="loading" role="status"><span class="loader" aria-hidden="true"></span>Reading results.json</div>
+    <section class="view active" id="leaderboard" role="tabpanel" aria-labelledby="tab-leaderboard">
+      <div class="hero"><div class="hero-copy"><p class="eyebrow">A hostile-file reading benchmark</p><h1>Can it read the tensor<br><em>without trusting it?</em></h1><p class="lede">NullTorch measures correctness across ordinary and strange PyTorch files—then asks the harder question: what happens when the file fights back?</p></div><div class="hero-orbit" id="hero-orbit" aria-label="Benchmark summary"></div></div>
+      <div class="story-strip" id="story-strip" aria-label="Key findings"></div>
+      <div class="section-head"><div><p class="eyebrow">The field</p><h2>Every run, in the open</h2></div><p class="section-note">Correctness is T1–T5. Robustness stands alone. An execution attempt means disqualification.</p></div>
+      <div class="controls" aria-label="Leaderboard filters"><label>Language<select id="language-filter"><option value="all">All languages</option></select></label><label>Condition<select id="condition-filter"><option value="all">All conditions</option></select></label><label>Order by<select id="sort-filter"><option value="correctness">Correctness</option><option value="robustness">Robustness</option><option value="model">Model name</option></select></label></div>
+      <div class="table-shell" tabindex="0" aria-label="Scrollable leaderboard"><table class="leaderboard-table"><thead id="leaderboard-head"></thead><tbody id="leaderboard-body"></tbody></table></div>
+      <p class="empty-message" id="leaderboard-empty" hidden>No runs match this view. Try a different filter.</p>
+    </section>
+    <section class="view" id="models" role="tabpanel" aria-labelledby="tab-models" hidden>
+      <div class="page-intro"><p class="eyebrow">Model profile</p><h1>One reader,<br>under the lens.</h1><p>Inspect the exact tier shape across languages and conditions, or place two models side by side.</p></div>
+      <div class="selector-bar"><label>Primary model <select id="model-select"></select></label><span class="versus" aria-hidden="true">versus</span><label>Compare with <select id="compare-select"><option value="">No comparison</option></select></label></div><div id="model-profile"></div>
+    </section>
+    <section class="view" id="gap" role="tabpanel" aria-labelledby="tab-gap" hidden>
+      <div class="page-intro"><p class="eyebrow">The memorization gap</p><h1>What survives<br>without the answer key?</h1><p>The gap subtracts the delta run’s T1–T6 reading rate from the matching open-book run. RVC is deliberately excluded. Smaller is steadier.</p></div>
+      <div class="gap-legend" aria-label="Gap chart legend"><span><i class="dot stock"></i> Open book</span><span><i class="dot delta"></i> Delta</span><span><i class="gap-rule"></i> Difference</span></div><div id="gap-chart" class="gap-chart"></div><p class="empty-message" id="gap-empty" hidden>A gap needs matching open-book and delta runs. This dataset does not contain a pair yet.</p>
+    </section>
+    <section class="view" id="fixtures" role="tabpanel" aria-labelledby="tab-fixtures" hidden>
+      <div class="page-intro"><p class="eyebrow">Fixture microscope</p><h1>Every edge case<br>leaves a trace.</h1><p>Choose any run, then open a tier to see which exact fixtures passed. RVC engine fidelity is separated from the T1–T6 reading path.</p></div>
+      <div class="selector-bar fixture-selectors"><label>Run <select id="fixture-run-select"></select></label><label>Tier <select id="fixture-tier-select"></select></label></div><div id="fixture-detail"></div>
+    </section>
+    <section class="view" id="reproduce" role="tabpanel" aria-labelledby="tab-reproduce" hidden>
+      <div class="page-intro"><p class="eyebrow">Chain of custody</p><h1>Trust the result.<br>Then verify it.</h1><p>Versions, fixtures, and container fingerprints are preserved here exactly as reported by the harness.</p></div>
+      <div class="provenance-grid" id="provenance"></div><div class="digest-section"><div class="section-head compact"><div><p class="eyebrow">Execution environments</p><h2>Container digests</h2></div></div><div id="digests" class="digest-list"></div></div>
+    </section>
+    <section class="fatal-state" id="fatal" hidden role="alert"><span class="fatal-code">DATA / 00</span><h1>No field notes yet.</h1><p id="fatal-message">The benchmark returned no runs. The interface is ready when the results are.</p></section>
+  </main>
+  <footer><span>NULLTORCH / FIELD REPORT</span><span id="footer-version">Benchmark —</span></footer><div id="tooltip" class="tooltip" role="tooltip" hidden></div><script src="app.js"></script>
+</body>
+</html>

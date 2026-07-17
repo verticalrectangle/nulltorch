@@ -16,3 +16,7 @@ submissions/*/convert
 
 # opencode/agent session logs
 omp-session-*.html
+
+# build staging / workspaces (the DEPLOYED site is committed at root)
+/showcase/
+/eval-board/
