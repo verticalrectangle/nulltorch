@@ -77,6 +77,28 @@ C++). Both were 100% correct on T1–T5 with a +0.0pp gap; the only separator wa
 T6 robustness (kimi-3 7/7 vs fable-cpp 5/7 — two segfaults on adversarial
 input). `python3 scripts/score.py` reproduces that leaderboard.
 
+## Front-end benchmark (NullTorch-Board)
+
+A second, human-judged task: build a static dashboard that visualizes a
+`results.json`. Same shape as the code benchmark — isolated workspace → an agent
+builds it → a **mechanical gate** must pass → a **blind rubric judgment** (like
+elegance). Needs `chromium` + `playwright` for the automated gate.
+
+1. **Workspace:** `scripts/new_board_eval.sh <name>` → `eval-board/<name>/`
+   (BRIEF + GATE + schema + sample datasets + a real `results.json` + empty
+   `submission/`).
+2. **Build:** open your agent inside it — *"Read `BRIEF.md` and `START.md`, then
+   build it."* It writes a self-contained dashboard in `submission/`.
+3. **Gate (automated):** `python3 scripts/board_gate.py eval-board/<name>/submission`
+   - **G0 static scan** — zero external deps (no CDN / web font / framework); the hard rule.
+   - **headless chromium** — renders offline with no console errors, makes no
+     external request, handles the degenerate datasets (`empty`/`one_model`),
+     reflects the data in the DOM, and has no horizontal page scroll at
+     375/768/1440 px. Must PASS before any human looks.
+4. **Judge (qualitative):** blind, against `board/RUBRIC.md` — six anchored
+   dimensions, ≥2 independent passes over rendered screenshots (same procedure
+   as `docs/ELEGANCE.md`).
+
 ## Layout
 
 ```
