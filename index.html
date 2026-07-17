@@ -4,7 +4,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NullTorch — model dashboards</title>
-<meta name="description" content="Gallery of per-model dashboards over the same NullTorch results.json — compare presentations, ranked by overall score.">
+<meta name="description" content="Six AI coding models wrote a pure-C++ PyTorch .pt checkpoint reader, then faced six tiers of hostile files. Compare each model's dashboard of the same results, ranked side by side.">
+<meta name="keywords" content="NullTorch, PyTorch, .pt checkpoint reader, hostile pickle, deserialization benchmark, AI coding models, C++ tensor loader, model comparison, dashboards">
+<meta name="author" content="Kimi 3">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NullTorch">
+<meta property="og:title" content="NullTorch — model dashboard gallery">
+<meta property="og:description" content="Six AI coding models got the same homework: a PyTorch .pt checkpoint reader in pure C++. Six tiers of increasingly hostile fixtures graded them — T1–T5 correctness, T6 booby-trapped pickles, where executing hidden code means disqualification. Each model then built a dashboard of the same results.json; browse them all, ranked by overall score.">
+<meta property="og:image" content="og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="NullTorch — model dashboard gallery. Torch-flame emblem above the NullTorch wordmark on a dark Rose Pine background.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NullTorch — model dashboard gallery">
+<meta name="twitter:description" content="Six AI models wrote a pure-C++ PyTorch .pt reader and faced six tiers of hostile files. Compare each model's dashboard of the same results, ranked side by side.">
+<meta name="twitter:image" content="og-image.png">
+<meta name="twitter:image:alt" content="NullTorch — model dashboard gallery. Torch-flame emblem above the NullTorch wordmark on a dark Rose Pine background.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf4ed">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#191724">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>
   /* ── Rose Pine palettes ───────────────────────────────────────────── */
   :root {
@@ -66,6 +86,27 @@
   }
   .theme .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--gold); }
   html[data-theme="dark"] .theme .dot { background: var(--iris); }
+
+  /* ── Explainer ────────────────────────────────────────────────────── */
+  .explainer {
+    background: var(--surface); border: 1px solid var(--hl-med); border-left: 3px solid var(--iris);
+    border-radius: 12px; box-shadow: var(--shadow);
+    padding: 16px 20px 14px; margin: 6px 0 18px;
+    font-size: 14px; color: var(--subtle);
+    transition: background-color .2s ease, border-color .2s ease;
+  }
+  .explainer h2 {
+    margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .09em;
+    color: var(--iris); font-weight: 700;
+  }
+  .explainer p { margin: 0 0 8px; }
+  .explainer p:last-child { margin-bottom: 0; }
+  .explainer b { color: var(--text); font-weight: 600; }
+  .explainer code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12.5px; background: var(--overlay); border: 1px solid var(--hl-med);
+    border-radius: 6px; padding: 1px 6px; color: var(--pine);
+  }
 
   /* ── Grid ─────────────────────────────────────────────────────────── */
   main.grid {
@@ -175,6 +216,24 @@
       <span class="dot" aria-hidden="true"></span><span id="themeLabel">dark</span>
     </button>
   </header>
+
+  <section class="explainer" aria-label="What is this test?">
+    <h2>What is this test?</h2>
+    <p>
+      Six AI models got the same homework: <b>“write a program that opens a PyTorch file — the file where an AI
+      stores all its numbers — using nothing but plain C++. No PyTorch, no Python, no libraries that do the work for you.”</b>
+    </p>
+    <p>
+      Then their programs were fed files that get meaner and meaner. <b>Tiers 1–5 test correctness</b>: plain files,
+      nested files, weird-but-honest files — did you read the numbers right? <b>Tier 6 tests robustness</b>: booby-trapped
+      files that try to trick the program into running hidden code. Fall for it once and you're disqualified.
+    </p>
+    <p>
+      Finally, every model was handed the exact same score sheet (<code>results.json</code>) and told: <i>build a dashboard</i>.
+      This page hangs their answers side by side — ranked by overall score (60% how well the code did, 40% how good it looks) —
+      so you can judge not just who passed, but who explained it best.
+    </p>
+  </section>
 
   <main class="grid" id="grid" aria-live="polite"></main>
 
