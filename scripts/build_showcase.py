@@ -127,19 +127,17 @@ def _write_brief():
         "- Handle any number of models (1..N) gracefully; no horizontal page "
         "scroll.\n\n"
         "## Hosting\n"
-        "This gallery ships to **https://verticalrectangle.com/nulltorch/** "
-        "(served as static files from that sub-path). Build it accordingly:\n"
-        "- Use **relative paths only** for every asset, iframe `src`, and the "
+        "This gallery IS the site at **https://nulltorch.com/** — its own "
+        "domain, served as static files. Build it accordingly:\n"
+        "- Use **relative paths** for every asset, iframe `src`, and the "
         "`results.json`/`manifest.json` fetch (e.g. `dashboards/<model>/"
-        "index.html`, `manifest.json`) — never a `/`-rooted absolute path, or "
-        "it will 404 under the `/nulltorch/` sub-path.\n"
-        "- The deliverable is a self-contained static bundle: the whole "
-        "`showcase/` folder is copied verbatim into the site's `nulltorch/` "
-        "directory and served over https, no build step. Make sure it works "
-        "when opened at a URL ending in `/nulltorch/` (not just at the root).\n"
+        "index.html`, `manifest.json`). Relative works at the domain root and "
+        "won't break if the bundle moves; never hardcode a host.\n"
+        "- The deliverable is a self-contained static bundle — the whole "
+        "`showcase/` folder is served verbatim at the domain root, no build "
+        "step. `showcase/index.html` becomes the site's landing page.\n"
         "- Same no-external-deps discipline as the dashboards; it must render "
-        "offline and over https with zero network requests. Put it at "
-        "`showcase/index.html`.\n")
+        "offline and over https with zero network requests.\n")
 
 
 if __name__ == "__main__":
