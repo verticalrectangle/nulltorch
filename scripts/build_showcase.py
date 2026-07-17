@@ -25,9 +25,17 @@ EVAL_BOARD = os.path.join(ROOT, "eval-board")
 SHOW = os.path.join(ROOT, "showcase")
 RESULTS = os.path.join(ROOT, "harness", "example_results.json")
 
-# elegance averages from the recorded blind judgment (docs/ELEGANCE_RESULTS.md)
-ELEGANCE = {"swe-1.7": 26.5, "glm-5.2": 25.5, "kimi-3": 25.0,
-            "gpt-sol": 24.5, "fable-cpp": 20.0, "gpt-luna": 9.0}
+# elegance averages — single source of truth is docs/elegance.json
+def _load_elegance():
+    try:
+        return {m: v["avg"] for m, v
+                in json.load(open(os.path.join(ROOT, "docs",
+                                                "elegance.json")))["scores"].items()}
+    except OSError:
+        return {}
+
+
+ELEGANCE = _load_elegance()
 W_CORRECT, W_ROBUST = 0.70, 0.30
 
 

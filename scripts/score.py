@@ -26,8 +26,23 @@ import sys
 
 W_CORRECT = 0.70
 W_ROBUST = 0.30
+# "overall" blends the mechanical composite with the judge-based elegance score
+# (docs/elegance.json). Elegance stays its own column and is advisory; overall
+# is a convenience blend — adjust the weights to taste.
+W_MECH = 0.60
+W_ELEG = 0.40
+ELEG_MAX = 30
 CORRECT_TIERS = ["T1", "T2", "T3", "T4", "T5"]
 STOCK_CONDITIONS = {"open_book", "closed_book"}
+
+
+def load_elegance():
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..",
+                     "docs", "elegance.json")
+    try:
+        return json.load(open(p)).get("scores", {})
+    except OSError:
+        return {}
 
 
 def rate(tiers, keys):
@@ -71,26 +86,34 @@ def main():
         os.path.dirname(os.path.abspath(__file__)), "..",
         "harness", "example_results.json")
     doc = json.load(open(path))
+    eleg = load_elegance()
     rows = [score_run(r) for r in doc["runs"]]
     # Leaderboard ranks the stock (open_book/closed_book) runs; delta runs are
     # gap-probes, surfaced only in the memorization-gap section below.
-    stock = sorted((s for s in rows if s["cond"] in STOCK_CONDITIONS),
-                   key=lambda s: (-s["composite"], s["model"]))
+    stock = [s for s in rows if s["cond"] in STOCK_CONDITIONS]
+    for s in stock:
+        e = eleg.get(s["model"])
+        s["eleg"] = e["avg"] if e else None
+        ef = s["eleg"] / ELEG_MAX if s["eleg"] is not None else None
+        s["overall"] = (W_MECH * s["composite"] + W_ELEG * ef
+                        if ef is not None else s["composite"])
+    stock.sort(key=lambda s: (-s["overall"], -s["composite"], s["model"]))
 
     print(f"NullTorch leaderboard  ({os.path.basename(path)}, "
           f"fixtures {doc.get('fixture_set_hash','?')[:19]}…)")
-    print(f"composite = {W_CORRECT:.2f}*correctness + {W_ROBUST:.2f}*robustness "
-          f"(renormalized over measured components), safety-gated\n")
-    hdr = f"{'#':>2} {'model':12} {'lang':4} {'cond':10} " \
-          f"{'correct':>8} {'robust':>8} {'rvc':>7} {'safety':>7} " \
-          f"{'det':>4} {'score':>7}"
+    print(f"mech = {W_CORRECT:.2f}*correct + {W_ROBUST:.2f}*robust (safety-gated) · "
+          f"eleg = blind judge avg /30 (advisory) · "
+          f"overall = {W_MECH:.2f}*mech + {W_ELEG:.2f}*eleg\n")
+    hdr = f"{'#':>2} {'model':12} {'correct':>8} {'robust':>8} " \
+          f"{'eleg':>6} {'mech':>6} {'overall':>8} {'safety':>7}"
     print(hdr); print("-" * len(hdr))
     for i, s in enumerate(stock, 1):
         safety = "FAIL" if s["exec_bad"] else ("crash" if s["crashes"] else "ok")
-        print(f"{i:>2} {s['model']:12} {s['lang']:4} {s['cond']:10} "
-              f"{pct(s['correct']):>8} {pct(s['robust']):>8} "
-              f"{pct(s['rvc']):>7} {safety:>7} {s['det']:>4} "
-              f"{s['composite']*100:6.1f}")
+        eleg_s = "  -  " if s["eleg"] is None else f"{s['eleg']:4.1f}"
+        ov = "  -  " if s["eleg"] is None else f"{s['overall']*100:6.1f}"
+        print(f"{i:>2} {s['model']:12} {pct(s['correct']):>8} "
+              f"{pct(s['robust']):>8} {eleg_s:>6} {s['composite']*100:6.1f} "
+              f"{ov:>8} {safety:>7}")
         note = []
         if s["correct_n"][1]:
             note.append(f"correct {s['correct_n'][0]}/{s['correct_n'][1]}")
@@ -101,7 +124,7 @@ def main():
         if s["exec_bad"]:
             note.append("EXECUTED HOSTILE CODE")
         if note:
-            print(f"{'':>36}({', '.join(note)})")
+            print(f"{'':>16}({', '.join(note)})")
 
     # memorization gap: stock vs delta correctness per (model, lang), computed
     # over the tiers MEASURED IN BOTH conditions (delta usually covers only

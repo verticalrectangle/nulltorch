@@ -1,0 +1,13 @@
+{
+  "note": "Blind two-pass code-elegance judgment against docs/ELEGANCE.md; totals out of 30. Advisory / judge-based — NOT byte-graded. score.py blends it into an 'overall' but keeps the mechanical score separate.",
+  "max": 30,
+  "scores": {
+    "swe-1.7":   {"judge1": 26, "judge2": 27, "avg": 26.5},
+    "glm-5.2":   {"judge1": 25, "judge2": 26, "avg": 25.5},
+    "kimi-3":    {"judge1": 25, "judge2": 25, "avg": 25.0},
+    "gpt-sol":   {"judge1": 25, "judge2": 24, "avg": 24.5},
+    "grok-4.5":  {"judge1": 21, "judge2": 25, "avg": 23.0},
+    "fable-cpp": {"judge1": 22, "judge2": 18, "avg": 20.0},
+    "gpt-luna":  {"judge1": 9,  "judge2": 9,  "avg": 9.0}
+  }
+}

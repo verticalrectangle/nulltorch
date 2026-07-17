@@ -5,16 +5,27 @@ names stripped and order scrambled (A–F); two independent LLM judges scored ea
 1–5 on the six rubric dimensions without knowing which model wrote which. The
 A–F → model mapping was revealed only after scoring.
 
+Scores live in `docs/elegance.json` (single source of truth) and are blended
+into `scripts/score.py`'s `overall` column (`0.6*mechanical + 0.4*elegance`) —
+elegance stays advisory but now ties into the ranking. grok-4.5 was judged the
+same way when it joined.
+
 ## Aggregate (total /30)
 
-| # | model | judge 1 | judge 2 | avg | Δ | benchmark score |
+| # | model | judge 1 | judge 2 | avg | Δ | mech |
 |---|-------|:------:|:------:|:---:|:--:|:--:|
 | 1 | swe-1.7   | 26 | 27 | **26.5** | ±1 | 100.0 |
 | 2 | glm-5.2   | 25 | 26 | **25.5** | ±1 | 100.0 |
 | 3 | kimi-3    | 25 | 25 | **25.0** | ±0 | 100.0 |
 | 4 | gpt-sol   | 25 | 24 | **24.5** | ±1 | 95.7 |
-| 5 | fable-cpp | 22 | 18 | **20.0** | ±4 | 91.4 |
-| 6 | gpt-luna  |  9 |  9 | **9.0**  | ±0 | 97.3 |
+| 5 | grok-4.5  | 21 | 25 | **23.0** | ±4 | 91.4 |
+| 6 | fable-cpp | 22 | 18 | **20.0** | ±4 | 91.4 |
+| 7 | gpt-luna  |  9 |  9 | **9.0**  | ±0 | 97.3 |
+
+grok-4.5 (both judges flagged the same debug-comment-laden BINFLOAT block) lands
+mid-pack — and its cleaner code breaks the mechanical tie with fable-cpp (both
+91.4) in the `overall` ranking. gpt-luna, mechanically strong, drops to last
+overall: code-golf costs it here.
 
 - judge 1 rank: swe-1.7 > gpt-sol > kimi-3 > glm-5.2 > fable-cpp > gpt-luna
 - judge 2 rank: swe-1.7 > glm-5.2 > kimi-3 > gpt-sol > fable-cpp > gpt-luna
