@@ -37,6 +37,15 @@ def _load_elegance():
 
 ELEGANCE = _load_elegance()
 W_CORRECT, W_ROBUST = 0.70, 0.30
+# overall = mechanical composite blended with elegance — same formula as
+# scripts/score.py, so the gallery ranks exhibits by the leaderboard number.
+W_MECH, W_ELEG, ELEG_MAX = 0.60, 0.40, 30
+
+
+def overall(code_composite, eleg):
+    if eleg is None:
+        return None
+    return round(W_MECH * code_composite + W_ELEG * (eleg / ELEG_MAX * 100), 1)
 
 
 def code_scores():
@@ -76,7 +85,11 @@ def gate(sub):
 
 def main():
     scores = code_scores()
-    models = sorted(scores, key=lambda m: -scores[m]["composite"])
+    # rank exhibits by overall (mech blended with elegance), same as score.py;
+    # fall back to mechanical composite for a model with no elegance yet.
+    models = sorted(scores, key=lambda m: -(
+        overall(scores[m]["composite"], ELEGANCE.get(m))
+        if ELEGANCE.get(m) is not None else scores[m]["composite"]))
     # Refresh ONLY the generated parts (dashboards/ + manifest/results below);
     # NEVER wipe the gallery a model built here (index.html + its assets).
     os.makedirs(SHOW, exist_ok=True)
@@ -101,15 +114,17 @@ def main():
             "code_composite": scores[m]["composite"],
             "correct": scores[m]["correct"], "robust": scores[m]["robust"],
             "elegance": ELEGANCE.get(m),
+            "overall": overall(scores[m]["composite"], ELEGANCE.get(m)),
         })
         print(f"  {m:11} dashboard={'yes' if has else 'PENDING':7} gate={g:7} "
               f"code={scores[m]['composite']:5} elegance={ELEGANCE.get(m)}")
 
     manifest = {
         "title": "NullTorch — model dashboards",
-        "note": "Each model built a dashboard of the SAME 6-model results.json; "
-                "compare presentations. code_composite/elegance are how the "
-                "model did on the code + elegance benchmarks.",
+        "note": "Each model built a dashboard of the SAME results.json; compare "
+                "presentations. Per model: code_composite (mechanical), elegance "
+                "(/30, judge-based), and overall (0.6*mech + 0.4*elegance, same "
+                "as scripts/score.py) — rank the exhibits by overall.",
         "models": entries,
     }
     with open(os.path.join(SHOW, "manifest.json"), "w") as f:
