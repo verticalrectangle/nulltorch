@@ -4,20 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NullTorch — model dashboards</title>
-<meta name="description" content="Six AI coding models wrote a pure-C++ PyTorch .pt checkpoint reader, then faced six tiers of hostile files. Compare each model's dashboard of the same results, ranked side by side.">
+<meta name="description" content="NullTorch: a hostile-file benchmark for AI coding models. Each model writes a pure-C++ PyTorch .pt checkpoint reader, then faces six tiers of fixtures — correctness T1–T5, booby-trapped pickles T6.">
 <meta name="keywords" content="NullTorch, PyTorch, .pt checkpoint reader, hostile pickle, deserialization benchmark, AI coding models, C++ tensor loader, model comparison, dashboards">
 <meta name="author" content="Kimi 3">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="NullTorch">
 <meta property="og:title" content="NullTorch — model dashboard gallery">
-<meta property="og:description" content="Six AI coding models got the same homework: a PyTorch .pt checkpoint reader in pure C++. Six tiers of increasingly hostile fixtures graded them — T1–T5 correctness, T6 booby-trapped pickles, where executing hidden code means disqualification. Each model then built a dashboard of the same results.json; browse them all, ranked by overall score.">
+<meta property="og:description" content="NullTorch is a hostile-file benchmark for AI coding models. The task: write a PyTorch .pt checkpoint reader in pure C++ — no PyTorch, no Python, no libraries that do the work for you. Six tiers of fixtures decide the score: T1–T5 grade correctness on ordinary and strange tensor files; T6 throws booby-trapped pickles that try to make the reader execute hidden code, and one slip means disqualification.">
 <meta property="og:image" content="https://nulltorch.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="NullTorch — model dashboard gallery. Torch-flame emblem above the NullTorch wordmark on a dark Rose Pine background.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="NullTorch — model dashboard gallery">
-<meta name="twitter:description" content="Six AI models wrote a pure-C++ PyTorch .pt reader and faced six tiers of hostile files. Compare each model's dashboard of the same results, ranked side by side.">
+<meta name="twitter:description" content="NullTorch: a hostile-file benchmark for AI coding models. Each model writes a pure-C++ PyTorch .pt checkpoint reader, then faces six tiers of fixtures — correctness T1–T5, booby-trapped pickles T6.">
 <meta name="twitter:image" content="https://nulltorch.com/og-image.png">
 <meta name="twitter:image:alt" content="NullTorch — model dashboard gallery. Torch-flame emblem above the NullTorch wordmark on a dark Rose Pine background.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf4ed">
@@ -107,6 +107,28 @@
     font-size: 12.5px; background: var(--overlay); border: 1px solid var(--hl-med);
     border-radius: 6px; padding: 1px 6px; color: var(--pine);
   }
+
+  /* ── Sort bar ─────────────────────────────────────────────────────── */
+  .sortbar {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    margin: 0 0 14px; font-size: 13px; color: var(--muted);
+  }
+  .seg {
+    display: inline-flex; background: var(--surface); border: 1px solid var(--hl-med);
+    border-radius: 999px; padding: 3px; gap: 2px; box-shadow: var(--shadow);
+  }
+  .seg button {
+    appearance: none; border: 1px solid transparent; background: transparent; cursor: pointer;
+    font: inherit; font-size: 12.5px; color: var(--subtle);
+    border-radius: 999px; padding: 4px 12px; transition: color .15s, background-color .2s;
+  }
+  .seg button:hover { color: var(--pine); }
+  .seg button[aria-pressed="true"] {
+    color: var(--pine); border-color: var(--pine);
+    background: color-mix(in srgb, var(--pine) 10%, transparent); font-weight: 600;
+  }
+  .seg button:focus-visible { outline: 2px solid var(--iris); outline-offset: 2px; }
+  .sort-note { font-size: 12px; color: var(--muted); font-style: italic; }
 
   /* ── Grid ─────────────────────────────────────────────────────────── */
   main.grid {
@@ -234,6 +256,15 @@
       so you can judge not just who passed, but who explained it best.
     </p>
   </section>
+
+  <div class="sortbar">
+    <span>rank by</span>
+    <div class="seg" role="group" aria-label="Ranking order">
+      <button type="button" data-sort="overall" aria-pressed="true">overall score</button>
+      <button type="button" data-sort="designer" aria-pressed="false">designer's choice</button>
+    </div>
+    <span class="sort-note" id="sortNote" hidden>curated by the designer — taste over numbers</span>
+  </div>
 
   <main class="grid" id="grid" aria-live="polite"></main>
 
@@ -373,16 +404,44 @@
   }
 
   /* ── Render ─────────────────────────────────────────────────────── */
+  /* Designer's choice: curated order, models not listed fall to the end by overall. */
+  var DESIGNER_RANK = {
+    "gpt-sol": 1,
+    "grok-4.5": 2,
+    "kimi-3": 3,
+    "fable-cpp": 4,
+    "swe-1.7": 5,
+    "gpt-luna": 6
+  };
+  var MANIFEST = null;
+  var sortMode = "overall";
+  try {
+    var savedSort = localStorage.getItem("nt-sort");
+    if (savedSort === "overall" || savedSort === "designer") sortMode = savedSort;
+  } catch (e) {}
+
+  function overallOf(m) { return typeof m.overall === "number" ? m.overall : -Infinity; }
+
+  function sortModels(models, mode) {
+    var arr = models.slice();
+    if (mode === "designer") {
+      arr.sort(function (a, b) {
+        var ra = DESIGNER_RANK[a.model] != null ? DESIGNER_RANK[a.model] : 1000;
+        var rb = DESIGNER_RANK[b.model] != null ? DESIGNER_RANK[b.model] : 1000;
+        return ra !== rb ? ra - rb : overallOf(b) - overallOf(a);
+      });
+    } else {
+      arr.sort(function (a, b) { return overallOf(b) - overallOf(a); });
+    }
+    return arr;
+  }
+
   function render(manifest) {
     if (manifest && manifest.title) {
       document.title = manifest.title;
     }
-    var models = (manifest && Array.isArray(manifest.models)) ? manifest.models.slice() : [];
-    models.sort(function (a, b) {
-      var ao = typeof a.overall === "number" ? a.overall : -Infinity;
-      var bo = typeof b.overall === "number" ? b.overall : -Infinity;
-      return bo - ao;
-    });
+    MANIFEST = manifest;
+    var models = sortModels((manifest && Array.isArray(manifest.models)) ? manifest.models : [], sortMode);
 
     var grid = document.getElementById("grid");
     grid.textContent = "";
@@ -396,7 +455,25 @@
     models.forEach(function (m, i) {
       grid.appendChild(m.dashboard ? builtCard(m, i + 1) : placeholderCard(m, i + 1));
     });
+
+    /* reflect sort state in the toggle */
+    var note = document.getElementById("sortNote");
+    note.hidden = sortMode !== "designer";
+    var btns = document.querySelectorAll(".seg button[data-sort]");
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].setAttribute("aria-pressed", btns[i].getAttribute("data-sort") === sortMode ? "true" : "false");
+    }
   }
+
+  document.querySelector(".seg").addEventListener("click", function (ev) {
+    var btn = ev.target.closest ? ev.target.closest("button[data-sort]") : null;
+    if (!btn) return;
+    var mode = btn.getAttribute("data-sort");
+    if (mode === sortMode) return;
+    sortMode = mode;
+    try { localStorage.setItem("nt-sort", mode); } catch (e) {}
+    if (MANIFEST) render(MANIFEST);
+  });
 
   /* ── Load manifest (inline fallback for file:// contexts) ───────── */
   var FALLBACK = {
