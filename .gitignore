@@ -16,3 +16,6 @@ submissions/*/convert
 
 # opencode/agent session logs
 omp-session-*.html
+
+# generated dashboard gallery
+/showcase/
