@@ -126,8 +126,20 @@ def _write_brief():
         "`dashboard: null` show a 'not built yet' placeholder card.\n"
         "- Handle any number of models (1..N) gracefully; no horizontal page "
         "scroll.\n\n"
-        "This gallery is itself a front-end artifact — the same "
-        "no-external-deps discipline applies. Put it at `showcase/index.html`.\n")
+        "## Hosting\n"
+        "This gallery ships to **https://verticalrectangle.com/nulltorch/** "
+        "(served as static files from that sub-path). Build it accordingly:\n"
+        "- Use **relative paths only** for every asset, iframe `src`, and the "
+        "`results.json`/`manifest.json` fetch (e.g. `dashboards/<model>/"
+        "index.html`, `manifest.json`) — never a `/`-rooted absolute path, or "
+        "it will 404 under the `/nulltorch/` sub-path.\n"
+        "- The deliverable is a self-contained static bundle: the whole "
+        "`showcase/` folder is copied verbatim into the site's `nulltorch/` "
+        "directory and served over https, no build step. Make sure it works "
+        "when opened at a URL ending in `/nulltorch/` (not just at the root).\n"
+        "- Same no-external-deps discipline as the dashboards; it must render "
+        "offline and over https with zero network requests. Put it at "
+        "`showcase/index.html`.\n")
 
 
 if __name__ == "__main__":
