@@ -129,13 +129,17 @@ def runtime_gate(sub, entry, datasets, data_name):
             body = (page.inner_text("body") or "").strip()
             if len(body) < 10 and name != "empty":
                 fails.append(f"[{name}] rendered no visible content")
-            # DOM reflects the data: a model_id from the dataset appears
-            if name in ("one_model", "real"):
+            # DOM reflects the REAL data: a model_id from the real results.json
+            # appears in the page. Only checked for "real" — the synthetic
+            # datasets are swapped into results.json to test graceful handling
+            # (no crash/error), NOT re-render, since a manifest-driven gallery
+            # legitimately ignores a results.json swap and reads manifest.json.
+            if name == "real":
                 import json
                 d = json.load(open(path))
                 mids = {r["model_id"] for r in d.get("runs", [])}
                 if mids and not any(m in body for m in mids):
-                    fails.append(f"[{name}] no model_id from data shown in DOM")
+                    fails.append(f"[{name}] no real model_id shown in DOM")
             for w in WIDTHS:
                 page.set_viewport_size({"width": w, "height": 900})
                 page.wait_for_timeout(120)
