@@ -108,6 +108,37 @@
     border-radius: 6px; padding: 1px 6px; color: var(--pine);
   }
 
+  /* ── Chart ────────────────────────────────────────────────────────── */
+  .chart {
+    background: var(--surface); border: 1px solid var(--hl-med);
+    border-radius: 12px; box-shadow: var(--shadow);
+    padding: 14px 20px 16px; margin: 0 0 18px;
+    transition: background-color .2s ease, border-color .2s ease;
+  }
+  .chart h2 {
+    margin: 0 0 10px; font-size: 13px; text-transform: uppercase; letter-spacing: .09em;
+    color: var(--foam); font-weight: 700;
+  }
+  .chart .row { display: flex; align-items: center; gap: 12px; margin: 7px 0; }
+  .chart .m-name {
+    flex: 0 0 9ch; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 13px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .chart .track {
+    flex: 1; height: 16px; background: var(--overlay); border: 1px solid var(--hl-med);
+    border-radius: 999px; overflow: clip;
+  }
+  .chart .fill {
+    display: block; height: 100%; width: 0; border-radius: 999px;
+    background: linear-gradient(90deg, var(--pine), var(--foam));
+    transition: width .7s cubic-bezier(.22,.8,.3,1);
+  }
+  .chart .row:first-of-type .fill { background: linear-gradient(90deg, var(--gold), var(--rose)); }
+  .chart .val {
+    flex: 0 0 5ch; text-align: right; font-size: 13px; font-weight: 600;
+    color: var(--text); font-variant-numeric: tabular-nums;
+  }
+
   /* ── Sort bar ─────────────────────────────────────────────────────── */
   .sortbar {
     display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
@@ -255,6 +286,10 @@
       This page hangs their answers side by side — ranked by overall score (60% how well the code did, 40% how good it looks) —
       so you can judge not just who passed, but who explained it best.
     </p>
+  </section>
+
+  <section class="chart" id="chart" aria-label="Overall score comparison">
+    <h2>Overall scores</h2>
   </section>
 
   <div class="sortbar">
@@ -414,6 +449,7 @@
     "gpt-luna": 6
   };
   var MANIFEST = null;
+  var chartBuilt = false;
   var sortMode = "overall";
   try {
     var savedSort = localStorage.getItem("nt-sort");
@@ -436,12 +472,43 @@
     return arr;
   }
 
+  /* ── Chart ──────────────────────────────────────────────────────── */
+  function buildChart(models) {
+    var chart = document.getElementById("chart");
+    var sorted = sortModels(models, "overall");
+    var fills = [];
+    sorted.forEach(function (m) {
+      var overall = overallOf(m);
+      if (overall < 0) return;
+      var row = document.createElement("div");
+      row.className = "row";
+      row.setAttribute("role", "img");
+      row.setAttribute("aria-label", m.model + " overall " + fmt(overall));
+      var name = document.createElement("span"); name.className = "m-name"; name.textContent = m.model;
+      var track = document.createElement("span"); track.className = "track";
+      var fill = document.createElement("span"); fill.className = "fill";
+      fill.style.width = "0%";
+      track.appendChild(fill);
+      var val = document.createElement("span"); val.className = "val"; val.textContent = fmt(overall);
+      row.appendChild(name); row.appendChild(track); row.appendChild(val);
+      chart.appendChild(row);
+      fills.push({ el: fill, pct: Math.max(0, Math.min(100, overall)) });
+    });
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        fills.forEach(function (f) { f.el.style.width = f.pct + "%"; });
+      });
+    });
+  }
+
   function render(manifest) {
     if (manifest && manifest.title) {
       document.title = manifest.title;
     }
     MANIFEST = manifest;
-    var models = sortModels((manifest && Array.isArray(manifest.models)) ? manifest.models : [], sortMode);
+    var allModels = (manifest && Array.isArray(manifest.models)) ? manifest.models : [];
+    if (!chartBuilt && allModels.length) { buildChart(allModels); chartBuilt = true; }
+    var models = sortModels(allModels, sortMode);
 
     var grid = document.getElementById("grid");
     grid.textContent = "";
