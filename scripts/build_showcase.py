@@ -141,7 +141,27 @@ def _write_brief():
         "`showcase/` folder is served verbatim at the domain root, no build "
         "step. `showcase/index.html` becomes the site's landing page.\n"
         "- Same no-external-deps discipline as the dashboards; it must render "
-        "offline and over https with zero network requests.\n")
+        "offline and over https with zero network requests. This bundle is "
+        "copied to the **root of the repo's main branch** (GitHub Pages serves "
+        "main/root) — it literally becomes nulltorch.com.\n\n"
+        "## Palette (required)\n"
+        "Use **Rose Pine Dawn** for light and its dark equivalent, **Rose "
+        "Pine**, for dark (`prefers-color-scheme` + a manual toggle). Inline "
+        "these exact colors as CSS variables (no fetching):\n"
+        "- Light (Dawn): base #faf4ed, surface #fffaf3, overlay #f2e9e1, text "
+        "#575279, subtle #797593, muted #9893a5, love #b4637a, gold #ea9d34, "
+        "rose #d7827e, pine #286983, foam #56949f, iris #907aa9, "
+        "highlight-med #dfdad9\n"
+        "- Dark (Rose Pine): base #191724, surface #1f1d2e, overlay #26233a, "
+        "text #e0def4, subtle #908caa, muted #6e6a86, love #eb6f92, gold "
+        "#f6c177, rose #ebbcba, pine #31748f, foam #9ccfd8, iris #c4a7e7, "
+        "highlight-med #403d52\n"
+        "Use `love` for the danger/robustness-failure signal; pine/foam/iris "
+        "for accents and chart series.\n\n"
+        "## Credit\n"
+        "You (Kimi 3) built this gallery — **sign it.** Put a tasteful "
+        "'built by Kimi 3' credit somewhere on the page (a footer or an about "
+        "corner). It's your work; take the byline.\n")
 
 
 if __name__ == "__main__":
