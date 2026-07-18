@@ -1,0 +1,10 @@
+{
+  "bias": "none",
+  "lora_alpha": 4,
+  "lora_dropout": 0.0,
+  "r": 2,
+  "target_modules": [
+    "to_q",
+    "to_k"
+  ]
+}

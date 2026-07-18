@@ -262,3 +262,19 @@ Deferred (documented): fp8/qtensor/legacy T4 (`fixtures/t4/DEFERRED.md`),
 T5 multi-GB calibration fixtures (`fixtures/T5_DESIGN.md`), container digest
 pins, and the agent-driver `orchestrate.py` (specified in
 `harness/PROTOCOL.md`; runtime-SDK-specific).
+
+## Add-on: LoRA-merge tier (L1)
+
+A companion task derived from an actual ACE-Step v1.5 fine-tuning run on AMD ROCm.
+The model under test merges a PEFT LoRA adapter into a `safetensors` checkpoint
+without torch/numpy: stdlib only, byte-exact grading. See
+`harness/TASK_LORA.md`, fixtures in `fixtures/lora/`, the reference solution
+`fixtures/lora/merge_reference.py`, and the grader `grader/grade_lora.py`.
+
+Run the reference end-to-end:
+
+```
+python3 fixtures/lora/generate.py
+python3 fixtures/lora/merge_reference.py fixtures/lora/lora_fixture_000 /tmp/out
+python3 grader/grade_lora.py fixtures/lora/lora_fixture_000 /tmp/out
+```

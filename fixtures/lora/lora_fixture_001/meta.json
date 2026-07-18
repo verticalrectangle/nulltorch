@@ -1,0 +1,23 @@
+{
+  "expected_targets": [
+    "decoder.0.attn.to_q.weight",
+    "decoder.0.attn.to_k.weight",
+    "decoder.0.ff.0.weight",
+    "decoder.1.attn.to_q.weight"
+  ],
+  "expected_warnings": [
+    {
+      "target": "decoder.1.missing.weight",
+      "type": "missing_target"
+    }
+  ],
+  "fixture_id": "lora_fixture_001",
+  "include_distractor": true,
+  "lora_alpha": 4,
+  "n_adapter_pairs": 4,
+  "n_model_tensors": 4,
+  "rank": 2,
+  "recipe": "lora_merge",
+  "seed": 6001,
+  "tier": "L1"
+}
